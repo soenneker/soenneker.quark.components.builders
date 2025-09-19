@@ -3,6 +3,7 @@ using System;
 using Soenneker.Quark.Components.Builders.Abstract;
 using Soenneker.Quark.Components.Builders.Widths;
 using Soenneker.Quark.Components.Builders.Heights;
+using Soenneker.Quark.Components.Builders.Colors;
 
 namespace Soenneker.Quark.Components.Builders;
 
@@ -72,17 +73,25 @@ public readonly struct CssValue<TBuilder> : IEquatable<CssValue<TBuilder>> where
     /// <summary>
     /// Determines if this CSS value is empty.
     /// </summary>
-    public bool IsEmpty => !_value.HasContent();
+    public bool IsEmpty => _value.IsNullOrEmpty();
 
     /// <summary>
-    /// Determines if this CSS value contains CSS properties (contains ':'). 
+    /// Determines if this CSS value contains CSS properties (contains ':') or if the builder falls back to CSS styles.
     /// </summary>
-    public bool IsCssStyle => _value.Contains(':');
+    public bool IsCssStyle => _value.Contains(':') || (typeof(TBuilder) == typeof(ColorBuilder) && !IsKnownThemeToken(_value));
 
     /// <summary>
     /// Determines if this CSS value is a CSS class.
     /// </summary>
     public bool IsCssClass => !IsCssStyle && !IsEmpty;
+
+    /// <summary>
+    /// Checks if the value is a known Bootstrap theme token that can generate a class.
+    /// </summary>
+    private static bool IsKnownThemeToken(string value)
+    {
+        return value is "primary" or "secondary" or "success" or "danger" or "warning" or "info" or "light" or "dark" or "link" or "muted";
+    }
 
     public bool Equals(CssValue<TBuilder> other)
     {
