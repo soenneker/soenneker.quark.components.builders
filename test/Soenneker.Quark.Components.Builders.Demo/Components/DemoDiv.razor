@@ -2,7 +2,7 @@
 @using Soenneker.Quark.Components.Builders.Floats
 @using Soenneker.Quark.Components.Builders.Visibilities
 
-<div>
+<div class="@GetDisplayClass()" style="@GetDisplayStyle() @GetFloatStyle()">
 	@ChildContent
 </div>
 
@@ -18,4 +18,25 @@
 
 	[Parameter]
 	public RenderFragment? ChildContent { get; set; }
+
+    private string GetDisplayClass()
+    {
+        if (Display?.IsCssClass == true)
+            return Display.ToString();
+        return string.Empty;
+    }
+
+    private string GetDisplayStyle()
+    {
+        if (Display?.IsCssStyle == true)
+            return Display.ToString();
+        return string.Empty;
+    }
+
+    private string GetFloatStyle()
+    {
+        if (Float?.IsCssStyle == true)
+            return Float.ToString();
+        return string.Empty;
+    }
 }
