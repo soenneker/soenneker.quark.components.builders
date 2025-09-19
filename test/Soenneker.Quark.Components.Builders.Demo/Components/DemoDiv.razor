@@ -1,0 +1,21 @@
+@using Soenneker.Quark.Components.Builders.Displays
+@using Soenneker.Quark.Components.Builders.Floats
+@using Soenneker.Quark.Components.Builders.Visibilities
+
+<div>
+	@ChildContent
+</div>
+
+@code {
+    [Parameter]
+    public CssValue<DisplayBuilder>? Display { get; set; }
+
+    [Parameter]
+    public CssValue<VisibilityBuilder>? Visibility { get; set; }
+
+    [Parameter]
+    public CssValue<FloatBuilder>? Float { get; set; }
+
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+}

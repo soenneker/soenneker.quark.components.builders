@@ -1,0 +1,24 @@
+﻿@page "/"
+@using Microsoft.Extensions.Logging
+@using Soenneker.Quark.Components.Builders.Demo.Components
+@using Soenneker.Quark.Components.Builders.Displays
+
+@inject ILogger<Index> Logger
+
+<img src="https://user-images.githubusercontent.com/4441470/224455560-91ed3ee7-f510-4041-a8d2-3fc093025112.png" />
+<h1>Soenneker.Quark.Components.Builders demo</h1>
+<p>This page demonstrates some of the common usages for the interop library.</p>
+<br />
+
+<DemoDiv Display="Display.Inline" Float="@("end")" >
+    Testing
+</DemoDiv>
+
+<hr />
+
+@code{
+
+    protected override void OnInitialized()
+    {
+    }
+}

@@ -1,0 +1,180 @@
+using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using Soenneker.Quark.Components.Builders.Abstract;
+using Soenneker.Quark.Components.Builders.Utils;
+using Soenneker.Quark.Enums.Breakpoints;
+using Soenneker.Utils.PooledStringBuilders;
+
+namespace Soenneker.Quark.Components.Builders.Floats;
+
+/// <summary>
+/// Simplified float builder with fluent API for chaining float rules.
+/// </summary>
+public sealed class FloatBuilder : ICssBuilder
+{
+    private readonly List<FloatRule> _rules = new(4);
+
+    private const string _classStart = "float-start";
+    private const string _classEnd = "float-end";
+    private const string _classNone = "float-none";
+
+    private const string _floatPrefix = "float: ";
+
+    internal FloatBuilder(string value, Breakpoint? breakpoint = null)
+    {
+        _rules.Add(new FloatRule(value, breakpoint));
+    }
+
+    internal FloatBuilder(List<FloatRule> rules)
+    {
+        if (rules is { Count: > 0 })
+            _rules.AddRange(rules);
+    }
+
+    public FloatBuilder None => ChainWithValue(Enums.Floats.Float.NoneValue);
+    public FloatBuilder Left => ChainWithValue(Enums.Floats.Float.LeftValue);
+    public FloatBuilder Right => ChainWithValue(Enums.Floats.Float.RightValue);
+    public FloatBuilder Start => ChainWithValue(Enums.Floats.Float.InlineStartValue);
+    public FloatBuilder End => ChainWithValue(Enums.Floats.Float.InlineEndValue);
+    public FloatBuilder Inherit => ChainWithValue(Enums.GlobalKeywords.GlobalKeyword.InheritValue);
+    public FloatBuilder Initial => ChainWithValue(Enums.GlobalKeywords.GlobalKeyword.InitialValue);
+    public FloatBuilder Revert => ChainWithValue(Enums.GlobalKeywords.GlobalKeyword.RevertValue);
+    public FloatBuilder RevertLayer => ChainWithValue(Enums.GlobalKeywords.GlobalKeyword.RevertLayerValue);
+    public FloatBuilder Unset => ChainWithValue(Enums.GlobalKeywords.GlobalKeyword.UnsetValue);
+
+    public FloatBuilder OnPhone => ChainWithBreakpoint(Breakpoint.Phone);
+    public FloatBuilder OnTablet => ChainWithBreakpoint(Breakpoint.Tablet);
+    public FloatBuilder OnLaptop => ChainWithBreakpoint(Breakpoint.Laptop);
+    public FloatBuilder OnDesktop => ChainWithBreakpoint(Breakpoint.Desktop);
+    public FloatBuilder OnWidescreen => ChainWithBreakpoint(Breakpoint.Widescreen);
+    public FloatBuilder OnUltrawide => ChainWithBreakpoint(Breakpoint.Ultrawide);
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private FloatBuilder ChainWithValue(string value)
+    {
+        _rules.Add(new FloatRule(value, null));
+        return this;
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private FloatBuilder ChainWithBreakpoint(Breakpoint breakpoint)
+    {
+        if (_rules.Count == 0)
+        {
+            _rules.Add(new FloatRule(Enums.Floats.Float.NoneValue, breakpoint));
+            return this;
+        }
+
+        int lastIdx = _rules.Count - 1;
+        FloatRule last = _rules[lastIdx];
+        _rules[lastIdx] = new FloatRule(last.Value, breakpoint);
+        return this;
+    }
+
+    public string ToClass()
+    {
+        if (_rules.Count == 0)
+            return string.Empty;
+
+        using var sb = new PooledStringBuilder();
+        var first = true;
+
+        for (var i = 0; i < _rules.Count; i++)
+        {
+            FloatRule rule = _rules[i];
+
+            string cls = rule.Value switch
+            {
+                Enums.Floats.Float.LeftValue => _classStart,
+                Enums.Floats.Float.RightValue => _classEnd,
+                Enums.Floats.Float.InlineStartValue => _classStart,
+                Enums.Floats.Float.InlineEndValue => _classEnd,
+                Enums.Floats.Float.NoneValue => _classNone,
+                _ => string.Empty
+            };
+
+            if (cls.Length == 0)
+                continue;
+
+            string bp = BreakpointUtil.GetBreakpointClass(rule.Breakpoint);
+            if (bp.Length != 0)
+                cls = InsertBreakpoint(cls, bp);
+
+            if (!first) sb.Append(' ');
+            else first = false;
+
+            sb.Append(cls);
+        }
+
+        return sb.ToString();
+    }
+
+    public string ToStyle()
+    {
+        if (_rules.Count == 0)
+            return string.Empty;
+
+        using var sb = new PooledStringBuilder();
+        var first = true;
+
+        for (var i = 0; i < _rules.Count; i++)
+        {
+            FloatRule rule = _rules[i];
+
+            string? css = rule.Value switch
+            {
+                Enums.Floats.Float.LeftValue => "left",
+                Enums.Floats.Float.RightValue => "right",
+                Enums.Floats.Float.InlineStartValue => "inline-start",
+                Enums.Floats.Float.InlineEndValue => "inline-end",
+                Enums.Floats.Float.NoneValue => "none",
+                Enums.GlobalKeywords.GlobalKeyword.InheritValue => "inherit",
+                Enums.GlobalKeywords.GlobalKeyword.InitialValue => "initial",
+                Enums.GlobalKeywords.GlobalKeyword.UnsetValue => "unset",
+                Enums.GlobalKeywords.GlobalKeyword.RevertValue => "revert",
+                Enums.GlobalKeywords.GlobalKeyword.RevertLayerValue => "revert-layer",
+                _ => null
+            };
+
+            if (css is null)
+                continue;
+
+            if (!first) sb.Append("; ");
+            else first = false;
+
+            sb.Append(_floatPrefix);
+            sb.Append(css);
+        }
+
+        return sb.ToString();
+    }
+
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static string InsertBreakpoint(string className, string bp)
+    {
+        int dashIndex = className.IndexOf('-');
+        if (dashIndex > 0)
+        {
+            int len = dashIndex + 1 + bp.Length + (className.Length - dashIndex);
+            return string.Create(len, (className, dashIndex, bp), static (dst, s) =>
+            {
+                s.className.AsSpan(0, s.dashIndex).CopyTo(dst);
+                int idx = s.dashIndex;
+                dst[idx++] = '-';
+                s.bp.AsSpan().CopyTo(dst[idx..]);
+                idx += s.bp.Length;
+                s.className.AsSpan(s.dashIndex).CopyTo(dst[idx..]);
+            });
+        }
+
+        return string.Create(bp.Length + 1 + className.Length, (className, bp), static (dst, s) =>
+        {
+            s.bp.AsSpan().CopyTo(dst);
+            int idx = s.bp.Length;
+            dst[idx++] = '-';
+            s.className.AsSpan().CopyTo(dst[idx..]);
+        });
+    }
+}

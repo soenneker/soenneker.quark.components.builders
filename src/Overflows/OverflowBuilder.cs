@@ -1,0 +1,189 @@
+using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using Soenneker.Quark.Components.Builders.Abstract;
+using Soenneker.Quark.Components.Builders.Utils;
+using Soenneker.Quark.Enums.Breakpoints;
+using Soenneker.Utils.PooledStringBuilders;
+
+namespace Soenneker.Quark.Components.Builders.Overflows;
+
+/// <summary>
+/// High-performance overflow builder with fluent API for chaining overflow rules.
+/// </summary>
+public sealed class OverflowBuilder : ICssBuilder
+{
+    private readonly List<OverflowRule> _rules = new(4);
+
+    // ----- Class name constants -----
+    private const string _classAuto = "overflow-auto";
+    private const string _classHidden = "overflow-hidden";
+    private const string _classVisible = "overflow-visible";
+    private const string _classScroll = "overflow-scroll";
+
+    // ----- CSS prefix -----
+    private const string _overflowPrefix = "overflow: ";
+
+    internal OverflowBuilder(string overflow, Breakpoint? breakpoint = null)
+    {
+        _rules.Add(new OverflowRule(overflow, breakpoint));
+    }
+
+    internal OverflowBuilder(List<OverflowRule> rules)
+    {
+        if (rules is { Count: > 0 })
+            _rules.AddRange(rules);
+    }
+
+    // ----- Fluent chaining (values & keywords) -----
+    public OverflowBuilder Auto => Chain(Enums.Overflows.Overflow.AutoValue);
+    public OverflowBuilder Hidden => Chain(Enums.Overflows.Overflow.HiddenValue);
+    public OverflowBuilder Visible => Chain(Enums.Overflows.Overflow.VisibleValue);
+    public OverflowBuilder Scroll => Chain(Enums.Overflows.Overflow.ScrollValue);
+
+    public OverflowBuilder Inherit => Chain(Enums.GlobalKeywords.GlobalKeyword.InheritValue);
+    public OverflowBuilder Initial => Chain(Enums.GlobalKeywords.GlobalKeyword.InitialValue);
+    public OverflowBuilder Revert => Chain(Enums.GlobalKeywords.GlobalKeyword.RevertValue);
+    public OverflowBuilder RevertLayer => Chain(Enums.GlobalKeywords.GlobalKeyword.RevertLayerValue);
+    public OverflowBuilder Unset => Chain(Enums.GlobalKeywords.GlobalKeyword.UnsetValue);
+
+    // ----- Breakpoint chaining -----
+    public OverflowBuilder OnPhone => ChainBp(Breakpoint.Phone);
+    public OverflowBuilder OnTablet => ChainBp(Breakpoint.Tablet);
+    public OverflowBuilder OnLaptop => ChainBp(Breakpoint.Laptop);
+    public OverflowBuilder OnDesktop => ChainBp(Breakpoint.Desktop);
+    public OverflowBuilder OnWidescreen => ChainBp(Breakpoint.Widescreen);
+    public OverflowBuilder OnUltrawide => ChainBp(Breakpoint.Ultrawide);
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private OverflowBuilder Chain(string overflow)
+    {
+        _rules.Add(new OverflowRule(overflow, null));
+        return this;
+    }
+
+    /// <summary>Apply a breakpoint to the most recent rule (or bootstrap with "auto" if empty).</summary>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private OverflowBuilder ChainBp(Breakpoint bp)
+    {
+        if (_rules.Count == 0)
+        {
+            _rules.Add(new OverflowRule(Enums.Overflows.Overflow.AutoValue, bp));
+            return this;
+        }
+
+        int lastIdx = _rules.Count - 1;
+        OverflowRule last = _rules[lastIdx];
+        _rules[lastIdx] = new OverflowRule(last.Overflow, bp);
+        return this;
+    }
+
+    /// <summary>Gets the CSS class string for the current configuration.</summary>
+    public string ToClass()
+    {
+        if (_rules.Count == 0)
+            return string.Empty;
+
+        using var sb = new PooledStringBuilder();
+        var first = true;
+
+        for (var i = 0; i < _rules.Count; i++)
+        {
+            OverflowRule rule = _rules[i];
+
+            string baseClass = GetOverflowClass(rule.Overflow);
+            if (baseClass.Length == 0)
+                continue;
+
+            string bp = BreakpointUtil.GetBreakpointToken(rule.Breakpoint);
+            if (bp.Length != 0)
+                baseClass = InsertBreakpoint(baseClass, bp);
+
+            if (!first) sb.Append(' ');
+            else first = false;
+
+            sb.Append(baseClass);
+        }
+
+        return sb.ToString();
+    }
+
+    /// <summary>Gets the CSS style string for the current configuration.</summary>
+    public string ToStyle()
+    {
+        if (_rules.Count == 0)
+            return string.Empty;
+
+        using var sb = new PooledStringBuilder();
+        var first = true;
+
+        for (var i = 0; i < _rules.Count; i++)
+        {
+            string value = _rules[i].Overflow;
+            if (string.IsNullOrEmpty(value))
+                continue;
+
+            if (!first) sb.Append("; ");
+            else first = false;
+
+            sb.Append(_overflowPrefix);
+            sb.Append(value);
+        }
+
+        return sb.ToString();
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static string GetOverflowClass(string overflow)
+    {
+        return overflow switch
+        {
+            Enums.Overflows.Overflow.AutoValue => _classAuto,
+            Enums.Overflows.Overflow.HiddenValue => _classHidden,
+            Enums.Overflows.Overflow.VisibleValue => _classVisible,
+            Enums.Overflows.Overflow.ScrollValue => _classScroll,
+            _ => string.Empty
+        };
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static string GetBp(Breakpoint? breakpoint) => breakpoint?.Value ?? string.Empty;
+
+    /// <summary>
+    /// Insert breakpoint token as: "overflow-hidden" + "md" ? "overflow-md-hidden".
+    /// Falls back to "bp-{class}" if no dash exists.
+    /// </summary>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static string InsertBreakpoint(string className, string bp)
+    {
+        int dashIndex = className.IndexOf('-');
+        if (dashIndex > 0)
+        {
+            // length = prefix + "-" + bp + remainder
+            int len = dashIndex + 1 + bp.Length + (className.Length - dashIndex);
+            return string.Create(len, (className, dashIndex, bp), static (dst, s) =>
+            {
+                // prefix
+                s.className.AsSpan(0, s.dashIndex).CopyTo(dst);
+                int idx = s.dashIndex;
+
+                // "-" + bp
+                dst[idx++] = '-';
+                s.bp.AsSpan().CopyTo(dst[idx..]);
+                idx += s.bp.Length;
+
+                // remainder (starts with '-')
+                s.className.AsSpan(s.dashIndex).CopyTo(dst[idx..]);
+            });
+        }
+
+        // Fallback: "bp-{className}"
+        return string.Create(bp.Length + 1 + className.Length, (className, bp), static (dst, s) =>
+        {
+            s.bp.AsSpan().CopyTo(dst);
+            int idx = s.bp.Length;
+            dst[idx++] = '-';
+            s.className.AsSpan().CopyTo(dst[idx..]);
+        });
+    }
+}
