@@ -3,7 +3,7 @@ using Soenneker.Quark.Enums.GlobalKeywords;
 namespace Soenneker.Quark.Components.Builders.Colors;
 
 /// <summary>
-/// Text/background color utility with fluent API and Bootstrap-first approach.
+/// Color utility with fluent API and Bootstrap-first approach.
 /// </summary>
 public static class Color
 {

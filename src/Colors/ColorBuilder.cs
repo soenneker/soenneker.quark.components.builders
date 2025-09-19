@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Soenneker.Extensions.String;
 using Soenneker.Quark.Components.Builders.Abstract;
 using Soenneker.Quark.Components.Builders.Utils;
 using Soenneker.Quark.Enums.Breakpoints;
@@ -9,24 +10,16 @@ using Soenneker.Utils.PooledStringBuilders;
 namespace Soenneker.Quark.Components.Builders.Colors;
 
 /// <summary>
-/// High-performance builder for text/background colors.
+/// High-performance generic color builder.
 /// Produces Bootstrap utility classes when possible, otherwise falls back to inline style.
 /// </summary>
 public sealed class ColorBuilder : ICssBuilder
 {
     private readonly List<ColorRule> _rules = new(4);
 
-    // Class name constants
-    private const string _textPrefix = "text";
-    private const string _bgPrefix = "bg";
-
-    // CSS property names
-    private const string _cssText = "color: ";
-    private const string _cssBg = "background-color: ";
-
-    internal ColorBuilder(string value, bool background = false, Breakpoint? breakpoint = null)
+    internal ColorBuilder(string value, Breakpoint? breakpoint = null)
     {
-        _rules.Add(new ColorRule(value, background, breakpoint));
+        _rules.Add(new ColorRule(value, breakpoint));
     }
 
     internal ColorBuilder(List<ColorRule> rules)
@@ -34,11 +27,7 @@ public sealed class ColorBuilder : ICssBuilder
         if (rules is { Count: > 0 })
             _rules.AddRange(rules);
     }
-
-    // Fluent chaining
-    public ColorBuilder Text => ChainBackground(false);
-    public ColorBuilder Background => ChainBackground(true);
-
+    
     public ColorBuilder Primary => ChainValue("primary");
     public ColorBuilder Secondary => ChainValue("secondary");
     public ColorBuilder Success => ChainValue("success");
@@ -64,24 +53,9 @@ public sealed class ColorBuilder : ICssBuilder
     public ColorBuilder OnUltrawide => ChainBp(Breakpoint.Ultrawide);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private ColorBuilder ChainBackground(bool background)
-    {
-        if (_rules.Count == 0)
-        {
-            _rules.Add(new ColorRule("inherit", background, null));
-            return this;
-        }
-
-        int last = _rules.Count - 1;
-        ColorRule prev = _rules[last];
-        _rules[last] = new ColorRule(prev.Value, background, prev.Breakpoint);
-        return this;
-    }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private ColorBuilder ChainValue(string value)
     {
-        _rules.Add(new ColorRule(value, _rules.Count > 0 && _rules[^1].Background, null));
+        _rules.Add(new ColorRule(value, null));
         return this;
     }
 
@@ -90,13 +64,13 @@ public sealed class ColorBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new ColorRule("inherit", false, bp));
+            _rules.Add(new ColorRule("inherit", bp));
             return this;
         }
 
         int lastIdx = _rules.Count - 1;
         ColorRule last = _rules[lastIdx];
-        _rules[lastIdx] = new ColorRule(last.Value, last.Background, bp);
+        _rules[lastIdx] = new ColorRule(last.Value, bp);
         return this;
     }
 
@@ -152,49 +126,44 @@ public sealed class ColorBuilder : ICssBuilder
         return sb.ToString();
     }
 
+    /// <summary>
+    /// Returns the string representation of the color builder.
+    /// Chooses between class and style based on whether any rules generate CSS classes.
+    /// </summary>
+    public override string ToString()
+    {
+        if (_rules.Count == 0)
+            return string.Empty;
+
+        // First try to generate classes
+        string classResult = ToClass();
+        if (classResult.HasContent())
+            return classResult;
+
+        // Fall back to styles if no classes were generated
+        return ToStyle();
+    }
+
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static string GetClass(ColorRule rule)
     {
-        // Only known theme tokens map to utility classes; CSS keywords go to style.
-        switch (rule.Value)
+        // Only known theme tokens map to utility classes
+        return rule.Value switch
         {
-            case "primary":
-            case "secondary":
-            case "success":
-            case "danger":
-            case "warning":
-            case "info":
-            case "light":
-            case "dark":
-            case "link":
-            case "muted":
-                return rule.Background ? $"{_bgPrefix}-{rule.Value}" : $"{_textPrefix}-{rule.Value}";
-
-            default:
-                return string.Empty;
-        }
+            "primary" or "secondary" or "success" or "danger" or "warning" or "info" or "light" or "dark" or "link" or "muted" => rule.Value,
+            _ => string.Empty
+        };
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static string? GetStyle(ColorRule rule)
     {
-        // If not a known theme token, treat as raw CSS value (including CSS-wide keywords)
-        switch (rule.Value)
+        // If not a known theme token, treat as raw CSS value
+        return rule.Value switch
         {
-            case "primary":
-            case "secondary":
-            case "success":
-            case "danger":
-            case "warning":
-            case "info":
-            case "light":
-            case "dark":
-            case "link":
-            case "muted":
-                return null;
-            default:
-                return rule.Background ? _cssBg + rule.Value : _cssText + rule.Value;
-        }
+            "primary" or "secondary" or "success" or "danger" or "warning" or "info" or "light" or "dark" or "link" or "muted" => null,
+            _ => rule.Value
+        };
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -223,4 +192,5 @@ public sealed class ColorBuilder : ICssBuilder
             s.className.AsSpan().CopyTo(dst[idx..]);
         });
     }
+
 }
