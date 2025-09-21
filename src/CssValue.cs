@@ -1,5 +1,6 @@
 using Soenneker.Extensions.String;
 using System;
+using System.Collections.Generic;
 using Soenneker.Quark.Components.Builders.Abstract;
 using Soenneker.Quark.Components.Builders.Widths;
 using Soenneker.Quark.Components.Builders.Heights;
@@ -15,6 +16,20 @@ namespace Soenneker.Quark.Components.Builders;
 public readonly struct CssValue<TBuilder> : IEquatable<CssValue<TBuilder>> where TBuilder : class, ICssBuilder
 {
     private readonly string _value;
+
+    private static readonly HashSet<string> _bootstrapThemeTokens = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "primary",
+        "secondary",
+        "success",
+        "danger",
+        "warning",
+        "info",
+        "light",
+        "dark",
+        "link",
+        "muted"
+    };
 
     private CssValue(string value)
     {
@@ -90,7 +105,7 @@ public readonly struct CssValue<TBuilder> : IEquatable<CssValue<TBuilder>> where
     /// </summary>
     private static bool IsKnownThemeToken(string value)
     {
-        return value is "primary" or "secondary" or "success" or "danger" or "warning" or "info" or "light" or "dark" or "link" or "muted";
+        return value.HasContent() && _bootstrapThemeTokens.Contains(value);
     }
 
     public bool Equals(CssValue<TBuilder> other)
@@ -116,5 +131,26 @@ public readonly struct CssValue<TBuilder> : IEquatable<CssValue<TBuilder>> where
     public static bool operator !=(CssValue<TBuilder> start, CssValue<TBuilder> end)
     {
         return !start.Equals(end);
+    }
+
+    /// <summary>
+    /// Attempts to match the value against a known Bootstrap theme token
+    /// (e.g., "primary", "secondary", etc.).
+    /// </summary>
+    public bool TryGetBootstrapThemeToken(out string token)
+    {
+        if (!_value.IsNullOrWhiteSpace())
+        {
+            string v = _value.Trim();
+
+            if (_bootstrapThemeTokens.Contains(v))
+            {
+                token = v.ToLowerInvariant();
+                return true;
+            }
+        }
+
+        token = null!;
+        return false;
     }
 }
