@@ -1,6 +1,6 @@
 using Soenneker.Quark.Enums.Breakpoints;
 
-namespace Soenneker.Quark.Components.Builders.Overflows;
+namespace Soenneker.Quark;
 
 /// <summary>
 /// Represents a single overflow rule with optional breakpoint.

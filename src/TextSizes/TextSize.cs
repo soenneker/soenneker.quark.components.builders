@@ -1,6 +1,6 @@
 using Soenneker.Quark.Enums.Size;
 
-namespace Soenneker.Quark.Components.Builders.TextSizes;
+namespace Soenneker.Quark;
 
 /// <summary>
 /// Simplified text size utility with fluent API and Bootstrap-first approach.

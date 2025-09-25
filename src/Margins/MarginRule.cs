@@ -1,7 +1,7 @@
 using Soenneker.Quark.Enums.Breakpoints;
 using Soenneker.Quark.Enums.ElementSides;
 
-namespace Soenneker.Quark.Components.Builders.Margins;
+namespace Soenneker.Quark;
 
 /// <summary>
 /// Represents a single margin rule with optional breakpoint.

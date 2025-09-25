@@ -1,5 +1,5 @@
 using Soenneker.Quark.Enums.Breakpoints;
 
-namespace Soenneker.Quark.Components.Builders.TextBreaks;
+namespace Soenneker.Quark;
 
 internal readonly record struct TextBreakRule(bool Enabled, Breakpoint? Breakpoint);

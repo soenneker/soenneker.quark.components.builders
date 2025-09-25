@@ -1,12 +1,8 @@
 using Soenneker.Extensions.String;
 using System;
 using System.Collections.Generic;
-using Soenneker.Quark.Components.Builders.Abstract;
-using Soenneker.Quark.Components.Builders.Widths;
-using Soenneker.Quark.Components.Builders.Heights;
-using Soenneker.Quark.Components.Builders.Colors;
 
-namespace Soenneker.Quark.Components.Builders;
+namespace Soenneker.Quark;
 
 /// <summary>
 /// Represents a CSS value that can be either a builder or a string.

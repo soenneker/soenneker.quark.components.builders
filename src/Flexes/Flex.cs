@@ -1,4 +1,4 @@
-namespace Soenneker.Quark.Components.Builders.Flexes;
+namespace Soenneker.Quark;
 
 /// <summary>
 /// Simplified flex utility with fluent API and Bootstrap-first approach.

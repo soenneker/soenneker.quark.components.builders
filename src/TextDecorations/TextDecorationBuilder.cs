@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Soenneker.Utils.PooledStringBuilders;
 using Soenneker.Quark.Enums.Breakpoints;
-using Soenneker.Quark.Components.Builders.Utils;
-using Soenneker.Quark.Components.Builders.Abstract;
 
-namespace Soenneker.Quark.Components.Builders.TextDecorations;
+namespace Soenneker.Quark;
 
 public sealed class TextDecorationBuilder : ICssBuilder
 {

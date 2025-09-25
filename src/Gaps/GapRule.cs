@@ -1,6 +1,6 @@
 using Soenneker.Quark.Enums.Breakpoints;
 
-namespace Soenneker.Quark.Components.Builders.Gaps;
+namespace Soenneker.Quark;
 
 /// <summary>
 /// Represents a single gap rule with optional breakpoint.

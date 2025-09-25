@@ -1,13 +1,11 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using Soenneker.Quark.Components.Builders.Abstract;
-using Soenneker.Quark.Components.Builders.Utils;
 using Soenneker.Quark.Enums.Breakpoints;
 using Soenneker.Quark.Enums.ElementSides;
 using Soenneker.Quark.Enums.Scales;
 using Soenneker.Utils.PooledStringBuilders;
 
-namespace Soenneker.Quark.Components.Builders.Margins;
+namespace Soenneker.Quark;
 
 /// <summary>
 /// Simplified margin builder with fluent API for chaining margin rules.

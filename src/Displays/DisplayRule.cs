@@ -1,6 +1,6 @@
 using Soenneker.Quark.Enums.Breakpoints;
 
-namespace Soenneker.Quark.Components.Builders.Displays;
+namespace Soenneker.Quark;
 
 /// <summary>
 /// Represents a single display rule with optional breakpoint.

@@ -1,7 +1,7 @@
 using Soenneker.Quark.Enums.Scales;
 using Soenneker.Quark.Enums.Size;
 
-namespace Soenneker.Quark.Components.Builders.LineHeights;
+namespace Soenneker.Quark;
 
 public static class LineHeight
 {

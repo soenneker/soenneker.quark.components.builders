@@ -1,6 +1,6 @@
 using Soenneker.Quark.Enums.Size;
 
-namespace Soenneker.Quark.Components.Builders.BoxShadows;
+namespace Soenneker.Quark;
 
 public static class BoxShadow
 {

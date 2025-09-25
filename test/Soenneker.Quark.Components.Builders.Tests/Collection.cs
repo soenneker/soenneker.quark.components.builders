@@ -1,6 +1,6 @@
-﻿using Xunit;
+using Xunit;
 
-namespace Soenneker.Quark.Components.Builders.Tests;
+namespace Soenneker.Quark.Components.Builders;
 
 /// <summary>
 /// This class has no code, and is never created. Its purpose is simply

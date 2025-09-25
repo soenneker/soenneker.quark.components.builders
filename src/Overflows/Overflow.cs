@@ -1,6 +1,6 @@
 using Soenneker.Quark.Enums.GlobalKeywords;
 
-namespace Soenneker.Quark.Components.Builders.Overflows;
+namespace Soenneker.Quark;
 
 /// <summary>
 /// Simplified overflow utility with fluent API and Bootstrap-first approach.

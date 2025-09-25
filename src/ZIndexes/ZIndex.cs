@@ -1,4 +1,4 @@
-namespace Soenneker.Quark.Components.Builders.ZIndexes;
+namespace Soenneker.Quark;
 
 public static class ZIndex
 {

@@ -1,6 +1,6 @@
 using Soenneker.Quark.Enums.Scales;
 
-namespace Soenneker.Quark.Components.Builders.Borders;
+namespace Soenneker.Quark;
 
 /// <summary>
 /// Simplified border utility with fluent API and Bootstrap-first approach.

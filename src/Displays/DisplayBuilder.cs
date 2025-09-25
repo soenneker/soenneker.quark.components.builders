@@ -2,12 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Soenneker.Extensions.String;
-using Soenneker.Quark.Components.Builders.Abstract;
-using Soenneker.Quark.Components.Builders.Utils;
 using Soenneker.Quark.Enums.Breakpoints;
 using Soenneker.Utils.PooledStringBuilders;
 
-namespace Soenneker.Quark.Components.Builders.Displays;
+namespace Soenneker.Quark;
 
 /// <summary>
 /// Simplified display builder with fluent API for chaining display rules.

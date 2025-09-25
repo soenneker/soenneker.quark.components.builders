@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using Soenneker.Quark.Components.Builders.Abstract;
-using Soenneker.Quark.Components.Builders.Utils;
 using Soenneker.Quark.Enums.Breakpoints;
 using Soenneker.Utils.PooledStringBuilders;
 
-namespace Soenneker.Quark.Components.Builders.Positions;
+namespace Soenneker.Quark;
 
 /// <summary>
 /// High-performance position builder with fluent API for chaining position rules.

@@ -1,7 +1,3 @@
-@using Soenneker.Quark.Components.Builders.Displays
-@using Soenneker.Quark.Components.Builders.Floats
-@using Soenneker.Quark.Components.Builders.Visibilities
-
 <div class="@GetDisplayClass()" style="@GetDisplayStyle() @GetFloatStyle()">
 	@ChildContent
 </div>
@@ -23,6 +19,7 @@
     {
         if (Display?.IsCssClass == true)
             return Display.ToString();
+
         return string.Empty;
     }
 
@@ -30,6 +27,7 @@
     {
         if (Display?.IsCssStyle == true)
             return Display.ToString();
+
         return string.Empty;
     }
 
@@ -37,6 +35,7 @@
     {
         if (Float?.IsCssStyle == true)
             return Float.ToString();
+
         return string.Empty;
     }
 }

@@ -1,6 +1,6 @@
 using Soenneker.Quark.Enums.GlobalKeywords;
 
-namespace Soenneker.Quark.Components.Builders.Positions;
+namespace Soenneker.Quark;
 
 /// <summary>
 /// Simplified position utility with fluent API and Bootstrap-first approach.

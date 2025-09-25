@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using Soenneker.Quark.Components.Builders.Abstract;
-using Soenneker.Quark.Components.Builders.Utils;
 using Soenneker.Quark.Enums.Breakpoints;
 using Soenneker.Utils.PooledStringBuilders;
 
-namespace Soenneker.Quark.Components.Builders.Flexes;
+namespace Soenneker.Quark;
 
 /// <summary>
 /// Simplified flex builder with fluent API for chaining flex rules.

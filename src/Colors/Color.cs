@@ -1,6 +1,6 @@
 using Soenneker.Quark.Enums.GlobalKeywords;
 
-namespace Soenneker.Quark.Components.Builders.Colors;
+namespace Soenneker.Quark;
 
 /// <summary>
 /// Color utility with fluent API and Bootstrap-first approach.

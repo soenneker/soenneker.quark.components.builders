@@ -1,6 +1,6 @@
 using Soenneker.Quark.Enums.GlobalKeywords;
 
-namespace Soenneker.Quark.Components.Builders.Visibilities;
+namespace Soenneker.Quark;
 
 public static class Visibility
 {

@@ -1,13 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using Soenneker.Quark.Components.Builders.Abstract;
-using Soenneker.Quark.Components.Builders.Utils;
 using Soenneker.Quark.Enums.Breakpoints;
 using Soenneker.Quark.Enums.Scales;
 using Soenneker.Utils.PooledStringBuilders;
 
-namespace Soenneker.Quark.Components.Builders.Gaps;
+namespace Soenneker.Quark;
 
 /// <summary>
 /// Simplified gap builder with fluent API for chaining gap rules.

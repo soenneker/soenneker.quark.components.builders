@@ -1,11 +1,11 @@
-﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Soenneker.Fixtures.Unit;
 using Soenneker.Utils.Test;
 using Soenneker.Blazor.MockJsRuntime.Registrars;
 
-namespace Soenneker.Quark.Components.Builders.Tests;
+namespace Soenneker.Quark.Components.Builders;
 
 public sealed class Fixture : UnitFixture
 {

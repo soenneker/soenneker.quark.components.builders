@@ -1,5 +1,5 @@
 using Soenneker.Quark.Enums.Breakpoints;
 
-namespace Soenneker.Quark.Components.Builders.LineHeights;
+namespace Soenneker.Quark;
 
 internal readonly record struct LineHeightRule(string Value, Breakpoint? Breakpoint);

@@ -1,4 +1,4 @@
-namespace Soenneker.Quark.Components.Builders.Widths;
+namespace Soenneker.Quark;
 
 /// <summary>
 /// Simplified width utility with fluent API and Bootstrap-first approach.

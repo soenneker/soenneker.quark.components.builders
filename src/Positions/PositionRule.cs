@@ -1,6 +1,6 @@
 using Soenneker.Quark.Enums.Breakpoints;
 
-namespace Soenneker.Quark.Components.Builders.Positions;
+namespace Soenneker.Quark;
 
 /// <summary>
 /// Represents a single position rule with optional breakpoint.

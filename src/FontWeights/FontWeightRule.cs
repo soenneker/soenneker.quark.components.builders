@@ -1,5 +1,5 @@
-﻿using Soenneker.Quark.Enums.Breakpoints;
+using Soenneker.Quark.Enums.Breakpoints;
 
-namespace Soenneker.Quark.Components.Builders.FontWeights;
+namespace Soenneker.Quark;
 
 internal readonly record struct FontWeightRule(string Value, Breakpoint? Breakpoint);

@@ -1,6 +1,6 @@
 using Soenneker.Quark.Enums.Breakpoints;
 
-namespace Soenneker.Quark.Components.Builders.Flexes;
+namespace Soenneker.Quark;
 
 /// <summary>
 /// Represents a single flex rule with optional breakpoint.
