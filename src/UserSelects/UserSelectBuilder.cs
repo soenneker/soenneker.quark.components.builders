@@ -25,14 +25,14 @@ public sealed class UserSelectBuilder : ICssBuilder
             _rules.AddRange(rules);
     }
 
-    public UserSelectBuilder None => Chain(Enums.UserSelects.UserSelect.NoneValue);
-    public UserSelectBuilder Auto => Chain(Enums.UserSelects.UserSelect.AutoValue);
-    public UserSelectBuilder All => Chain(Enums.UserSelects.UserSelect.AllValue);
-    public UserSelectBuilder Inherit => Chain(Enums.GlobalKeywords.GlobalKeyword.InheritValue);
-    public UserSelectBuilder Initial => Chain(Enums.GlobalKeywords.GlobalKeyword.InitialValue);
-    public UserSelectBuilder Revert => Chain(Enums.GlobalKeywords.GlobalKeyword.RevertValue);
-    public UserSelectBuilder RevertLayer => Chain(Enums.GlobalKeywords.GlobalKeyword.RevertLayerValue);
-    public UserSelectBuilder Unset => Chain(Enums.GlobalKeywords.GlobalKeyword.UnsetValue);
+    public UserSelectBuilder None => Chain(UserSelect.NoneValue);
+    public UserSelectBuilder Auto => Chain(UserSelect.AutoValue);
+    public UserSelectBuilder All => Chain(UserSelect.AllValue);
+    public UserSelectBuilder Inherit => Chain(GlobalKeyword.InheritValue);
+    public UserSelectBuilder Initial => Chain(GlobalKeyword.InitialValue);
+    public UserSelectBuilder Revert => Chain(GlobalKeyword.RevertValue);
+    public UserSelectBuilder RevertLayer => Chain(GlobalKeyword.RevertLayerValue);
+    public UserSelectBuilder Unset => Chain(GlobalKeyword.UnsetValue);
 
     public UserSelectBuilder OnPhone => ChainBp(Breakpoint.Phone);
     public UserSelectBuilder OnTablet => ChainBp(Breakpoint.Tablet);
@@ -53,7 +53,7 @@ public sealed class UserSelectBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new UserSelectRule(Enums.UserSelects.UserSelect.AutoValue, bp));
+            _rules.Add(new UserSelectRule(UserSelect.AutoValue, bp));
             return this;
         }
 
@@ -74,9 +74,9 @@ public sealed class UserSelectBuilder : ICssBuilder
             UserSelectRule rule = _rules[i];
             string cls = rule.Value switch
             {
-                Enums.UserSelects.UserSelect.NoneValue => _classNone,
-                Enums.UserSelects.UserSelect.AutoValue => _classAuto,
-                Enums.UserSelects.UserSelect.AllValue => _classAll,
+                UserSelect.NoneValue => _classNone,
+                UserSelect.AutoValue => _classAuto,
+                UserSelect.AllValue => _classAll,
                 _ => string.Empty
             };
             if (cls.Length == 0)

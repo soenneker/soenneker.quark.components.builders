@@ -18,14 +18,14 @@ public sealed class TextAlignmentBuilder : ICssBuilder
     private const string _textAlignPrefix = "text-align: ";
 
     // ----- Style constants (compile-time, Intellenum *Value are const) -----
-    private const string _styleStart = $"{_textAlignPrefix}{Enums.TextAlignments.TextAlignment.StartValue}";
-    private const string _styleCenter = $"{_textAlignPrefix}{Enums.TextAlignments.TextAlignment.CenterValue}";
-    private const string _styleEnd = $"{_textAlignPrefix}{Enums.TextAlignments.TextAlignment.EndValue}";
-    private const string _styleInherit = $"{_textAlignPrefix}{Enums.GlobalKeywords.GlobalKeyword.InheritValue}";
-    private const string _styleInitial = $"{_textAlignPrefix}{Enums.GlobalKeywords.GlobalKeyword.InitialValue}";
-    private const string _styleUnset = $"{_textAlignPrefix}{Enums.GlobalKeywords.GlobalKeyword.UnsetValue}";
-    private const string _styleRevert = $"{_textAlignPrefix}{Enums.GlobalKeywords.GlobalKeyword.RevertValue}";
-    private const string _styleRevertLayer = $"{_textAlignPrefix}{Enums.GlobalKeywords.GlobalKeyword.RevertLayerValue}";
+    private const string _styleStart = $"{_textAlignPrefix}{TextAlignment.StartValue}";
+    private const string _styleCenter = $"{_textAlignPrefix}{TextAlignment.CenterValue}";
+    private const string _styleEnd = $"{_textAlignPrefix}{TextAlignment.EndValue}";
+    private const string _styleInherit = $"{_textAlignPrefix}{GlobalKeyword.InheritValue}";
+    private const string _styleInitial = $"{_textAlignPrefix}{GlobalKeyword.InitialValue}";
+    private const string _styleUnset = $"{_textAlignPrefix}{GlobalKeyword.UnsetValue}";
+    private const string _styleRevert = $"{_textAlignPrefix}{GlobalKeyword.RevertValue}";
+    private const string _styleRevertLayer = $"{_textAlignPrefix}{GlobalKeyword.RevertLayerValue}";
 
     internal TextAlignmentBuilder(string value, Breakpoint? breakpoint = null)
     {
@@ -38,15 +38,15 @@ public sealed class TextAlignmentBuilder : ICssBuilder
             _rules.AddRange(rules);
     }
 
-    public TextAlignmentBuilder Start => Chain(Enums.TextAlignments.TextAlignment.StartValue);
-    public TextAlignmentBuilder Center => Chain(Enums.TextAlignments.TextAlignment.CenterValue);
-    public TextAlignmentBuilder End => Chain(Enums.TextAlignments.TextAlignment.EndValue);
+    public TextAlignmentBuilder Start => Chain(TextAlignment.StartValue);
+    public TextAlignmentBuilder Center => Chain(TextAlignment.CenterValue);
+    public TextAlignmentBuilder End => Chain(TextAlignment.EndValue);
 
-    public TextAlignmentBuilder Inherit => Chain(Enums.GlobalKeywords.GlobalKeyword.InheritValue);
-    public TextAlignmentBuilder Initial => Chain(Enums.GlobalKeywords.GlobalKeyword.InitialValue);
-    public TextAlignmentBuilder Revert => Chain(Enums.GlobalKeywords.GlobalKeyword.RevertValue);
-    public TextAlignmentBuilder RevertLayer => Chain(Enums.GlobalKeywords.GlobalKeyword.RevertLayerValue);
-    public TextAlignmentBuilder Unset => Chain(Enums.GlobalKeywords.GlobalKeyword.UnsetValue);
+    public TextAlignmentBuilder Inherit => Chain(GlobalKeyword.InheritValue);
+    public TextAlignmentBuilder Initial => Chain(GlobalKeyword.InitialValue);
+    public TextAlignmentBuilder Revert => Chain(GlobalKeyword.RevertValue);
+    public TextAlignmentBuilder RevertLayer => Chain(GlobalKeyword.RevertLayerValue);
+    public TextAlignmentBuilder Unset => Chain(GlobalKeyword.UnsetValue);
 
     public TextAlignmentBuilder OnPhone => ChainBp(Breakpoint.Phone);
     public TextAlignmentBuilder OnTablet => ChainBp(Breakpoint.Tablet);
@@ -68,7 +68,7 @@ public sealed class TextAlignmentBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new TextAlignmentRule(Enums.TextAlignments.TextAlignment.StartValue, bp));
+            _rules.Add(new TextAlignmentRule(TextAlignment.StartValue, bp));
             return this;
         }
 
@@ -92,9 +92,9 @@ public sealed class TextAlignmentBuilder : ICssBuilder
 
             string baseClass = rule.Value switch
             {
-                Enums.TextAlignments.TextAlignment.StartValue => _classStart,
-                Enums.TextAlignments.TextAlignment.CenterValue => _classCenter,
-                Enums.TextAlignments.TextAlignment.EndValue => _classEnd,
+                TextAlignment.StartValue => _classStart,
+                TextAlignment.CenterValue => _classCenter,
+                TextAlignment.EndValue => _classEnd,
                 _ => string.Empty
             };
 
@@ -130,15 +130,15 @@ public sealed class TextAlignmentBuilder : ICssBuilder
 
             string css = rule.Value switch
             {
-                Enums.TextAlignments.TextAlignment.StartValue => _styleStart,
-                Enums.TextAlignments.TextAlignment.CenterValue => _styleCenter,
-                Enums.TextAlignments.TextAlignment.EndValue => _styleEnd,
+                TextAlignment.StartValue => _styleStart,
+                TextAlignment.CenterValue => _styleCenter,
+                TextAlignment.EndValue => _styleEnd,
 
-                Enums.GlobalKeywords.GlobalKeyword.InheritValue => _styleInherit,
-                Enums.GlobalKeywords.GlobalKeyword.InitialValue => _styleInitial,
-                Enums.GlobalKeywords.GlobalKeyword.UnsetValue => _styleUnset,
-                Enums.GlobalKeywords.GlobalKeyword.RevertValue => _styleRevert,
-                Enums.GlobalKeywords.GlobalKeyword.RevertLayerValue => _styleRevertLayer,
+                GlobalKeyword.InheritValue => _styleInherit,
+                GlobalKeyword.InitialValue => _styleInitial,
+                GlobalKeyword.UnsetValue => _styleUnset,
+                GlobalKeyword.RevertValue => _styleRevert,
+                GlobalKeyword.RevertLayerValue => _styleRevertLayer,
 
                 _ => string.Empty
             };

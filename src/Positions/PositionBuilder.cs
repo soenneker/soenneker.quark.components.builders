@@ -34,21 +34,21 @@ public sealed class PositionBuilder : ICssBuilder
     }
 
     /// <summary>Chain with static positioning for the next rule.</summary>
-    public PositionBuilder Static => ChainWithPosition(Enums.Positions.Position.StaticValue);
+    public PositionBuilder Static => ChainWithPosition(Position.StaticValue);
     /// <summary>Chain with relative positioning for the next rule.</summary>
-    public PositionBuilder Relative => ChainWithPosition(Enums.Positions.Position.RelativeValue);
+    public PositionBuilder Relative => ChainWithPosition(Position.RelativeValue);
     /// <summary>Chain with absolute positioning for the next rule.</summary>
-    public PositionBuilder Absolute => ChainWithPosition(Enums.Positions.Position.AbsoluteValue);
+    public PositionBuilder Absolute => ChainWithPosition(Position.AbsoluteValue);
     /// <summary>Chain with fixed positioning for the next rule.</summary>
-    public PositionBuilder Fixed => ChainWithPosition(Enums.Positions.Position.FixedValue);
+    public PositionBuilder Fixed => ChainWithPosition(Position.FixedValue);
     /// <summary>Chain with sticky positioning for the next rule.</summary>
-    public PositionBuilder Sticky => ChainWithPosition(Enums.Positions.Position.StickyValue);
+    public PositionBuilder Sticky => ChainWithPosition(Position.StickyValue);
 
-    public PositionBuilder Inherit => ChainWithPosition(Enums.GlobalKeywords.GlobalKeyword.InheritValue);
-    public PositionBuilder Initial => ChainWithPosition(Enums.GlobalKeywords.GlobalKeyword.InitialValue);
-    public PositionBuilder Revert => ChainWithPosition(Enums.GlobalKeywords.GlobalKeyword.RevertValue);
-    public PositionBuilder RevertLayer => ChainWithPosition(Enums.GlobalKeywords.GlobalKeyword.RevertLayerValue);
-    public PositionBuilder Unset => ChainWithPosition(Enums.GlobalKeywords.GlobalKeyword.UnsetValue);
+    public PositionBuilder Inherit => ChainWithPosition(GlobalKeyword.InheritValue);
+    public PositionBuilder Initial => ChainWithPosition(GlobalKeyword.InitialValue);
+    public PositionBuilder Revert => ChainWithPosition(GlobalKeyword.RevertValue);
+    public PositionBuilder RevertLayer => ChainWithPosition(GlobalKeyword.RevertLayerValue);
+    public PositionBuilder Unset => ChainWithPosition(GlobalKeyword.UnsetValue);
 
     // ----- Breakpoint chaining -----
     public PositionBuilder OnPhone => ChainWithBreakpoint(Breakpoint.Phone);
@@ -71,7 +71,7 @@ public sealed class PositionBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new PositionRule(Enums.Positions.Position.StaticValue, breakpoint));
+            _rules.Add(new PositionRule(Position.StaticValue, breakpoint));
             return this;
         }
 
@@ -146,11 +146,11 @@ public sealed class PositionBuilder : ICssBuilder
         return position switch
         {
             // Intellenum<string> *Value constants are compile-time consts, safe in switch
-            Enums.Positions.Position.StaticValue => _classStatic,
-            Enums.Positions.Position.RelativeValue => _classRelative,
-            Enums.Positions.Position.AbsoluteValue => _classAbsolute,
-            Enums.Positions.Position.FixedValue => _classFixed,
-            Enums.Positions.Position.StickyValue => _classSticky,
+            Position.StaticValue => _classStatic,
+            Position.RelativeValue => _classRelative,
+            Position.AbsoluteValue => _classAbsolute,
+            Position.FixedValue => _classFixed,
+            Position.StickyValue => _classSticky,
             _ => string.Empty
         };
     }

@@ -1,10 +1,9 @@
-using Soenneker.Quark.Enums.GlobalKeywords;
 
 namespace Soenneker.Quark;
 
 public static class Visibility
 {
-    public static VisibilityBuilder Visible => new(Enums.Visibilities.Visibility.VisibleValue);
+    public static VisibilityBuilder Visible => new(Visibility.VisibleValue);
 
     public static VisibilityBuilder Invisible => new("invisible");
 

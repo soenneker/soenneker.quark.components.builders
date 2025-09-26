@@ -23,13 +23,13 @@ public sealed class VisibilityBuilder : ICssBuilder
             _rules.AddRange(rules);
     }
 
-    public VisibilityBuilder Visible => Chain(Enums.Visibilities.Visibility.VisibleValue);
+    public VisibilityBuilder Visible => Chain(Visibility.VisibleValue);
     public VisibilityBuilder Invisible => Chain("invisible");
-    public VisibilityBuilder Inherit => Chain(Enums.GlobalKeywords.GlobalKeyword.InheritValue);
-    public VisibilityBuilder Initial => Chain(Enums.GlobalKeywords.GlobalKeyword.InitialValue);
-    public VisibilityBuilder Revert => Chain(Enums.GlobalKeywords.GlobalKeyword.RevertValue);
-    public VisibilityBuilder RevertLayer => Chain(Enums.GlobalKeywords.GlobalKeyword.RevertLayerValue);
-    public VisibilityBuilder Unset => Chain(Enums.GlobalKeywords.GlobalKeyword.UnsetValue);
+    public VisibilityBuilder Inherit => Chain(GlobalKeyword.InheritValue);
+    public VisibilityBuilder Initial => Chain(GlobalKeyword.InitialValue);
+    public VisibilityBuilder Revert => Chain(GlobalKeyword.RevertValue);
+    public VisibilityBuilder RevertLayer => Chain(GlobalKeyword.RevertLayerValue);
+    public VisibilityBuilder Unset => Chain(GlobalKeyword.UnsetValue);
 
     public VisibilityBuilder OnPhone => ChainBp(Breakpoint.Phone);
     public VisibilityBuilder OnTablet => ChainBp(Breakpoint.Tablet);
@@ -50,7 +50,7 @@ public sealed class VisibilityBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new VisibilityRule(Enums.Visibilities.Visibility.VisibleValue, bp));
+            _rules.Add(new VisibilityRule(Visibility.VisibleValue, bp));
             return this;
         }
 
@@ -72,7 +72,7 @@ public sealed class VisibilityBuilder : ICssBuilder
             string cls = rule.Value switch
             {
                 "invisible" => _classInvisible,
-                Enums.Visibilities.Visibility.VisibleValue => _classVisible,
+                Visibility.VisibleValue => _classVisible,
                 _ => string.Empty
             };
             if (cls.Length == 0)
@@ -102,12 +102,12 @@ public sealed class VisibilityBuilder : ICssBuilder
             string? css = rule.Value switch
             {
                 "invisible" => "visibility: hidden",
-                Enums.Visibilities.Visibility.VisibleValue => "visibility: visible",
-                Enums.GlobalKeywords.GlobalKeyword.InheritValue => "visibility: inherit",
-                Enums.GlobalKeywords.GlobalKeyword.InitialValue => "visibility: initial",
-                Enums.GlobalKeywords.GlobalKeyword.UnsetValue => "visibility: unset",
-                Enums.GlobalKeywords.GlobalKeyword.RevertValue => "visibility: revert",
-                Enums.GlobalKeywords.GlobalKeyword.RevertLayerValue => "visibility: revert-layer",
+                Visibility.VisibleValue => "visibility: visible",
+                GlobalKeyword.InheritValue => "visibility: inherit",
+                GlobalKeyword.InitialValue => "visibility: initial",
+                GlobalKeyword.UnsetValue => "visibility: unset",
+                GlobalKeyword.RevertValue => "visibility: revert",
+                GlobalKeyword.RevertLayerValue => "visibility: revert-layer",
                 _ => null
             };
             if (css is null) continue;

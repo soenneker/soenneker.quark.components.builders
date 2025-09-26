@@ -1,14 +1,13 @@
-using Soenneker.Quark.Enums.GlobalKeywords;
 
 namespace Soenneker.Quark;
 
 public static class TextAlignment
 {
-	public static TextAlignmentBuilder Start => new(Enums.TextAlignments.TextAlignment.StartValue);
+	public static TextAlignmentBuilder Start => new(TextAlignment.StartValue);
 
-	public static TextAlignmentBuilder Center => new(Enums.TextAlignments.TextAlignment.CenterValue);
+	public static TextAlignmentBuilder Center => new(TextAlignment.CenterValue);
 
-	public static TextAlignmentBuilder End => new(Enums.TextAlignments.TextAlignment.EndValue);
+	public static TextAlignmentBuilder End => new(TextAlignment.EndValue);
 
 	public static TextAlignmentBuilder Inherit => new(GlobalKeyword.InheritValue);
 	public static TextAlignmentBuilder Initial => new(GlobalKeyword.InitialValue);

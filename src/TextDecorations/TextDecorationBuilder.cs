@@ -18,15 +18,15 @@ public sealed class TextDecorationBuilder : ICssBuilder
     private const string _textDecorationPrefix = "text-decoration-line: ";
 
     // ----- Style constants (compile-time const interpolation with Intellenum consts) -----
-    private const string _styleNone = $"{_textDecorationPrefix}{Enums.TextDecorations.Line.TextDecorationLine.NoneValue}";
-    private const string _styleUnderline = $"{_textDecorationPrefix}{Enums.TextDecorations.Line.TextDecorationLine.UnderlineValue}";
-    private const string _styleLineThrough = $"{_textDecorationPrefix}{Enums.TextDecorations.Line.TextDecorationLine.LineThroughValue}";
+    private const string _styleNone = $"{_textDecorationPrefix}{TextDecorationLine.NoneValue}";
+    private const string _styleUnderline = $"{_textDecorationPrefix}{TextDecorationLine.UnderlineValue}";
+    private const string _styleLineThrough = $"{_textDecorationPrefix}{TextDecorationLine.LineThroughValue}";
 
-    private const string _styleInherit = $"{_textDecorationPrefix}{Enums.GlobalKeywords.GlobalKeyword.InheritValue}";
-    private const string _styleInitial = $"{_textDecorationPrefix}{Enums.GlobalKeywords.GlobalKeyword.InitialValue}";
-    private const string _styleUnset = $"{_textDecorationPrefix}{Enums.GlobalKeywords.GlobalKeyword.UnsetValue}";
-    private const string _styleRevert = $"{_textDecorationPrefix}{Enums.GlobalKeywords.GlobalKeyword.RevertValue}";
-    private const string _styleRevertLayer = $"{_textDecorationPrefix}{Enums.GlobalKeywords.GlobalKeyword.RevertLayerValue}";
+    private const string _styleInherit = $"{_textDecorationPrefix}{GlobalKeyword.InheritValue}";
+    private const string _styleInitial = $"{_textDecorationPrefix}{GlobalKeyword.InitialValue}";
+    private const string _styleUnset = $"{_textDecorationPrefix}{GlobalKeyword.UnsetValue}";
+    private const string _styleRevert = $"{_textDecorationPrefix}{GlobalKeyword.RevertValue}";
+    private const string _styleRevertLayer = $"{_textDecorationPrefix}{GlobalKeyword.RevertLayerValue}";
 
     internal TextDecorationBuilder(string value, Breakpoint? breakpoint = null)
     {
@@ -39,15 +39,15 @@ public sealed class TextDecorationBuilder : ICssBuilder
             _rules.AddRange(rules);
     }
 
-    public TextDecorationBuilder None => Chain(Enums.TextDecorations.Line.TextDecorationLine.NoneValue);
-    public TextDecorationBuilder Underline => Chain(Enums.TextDecorations.Line.TextDecorationLine.UnderlineValue);
-    public TextDecorationBuilder LineThrough => Chain(Enums.TextDecorations.Line.TextDecorationLine.LineThroughValue);
+    public TextDecorationBuilder None => Chain(TextDecorationLine.NoneValue);
+    public TextDecorationBuilder Underline => Chain(TextDecorationLine.UnderlineValue);
+    public TextDecorationBuilder LineThrough => Chain(TextDecorationLine.LineThroughValue);
 
-    public TextDecorationBuilder Inherit => Chain(Enums.GlobalKeywords.GlobalKeyword.InheritValue);
-    public TextDecorationBuilder Initial => Chain(Enums.GlobalKeywords.GlobalKeyword.InitialValue);
-    public TextDecorationBuilder Revert => Chain(Enums.GlobalKeywords.GlobalKeyword.RevertValue);
-    public TextDecorationBuilder RevertLayer => Chain(Enums.GlobalKeywords.GlobalKeyword.RevertLayerValue);
-    public TextDecorationBuilder Unset => Chain(Enums.GlobalKeywords.GlobalKeyword.UnsetValue);
+    public TextDecorationBuilder Inherit => Chain(GlobalKeyword.InheritValue);
+    public TextDecorationBuilder Initial => Chain(GlobalKeyword.InitialValue);
+    public TextDecorationBuilder Revert => Chain(GlobalKeyword.RevertValue);
+    public TextDecorationBuilder RevertLayer => Chain(GlobalKeyword.RevertLayerValue);
+    public TextDecorationBuilder Unset => Chain(GlobalKeyword.UnsetValue);
 
     public TextDecorationBuilder OnPhone => ChainBp(Breakpoint.Phone);
     public TextDecorationBuilder OnTablet => ChainBp(Breakpoint.Tablet);
@@ -69,7 +69,7 @@ public sealed class TextDecorationBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new TextDecorationRule(Enums.TextDecorations.Line.TextDecorationLine.NoneValue, bp));
+            _rules.Add(new TextDecorationRule(TextDecorationLine.NoneValue, bp));
             return this;
         }
 
@@ -93,9 +93,9 @@ public sealed class TextDecorationBuilder : ICssBuilder
 
             string baseClass = rule.Value switch
             {
-                Enums.TextDecorations.Line.TextDecorationLine.NoneValue => _classNone,
-                Enums.TextDecorations.Line.TextDecorationLine.UnderlineValue => _classUnderline,
-                Enums.TextDecorations.Line.TextDecorationLine.LineThroughValue => _classLineThrough,
+                TextDecorationLine.NoneValue => _classNone,
+                TextDecorationLine.UnderlineValue => _classUnderline,
+                TextDecorationLine.LineThroughValue => _classLineThrough,
                 _ => string.Empty
             };
 
@@ -131,15 +131,15 @@ public sealed class TextDecorationBuilder : ICssBuilder
 
             string css = rule.Value switch
             {
-                Enums.TextDecorations.Line.TextDecorationLine.NoneValue => _styleNone,
-                Enums.TextDecorations.Line.TextDecorationLine.UnderlineValue => _styleUnderline,
-                Enums.TextDecorations.Line.TextDecorationLine.LineThroughValue => _styleLineThrough,
+                TextDecorationLine.NoneValue => _styleNone,
+                TextDecorationLine.UnderlineValue => _styleUnderline,
+                TextDecorationLine.LineThroughValue => _styleLineThrough,
 
-                Enums.GlobalKeywords.GlobalKeyword.InheritValue => _styleInherit,
-                Enums.GlobalKeywords.GlobalKeyword.InitialValue => _styleInitial,
-                Enums.GlobalKeywords.GlobalKeyword.UnsetValue => _styleUnset,
-                Enums.GlobalKeywords.GlobalKeyword.RevertValue => _styleRevert,
-                Enums.GlobalKeywords.GlobalKeyword.RevertLayerValue => _styleRevertLayer,
+                GlobalKeyword.InheritValue => _styleInherit,
+                GlobalKeyword.InitialValue => _styleInitial,
+                GlobalKeyword.UnsetValue => _styleUnset,
+                GlobalKeyword.RevertValue => _styleRevert,
+                GlobalKeyword.RevertLayerValue => _styleRevertLayer,
 
                 _ => string.Empty
             };

@@ -24,13 +24,13 @@ public sealed class FontStyleBuilder : ICssBuilder
             _rules.AddRange(rules);
     }
 
-    public FontStyleBuilder Italic => Chain(Enums.FontStyles.FontStyle.ItalicValue);
-    public FontStyleBuilder Normal => Chain(Enums.FontStyles.FontStyle.NormalValue);
-    public FontStyleBuilder Inherit => Chain(Enums.GlobalKeywords.GlobalKeyword.InheritValue);
-    public FontStyleBuilder Initial => Chain(Enums.GlobalKeywords.GlobalKeyword.InitialValue);
-    public FontStyleBuilder Revert => Chain(Enums.GlobalKeywords.GlobalKeyword.RevertValue);
-    public FontStyleBuilder RevertLayer => Chain(Enums.GlobalKeywords.GlobalKeyword.RevertLayerValue);
-    public FontStyleBuilder Unset => Chain(Enums.GlobalKeywords.GlobalKeyword.UnsetValue);
+    public FontStyleBuilder Italic => Chain(FontStyle.ItalicValue);
+    public FontStyleBuilder Normal => Chain(FontStyle.NormalValue);
+    public FontStyleBuilder Inherit => Chain(GlobalKeyword.InheritValue);
+    public FontStyleBuilder Initial => Chain(GlobalKeyword.InitialValue);
+    public FontStyleBuilder Revert => Chain(GlobalKeyword.RevertValue);
+    public FontStyleBuilder RevertLayer => Chain(GlobalKeyword.RevertLayerValue);
+    public FontStyleBuilder Unset => Chain(GlobalKeyword.UnsetValue);
 
     public FontStyleBuilder OnPhone => ChainBp(Breakpoint.Phone);
     public FontStyleBuilder OnTablet => ChainBp(Breakpoint.Tablet);
@@ -51,7 +51,7 @@ public sealed class FontStyleBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new FontStyleRule(Enums.FontStyles.FontStyle.NormalValue, bp));
+            _rules.Add(new FontStyleRule(FontStyle.NormalValue, bp));
             return this;
         }
 
@@ -72,8 +72,8 @@ public sealed class FontStyleBuilder : ICssBuilder
             FontStyleRule rule = _rules[i];
             string cls = rule.Value switch
             {
-                Enums.FontStyles.FontStyle.ItalicValue => _classItalic,
-                Enums.FontStyles.FontStyle.NormalValue => _classNormal,
+                FontStyle.ItalicValue => _classItalic,
+                FontStyle.NormalValue => _classNormal,
                 _ => string.Empty
             };
             if (cls.Length == 0)

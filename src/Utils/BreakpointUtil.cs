@@ -1,5 +1,4 @@
 using System.Runtime.CompilerServices;
-using Soenneker.Quark.Enums.Breakpoints;
 
 namespace Soenneker.Quark;
 

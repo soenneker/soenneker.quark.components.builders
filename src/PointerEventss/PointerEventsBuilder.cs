@@ -16,13 +16,13 @@ public sealed class PointerEventsBuilder : ICssBuilder
     // ----- CSS prefix & style constants (Intellenum *Value are const, so const-interp is fine) -----
     private const string _pointerEventsPrefix = "pointer-events: ";
 
-    private const string _styleNone = $"{_pointerEventsPrefix}{Enums.PointerEvents.PointerEvents.NoneValue}";
-    private const string _styleAuto = $"{_pointerEventsPrefix}{Enums.PointerEvents.PointerEvents.AutoValue}";
-    private const string _styleInherit = $"{_pointerEventsPrefix}{Enums.GlobalKeywords.GlobalKeyword.InheritValue}";
-    private const string _styleInitial = $"{_pointerEventsPrefix}{Enums.GlobalKeywords.GlobalKeyword.InitialValue}";
-    private const string _styleUnset = $"{_pointerEventsPrefix}{Enums.GlobalKeywords.GlobalKeyword.UnsetValue}";
-    private const string _styleRevert = $"{_pointerEventsPrefix}{Enums.GlobalKeywords.GlobalKeyword.RevertValue}";
-    private const string _styleRevertLayer = $"{_pointerEventsPrefix}{Enums.GlobalKeywords.GlobalKeyword.RevertLayerValue}";
+    private const string _styleNone = $"{_pointerEventsPrefix}{PointerEvents.NoneValue}";
+    private const string _styleAuto = $"{_pointerEventsPrefix}{PointerEvents.AutoValue}";
+    private const string _styleInherit = $"{_pointerEventsPrefix}{GlobalKeyword.InheritValue}";
+    private const string _styleInitial = $"{_pointerEventsPrefix}{GlobalKeyword.InitialValue}";
+    private const string _styleUnset = $"{_pointerEventsPrefix}{GlobalKeyword.UnsetValue}";
+    private const string _styleRevert = $"{_pointerEventsPrefix}{GlobalKeyword.RevertValue}";
+    private const string _styleRevertLayer = $"{_pointerEventsPrefix}{GlobalKeyword.RevertLayerValue}";
 
     internal PointerEventsBuilder(string value, Breakpoint? breakpoint = null)
     {
@@ -35,13 +35,13 @@ public sealed class PointerEventsBuilder : ICssBuilder
             _rules.AddRange(rules);
     }
 
-    public PointerEventsBuilder None => Chain(Enums.PointerEvents.PointerEvents.NoneValue);
-    public PointerEventsBuilder Auto => Chain(Enums.PointerEvents.PointerEvents.AutoValue);
-    public PointerEventsBuilder Inherit => Chain(Enums.GlobalKeywords.GlobalKeyword.InheritValue);
-    public PointerEventsBuilder Initial => Chain(Enums.GlobalKeywords.GlobalKeyword.InitialValue);
-    public PointerEventsBuilder Revert => Chain(Enums.GlobalKeywords.GlobalKeyword.RevertValue);
-    public PointerEventsBuilder RevertLayer => Chain(Enums.GlobalKeywords.GlobalKeyword.RevertLayerValue);
-    public PointerEventsBuilder Unset => Chain(Enums.GlobalKeywords.GlobalKeyword.UnsetValue);
+    public PointerEventsBuilder None => Chain(PointerEvents.NoneValue);
+    public PointerEventsBuilder Auto => Chain(PointerEvents.AutoValue);
+    public PointerEventsBuilder Inherit => Chain(GlobalKeyword.InheritValue);
+    public PointerEventsBuilder Initial => Chain(GlobalKeyword.InitialValue);
+    public PointerEventsBuilder Revert => Chain(GlobalKeyword.RevertValue);
+    public PointerEventsBuilder RevertLayer => Chain(GlobalKeyword.RevertLayerValue);
+    public PointerEventsBuilder Unset => Chain(GlobalKeyword.UnsetValue);
 
     public PointerEventsBuilder OnPhone => ChainBp(Breakpoint.Phone);
     public PointerEventsBuilder OnTablet => ChainBp(Breakpoint.Tablet);
@@ -63,7 +63,7 @@ public sealed class PointerEventsBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new PointerEventsRule(Enums.PointerEvents.PointerEvents.AutoValue, bp));
+            _rules.Add(new PointerEventsRule(PointerEvents.AutoValue, bp));
             return this;
         }
 
@@ -87,8 +87,8 @@ public sealed class PointerEventsBuilder : ICssBuilder
 
             string baseClass = rule.Value switch
             {
-                Enums.PointerEvents.PointerEvents.NoneValue => _classNone,
-                Enums.PointerEvents.PointerEvents.AutoValue => _classAuto,
+                PointerEvents.NoneValue => _classNone,
+                PointerEvents.AutoValue => _classAuto,
                 _ => string.Empty
             };
 
@@ -122,13 +122,13 @@ public sealed class PointerEventsBuilder : ICssBuilder
 
             string css = rule.Value switch
             {
-                Enums.PointerEvents.PointerEvents.NoneValue => _styleNone,
-                Enums.PointerEvents.PointerEvents.AutoValue => _styleAuto,
-                Enums.GlobalKeywords.GlobalKeyword.InheritValue => _styleInherit,
-                Enums.GlobalKeywords.GlobalKeyword.InitialValue => _styleInitial,
-                Enums.GlobalKeywords.GlobalKeyword.UnsetValue => _styleUnset,
-                Enums.GlobalKeywords.GlobalKeyword.RevertValue => _styleRevert,
-                Enums.GlobalKeywords.GlobalKeyword.RevertLayerValue => _styleRevertLayer,
+                PointerEvents.NoneValue => _styleNone,
+                PointerEvents.AutoValue => _styleAuto,
+                GlobalKeyword.InheritValue => _styleInherit,
+                GlobalKeyword.InitialValue => _styleInitial,
+                GlobalKeyword.UnsetValue => _styleUnset,
+                GlobalKeyword.RevertValue => _styleRevert,
+                GlobalKeyword.RevertLayerValue => _styleRevertLayer,
                 _ => string.Empty
             };
 

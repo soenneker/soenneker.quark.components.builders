@@ -1,4 +1,3 @@
-using Soenneker.Quark.Enums.Breakpoints;
 using TextOverflowEnum = Soenneker.Quark.Enums.TextOverflows.TextOverflow;
 
 namespace Soenneker.Quark;

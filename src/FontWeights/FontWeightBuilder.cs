@@ -28,17 +28,17 @@ public sealed class FontWeightBuilder : ICssBuilder
             _rules.AddRange(rules);
     }
 
-    public FontWeightBuilder Light => Chain(Enums.FontWeights.FontWeight.LightValue);
-    public FontWeightBuilder Normal => Chain(Enums.FontWeights.FontWeight.NormalValue);
-    public FontWeightBuilder Medium => Chain(Enums.FontWeights.FontWeight.MediumValue);
-    public FontWeightBuilder Semibold => Chain(Enums.FontWeights.FontWeight.SemiboldValue);
-    public FontWeightBuilder Bold => Chain(Enums.FontWeights.FontWeight.BoldValue);
-    public FontWeightBuilder Bolder => Chain(Enums.FontWeights.FontWeight.BolderValue);
-    public FontWeightBuilder Inherit => Chain(Enums.GlobalKeywords.GlobalKeyword.InheritValue);
-    public FontWeightBuilder Initial => Chain(Enums.GlobalKeywords.GlobalKeyword.InitialValue);
-    public FontWeightBuilder Revert => Chain(Enums.GlobalKeywords.GlobalKeyword.RevertValue);
-    public FontWeightBuilder RevertLayer => Chain(Enums.GlobalKeywords.GlobalKeyword.RevertLayerValue);
-    public FontWeightBuilder Unset => Chain(Enums.GlobalKeywords.GlobalKeyword.UnsetValue);
+    public FontWeightBuilder Light => Chain(FontWeight.LightValue);
+    public FontWeightBuilder Normal => Chain(FontWeight.NormalValue);
+    public FontWeightBuilder Medium => Chain(FontWeight.MediumValue);
+    public FontWeightBuilder Semibold => Chain(FontWeight.SemiboldValue);
+    public FontWeightBuilder Bold => Chain(FontWeight.BoldValue);
+    public FontWeightBuilder Bolder => Chain(FontWeight.BolderValue);
+    public FontWeightBuilder Inherit => Chain(GlobalKeyword.InheritValue);
+    public FontWeightBuilder Initial => Chain(GlobalKeyword.InitialValue);
+    public FontWeightBuilder Revert => Chain(GlobalKeyword.RevertValue);
+    public FontWeightBuilder RevertLayer => Chain(GlobalKeyword.RevertLayerValue);
+    public FontWeightBuilder Unset => Chain(GlobalKeyword.UnsetValue);
 
     public FontWeightBuilder OnPhone => ChainBp(Breakpoint.Phone);
 
@@ -64,7 +64,7 @@ public sealed class FontWeightBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new FontWeightRule(Enums.FontWeights.FontWeight.NormalValue, bp));
+            _rules.Add(new FontWeightRule(FontWeight.NormalValue, bp));
             return this;
         }
 
@@ -85,12 +85,12 @@ public sealed class FontWeightBuilder : ICssBuilder
             FontWeightRule rule = _rules[i];
             string cls = rule.Value switch
             {
-                Enums.FontWeights.FontWeight.LightValue => _classLight,
-                Enums.FontWeights.FontWeight.NormalValue => _classNormal,
-                Enums.FontWeights.FontWeight.MediumValue => _classMedium,
-                Enums.FontWeights.FontWeight.SemiboldValue => _classSemibold,
-                Enums.FontWeights.FontWeight.BoldValue => _classBold,
-                Enums.FontWeights.FontWeight.BolderValue => _classBolder,
+                FontWeight.LightValue => _classLight,
+                FontWeight.NormalValue => _classNormal,
+                FontWeight.MediumValue => _classMedium,
+                FontWeight.SemiboldValue => _classSemibold,
+                FontWeight.BoldValue => _classBold,
+                FontWeight.BolderValue => _classBolder,
                 _ => string.Empty
             };
             if (cls.Length == 0)
@@ -119,17 +119,17 @@ public sealed class FontWeightBuilder : ICssBuilder
             FontWeightRule rule = _rules[i];
             string? css = rule.Value switch
             {
-                Enums.FontWeights.FontWeight.LightValue => "300",
-                Enums.FontWeights.FontWeight.NormalValue => "400",
-                Enums.FontWeights.FontWeight.MediumValue => "500",
-                Enums.FontWeights.FontWeight.SemiboldValue => "600",
-                Enums.FontWeights.FontWeight.BoldValue => "700",
-                Enums.FontWeights.FontWeight.BolderValue => "bolder",
-                Enums.GlobalKeywords.GlobalKeyword.InheritValue => "inherit",
-                Enums.GlobalKeywords.GlobalKeyword.InitialValue => "initial",
-                Enums.GlobalKeywords.GlobalKeyword.UnsetValue => "unset",
-                Enums.GlobalKeywords.GlobalKeyword.RevertValue => "revert",
-                Enums.GlobalKeywords.GlobalKeyword.RevertLayerValue => "revert-layer",
+                FontWeight.LightValue => "300",
+                FontWeight.NormalValue => "400",
+                FontWeight.MediumValue => "500",
+                FontWeight.SemiboldValue => "600",
+                FontWeight.BoldValue => "700",
+                FontWeight.BolderValue => "bolder",
+                GlobalKeyword.InheritValue => "inherit",
+                GlobalKeyword.InitialValue => "initial",
+                GlobalKeyword.UnsetValue => "unset",
+                GlobalKeyword.RevertValue => "revert",
+                GlobalKeyword.RevertLayerValue => "revert-layer",
                 _ => null
             };
             if (css is null)

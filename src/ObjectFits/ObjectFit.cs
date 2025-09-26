@@ -1,4 +1,3 @@
-using Soenneker.Quark.Enums.GlobalKeywords;
 
 namespace Soenneker.Quark;
 
@@ -10,27 +9,27 @@ public static class ObjectFit
     /// <summary>
     /// object-fit: contain.
     /// </summary>
-    public static ObjectFitBuilder Contain => new(Enums.ObjectFits.ObjectFit.ContainValue);
+    public static ObjectFitBuilder Contain => new(ObjectFit.ContainValue);
 
     /// <summary>
     /// object-fit: cover.
     /// </summary>
-    public static ObjectFitBuilder Cover => new(Enums.ObjectFits.ObjectFit.CoverValue);
+    public static ObjectFitBuilder Cover => new(ObjectFit.CoverValue);
 
     /// <summary>
     /// object-fit: fill.
     /// </summary>
-    public static ObjectFitBuilder Fill => new(Enums.ObjectFits.ObjectFit.FillValue);
+    public static ObjectFitBuilder Fill => new(ObjectFit.FillValue);
 
     /// <summary>
     /// object-fit: scale-down.
     /// </summary>
-    public static ObjectFitBuilder ScaleDown => new(Enums.ObjectFits.ObjectFit.ScaleDownValue);
+    public static ObjectFitBuilder ScaleDown => new(ObjectFit.ScaleDownValue);
 
     /// <summary>
     /// object-fit: none.
     /// </summary>
-    public static ObjectFitBuilder None => new(Enums.ObjectFits.ObjectFit.NoneValue);
+    public static ObjectFitBuilder None => new(ObjectFit.NoneValue);
 
     public static ObjectFitBuilder Inherit => new(GlobalKeyword.InheritValue);
     public static ObjectFitBuilder Initial => new(GlobalKeyword.InitialValue);

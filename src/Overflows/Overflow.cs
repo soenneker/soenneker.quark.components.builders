@@ -1,4 +1,3 @@
-using Soenneker.Quark.Enums.GlobalKeywords;
 
 namespace Soenneker.Quark;
 
@@ -10,22 +9,22 @@ public static class Overflow
     /// <summary>
     /// Overflow auto.
     /// </summary>
-    public static OverflowBuilder Auto => new(Enums.Overflows.Overflow.AutoValue);
+    public static OverflowBuilder Auto => new(Overflow.AutoValue);
 
     /// <summary>
     /// Overflow hidden.
     /// </summary>
-    public static OverflowBuilder Hidden => new(Enums.Overflows.Overflow.HiddenValue);
+    public static OverflowBuilder Hidden => new(Overflow.HiddenValue);
 
     /// <summary>
     /// Overflow visible.
     /// </summary>
-    public static OverflowBuilder Visible => new(Enums.Overflows.Overflow.VisibleValue);
+    public static OverflowBuilder Visible => new(Overflow.VisibleValue);
 
     /// <summary>
     /// Overflow scroll.
     /// </summary>
-    public static OverflowBuilder Scroll => new(Enums.Overflows.Overflow.ScrollValue);
+    public static OverflowBuilder Scroll => new(Overflow.ScrollValue);
 
     public static OverflowBuilder Inherit => new(GlobalKeyword.InheritValue);
     public static OverflowBuilder Initial => new(GlobalKeyword.InitialValue);

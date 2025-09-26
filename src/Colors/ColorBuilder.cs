@@ -36,11 +36,11 @@ public sealed class ColorBuilder : ICssBuilder
     public ColorBuilder Link => ChainValue("link");
     public ColorBuilder Muted => ChainValue("muted");
 
-    public ColorBuilder Inherit => ChainValue(Enums.GlobalKeywords.GlobalKeyword.InheritValue);
-    public ColorBuilder Initial => ChainValue(Enums.GlobalKeywords.GlobalKeyword.InitialValue);
-    public ColorBuilder Revert => ChainValue(Enums.GlobalKeywords.GlobalKeyword.RevertValue);
-    public ColorBuilder RevertLayer => ChainValue(Enums.GlobalKeywords.GlobalKeyword.RevertLayerValue);
-    public ColorBuilder Unset => ChainValue(Enums.GlobalKeywords.GlobalKeyword.UnsetValue);
+    public ColorBuilder Inherit => ChainValue(GlobalKeyword.InheritValue);
+    public ColorBuilder Initial => ChainValue(GlobalKeyword.InitialValue);
+    public ColorBuilder Revert => ChainValue(GlobalKeyword.RevertValue);
+    public ColorBuilder RevertLayer => ChainValue(GlobalKeyword.RevertLayerValue);
+    public ColorBuilder Unset => ChainValue(GlobalKeyword.UnsetValue);
 
     public ColorBuilder OnPhone => ChainBp(Breakpoint.Phone);
     public ColorBuilder OnTablet => ChainBp(Breakpoint.Tablet);

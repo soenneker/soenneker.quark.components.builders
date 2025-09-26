@@ -33,33 +33,33 @@ public sealed class ObjectFitBuilder : ICssBuilder
     /// <summary>
     /// Chain with contain for the next rule.
     /// </summary>
-    public ObjectFitBuilder Contain => ChainWithFit(Enums.ObjectFits.ObjectFit.ContainValue);
+    public ObjectFitBuilder Contain => ChainWithFit(ObjectFit.ContainValue);
 
     /// <summary>
     /// Chain with cover for the next rule.
     /// </summary>
-    public ObjectFitBuilder Cover => ChainWithFit(Enums.ObjectFits.ObjectFit.CoverValue);
+    public ObjectFitBuilder Cover => ChainWithFit(ObjectFit.CoverValue);
 
     /// <summary>
     /// Chain with fill for the next rule.
     /// </summary>
-    public ObjectFitBuilder Fill => ChainWithFit(Enums.ObjectFits.ObjectFit.FillValue);
+    public ObjectFitBuilder Fill => ChainWithFit(ObjectFit.FillValue);
 
     /// <summary>
     /// Chain with scale-down for the next rule.
     /// </summary>
-    public ObjectFitBuilder ScaleDown => ChainWithFit(Enums.ObjectFits.ObjectFit.ScaleDownValue);
+    public ObjectFitBuilder ScaleDown => ChainWithFit(ObjectFit.ScaleDownValue);
 
     /// <summary>
     /// Chain with none for the next rule.
     /// </summary>
-    public ObjectFitBuilder None => ChainWithFit(Enums.ObjectFits.ObjectFit.NoneValue);
+    public ObjectFitBuilder None => ChainWithFit(ObjectFit.NoneValue);
 
-    public ObjectFitBuilder Inherit => ChainWithFit(Enums.GlobalKeywords.GlobalKeyword.InheritValue);
-    public ObjectFitBuilder Initial => ChainWithFit(Enums.GlobalKeywords.GlobalKeyword.InitialValue);
-    public ObjectFitBuilder Revert => ChainWithFit(Enums.GlobalKeywords.GlobalKeyword.RevertValue);
-    public ObjectFitBuilder RevertLayer => ChainWithFit(Enums.GlobalKeywords.GlobalKeyword.RevertLayerValue);
-    public ObjectFitBuilder Unset => ChainWithFit(Enums.GlobalKeywords.GlobalKeyword.UnsetValue);
+    public ObjectFitBuilder Inherit => ChainWithFit(GlobalKeyword.InheritValue);
+    public ObjectFitBuilder Initial => ChainWithFit(GlobalKeyword.InitialValue);
+    public ObjectFitBuilder Revert => ChainWithFit(GlobalKeyword.RevertValue);
+    public ObjectFitBuilder RevertLayer => ChainWithFit(GlobalKeyword.RevertLayerValue);
+    public ObjectFitBuilder Unset => ChainWithFit(GlobalKeyword.UnsetValue);
 
     /// <summary>
     /// Apply on phone devices (portrait phones, less than 576px).
@@ -99,7 +99,7 @@ public sealed class ObjectFitBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new ObjectFitRule(Enums.ObjectFits.ObjectFit.ContainValue, breakpoint));
+            _rules.Add(new ObjectFitRule(ObjectFit.ContainValue, breakpoint));
             return this;
         }
 
@@ -173,11 +173,11 @@ public sealed class ObjectFitBuilder : ICssBuilder
     {
         return fit switch
         {
-            Enums.ObjectFits.ObjectFit.ContainValue => _classContain,
-            Enums.ObjectFits.ObjectFit.CoverValue => _classCover,
-            Enums.ObjectFits.ObjectFit.FillValue => _classFill,
-            Enums.ObjectFits.ObjectFit.ScaleDownValue => _classScale,
-            Enums.ObjectFits.ObjectFit.NoneValue => _classNone,
+            ObjectFit.ContainValue => _classContain,
+            ObjectFit.CoverValue => _classCover,
+            ObjectFit.FillValue => _classFill,
+            ObjectFit.ScaleDownValue => _classScale,
+            ObjectFit.NoneValue => _classNone,
             _ => string.Empty
         };
     }

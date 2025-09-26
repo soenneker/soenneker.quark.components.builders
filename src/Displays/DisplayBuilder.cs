@@ -35,11 +35,11 @@ public sealed class DisplayBuilder : ICssBuilder
     public DisplayBuilder Table => ChainWithDisplay(Enums.DisplayTypes.DisplayType.TableValue);
     public DisplayBuilder TableCell => ChainWithDisplay(Enums.DisplayTypes.DisplayType.TableCellValue);
     public DisplayBuilder TableRow => ChainWithDisplay(Enums.DisplayTypes.DisplayType.TableRowValue);
-    public DisplayBuilder Inherit => ChainWithDisplay(Enums.GlobalKeywords.GlobalKeyword.InheritValue);
-    public DisplayBuilder Initial => ChainWithDisplay(Enums.GlobalKeywords.GlobalKeyword.InitialValue);
-    public DisplayBuilder Revert => ChainWithDisplay(Enums.GlobalKeywords.GlobalKeyword.RevertValue);
-    public DisplayBuilder RevertLayer => ChainWithDisplay(Enums.GlobalKeywords.GlobalKeyword.RevertLayerValue);
-    public DisplayBuilder Unset => ChainWithDisplay(Enums.GlobalKeywords.GlobalKeyword.UnsetValue);
+    public DisplayBuilder Inherit => ChainWithDisplay(GlobalKeyword.InheritValue);
+    public DisplayBuilder Initial => ChainWithDisplay(GlobalKeyword.InitialValue);
+    public DisplayBuilder Revert => ChainWithDisplay(GlobalKeyword.RevertValue);
+    public DisplayBuilder RevertLayer => ChainWithDisplay(GlobalKeyword.RevertLayerValue);
+    public DisplayBuilder Unset => ChainWithDisplay(GlobalKeyword.UnsetValue);
 
     public DisplayBuilder OnPhone => ChainWithBreakpoint(Breakpoint.Phone);
     public DisplayBuilder OnTablet => ChainWithBreakpoint(Breakpoint.Tablet);

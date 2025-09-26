@@ -1,18 +1,17 @@
-using Soenneker.Quark.Enums.GlobalKeywords;
 
 namespace Soenneker.Quark;
 
 public static class Float
 {
-    public static FloatBuilder None => new(Enums.Floats.Float.NoneValue);
+    public static FloatBuilder None => new(Float.NoneValue);
 
-    public static FloatBuilder Left => new(Enums.Floats.Float.LeftValue);
+    public static FloatBuilder Left => new(Float.LeftValue);
 
-    public static FloatBuilder Start => new(Enums.Floats.Float.InlineStartValue);
+    public static FloatBuilder Start => new(Float.InlineStartValue);
 
-    public static FloatBuilder Right => new(Enums.Floats.Float.RightValue);
+    public static FloatBuilder Right => new(Float.RightValue);
 
-    public static FloatBuilder End => new(Enums.Floats.Float.InlineEndValue);
+    public static FloatBuilder End => new(Float.InlineEndValue);
 
     public static FloatBuilder Inherit => new(GlobalKeyword.InheritValue);
     public static FloatBuilder Initial => new(GlobalKeyword.InitialValue);

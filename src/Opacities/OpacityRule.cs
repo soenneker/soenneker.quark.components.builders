@@ -1,4 +1,3 @@
-using Soenneker.Quark.Enums.Breakpoints;
 
 namespace Soenneker.Quark;
 

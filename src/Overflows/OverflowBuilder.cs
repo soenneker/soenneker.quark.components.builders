@@ -33,16 +33,16 @@ public sealed class OverflowBuilder : ICssBuilder
     }
 
     // ----- Fluent chaining (values & keywords) -----
-    public OverflowBuilder Auto => Chain(Enums.Overflows.Overflow.AutoValue);
-    public OverflowBuilder Hidden => Chain(Enums.Overflows.Overflow.HiddenValue);
-    public OverflowBuilder Visible => Chain(Enums.Overflows.Overflow.VisibleValue);
-    public OverflowBuilder Scroll => Chain(Enums.Overflows.Overflow.ScrollValue);
+    public OverflowBuilder Auto => Chain(Overflow.AutoValue);
+    public OverflowBuilder Hidden => Chain(Overflow.HiddenValue);
+    public OverflowBuilder Visible => Chain(Overflow.VisibleValue);
+    public OverflowBuilder Scroll => Chain(Overflow.ScrollValue);
 
-    public OverflowBuilder Inherit => Chain(Enums.GlobalKeywords.GlobalKeyword.InheritValue);
-    public OverflowBuilder Initial => Chain(Enums.GlobalKeywords.GlobalKeyword.InitialValue);
-    public OverflowBuilder Revert => Chain(Enums.GlobalKeywords.GlobalKeyword.RevertValue);
-    public OverflowBuilder RevertLayer => Chain(Enums.GlobalKeywords.GlobalKeyword.RevertLayerValue);
-    public OverflowBuilder Unset => Chain(Enums.GlobalKeywords.GlobalKeyword.UnsetValue);
+    public OverflowBuilder Inherit => Chain(GlobalKeyword.InheritValue);
+    public OverflowBuilder Initial => Chain(GlobalKeyword.InitialValue);
+    public OverflowBuilder Revert => Chain(GlobalKeyword.RevertValue);
+    public OverflowBuilder RevertLayer => Chain(GlobalKeyword.RevertLayerValue);
+    public OverflowBuilder Unset => Chain(GlobalKeyword.UnsetValue);
 
     // ----- Breakpoint chaining -----
     public OverflowBuilder OnPhone => ChainBp(Breakpoint.Phone);
@@ -65,7 +65,7 @@ public sealed class OverflowBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new OverflowRule(Enums.Overflows.Overflow.AutoValue, bp));
+            _rules.Add(new OverflowRule(Overflow.AutoValue, bp));
             return this;
         }
 
@@ -135,10 +135,10 @@ public sealed class OverflowBuilder : ICssBuilder
     {
         return overflow switch
         {
-            Enums.Overflows.Overflow.AutoValue => _classAuto,
-            Enums.Overflows.Overflow.HiddenValue => _classHidden,
-            Enums.Overflows.Overflow.VisibleValue => _classVisible,
-            Enums.Overflows.Overflow.ScrollValue => _classScroll,
+            Overflow.AutoValue => _classAuto,
+            Overflow.HiddenValue => _classHidden,
+            Overflow.VisibleValue => _classVisible,
+            Overflow.ScrollValue => _classScroll,
             _ => string.Empty
         };
     }
