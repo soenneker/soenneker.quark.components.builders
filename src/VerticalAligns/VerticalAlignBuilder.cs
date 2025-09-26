@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Soenneker.Quark.Enums;
 using Soenneker.Utils.PooledStringBuilders;
 
 namespace Soenneker.Quark;
@@ -20,12 +21,12 @@ public sealed class VerticalAlignBuilder : ICssBuilder
             _rules.AddRange(rules);
     }
 
-    public VerticalAlignBuilder Baseline => Chain(VerticalAlign.BaselineValue);
-    public VerticalAlignBuilder Top => Chain(VerticalAlign.TopValue);
-    public VerticalAlignBuilder Middle => Chain(VerticalAlign.MiddleValue);
-    public VerticalAlignBuilder Bottom => Chain(VerticalAlign.BottomValue);
-    public VerticalAlignBuilder TextTop => Chain(VerticalAlign.TextTopValue);
-    public VerticalAlignBuilder TextBottom => Chain(VerticalAlign.TextBottomValue);
+    public VerticalAlignBuilder Baseline => Chain(Enums.VerticalAlign.BaselineValue);
+    public VerticalAlignBuilder Top => Chain(Enums.VerticalAlign.TopValue);
+    public VerticalAlignBuilder Middle => Chain(Enums.VerticalAlign.MiddleValue);
+    public VerticalAlignBuilder Bottom => Chain(Enums.VerticalAlign.BottomValue);
+    public VerticalAlignBuilder TextTop => Chain(Enums.VerticalAlign.TextTopValue);
+    public VerticalAlignBuilder TextBottom => Chain(Enums.VerticalAlign.TextBottomValue);
     public VerticalAlignBuilder Inherit => Chain(GlobalKeyword.InheritValue);
     public VerticalAlignBuilder Initial => Chain(GlobalKeyword.InitialValue);
     public VerticalAlignBuilder Revert => Chain(GlobalKeyword.RevertValue);
@@ -51,7 +52,7 @@ public sealed class VerticalAlignBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new VerticalAlignRule(VerticalAlign.BaselineValue, bp));
+            _rules.Add(new VerticalAlignRule(Enums.VerticalAlign.BaselineValue, bp));
             return this;
         }
 
@@ -72,12 +73,12 @@ public sealed class VerticalAlignBuilder : ICssBuilder
             VerticalAlignRule rule = _rules[i];
             string cls = rule.Value switch
             {
-                VerticalAlign.BaselineValue => "align-baseline",
-                VerticalAlign.TopValue => "align-top",
-                VerticalAlign.MiddleValue => "align-middle",
-                VerticalAlign.BottomValue => "align-bottom",
-                VerticalAlign.TextTopValue => "align-text-top",
-                VerticalAlign.TextBottomValue => "align-text-bottom",
+                Enums.VerticalAlign.BaselineValue => "align-baseline",
+                Enums.VerticalAlign.TopValue => "align-top",
+                Enums.VerticalAlign.MiddleValue => "align-middle",
+                Enums.VerticalAlign.BottomValue => "align-bottom",
+                Enums.VerticalAlign.TextTopValue => "align-text-top",
+                Enums.VerticalAlign.TextBottomValue => "align-text-bottom",
                 _ => string.Empty
             };
             if (cls.Length == 0)

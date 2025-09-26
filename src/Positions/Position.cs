@@ -1,4 +1,6 @@
 
+using Soenneker.Quark.Enums;
+
 namespace Soenneker.Quark;
 
 /// <summary>
@@ -9,27 +11,27 @@ public static class Position
     /// <summary>
     /// Static positioning.
     /// </summary>
-    public static PositionBuilder Static => new(Position.StaticValue);
+    public static PositionBuilder Static => new(Enums.Position.StaticValue);
 
     /// <summary>
     /// Relative positioning.
     /// </summary>
-    public static PositionBuilder Relative => new(Position.RelativeValue);
+    public static PositionBuilder Relative => new(Enums.Position.RelativeValue);
 
     /// <summary>
     /// Absolute positioning.
     /// </summary>
-    public static PositionBuilder Absolute => new(Position.AbsoluteValue);
+    public static PositionBuilder Absolute => new(Enums.Position.AbsoluteValue);
 
     /// <summary>
     /// Fixed positioning.
     /// </summary>
-    public static PositionBuilder Fixed => new(Position.FixedValue);
+    public static PositionBuilder Fixed => new(Enums.Position.FixedValue);
 
     /// <summary>
     /// Sticky positioning.
     /// </summary>
-    public static PositionBuilder Sticky => new(Position.StickyValue);
+    public static PositionBuilder Sticky => new(Enums.Position.StickyValue);
 
     public static PositionBuilder Inherit => new(GlobalKeyword.InheritValue);
     public static PositionBuilder Initial => new(GlobalKeyword.InitialValue);

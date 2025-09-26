@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Soenneker.Quark.Enums;
 using Soenneker.Utils.PooledStringBuilders;
 
 namespace Soenneker.Quark;
@@ -25,9 +26,9 @@ public sealed class UserSelectBuilder : ICssBuilder
             _rules.AddRange(rules);
     }
 
-    public UserSelectBuilder None => Chain(UserSelect.NoneValue);
-    public UserSelectBuilder Auto => Chain(UserSelect.AutoValue);
-    public UserSelectBuilder All => Chain(UserSelect.AllValue);
+    public UserSelectBuilder None => Chain(Enums.UserSelect.NoneValue);
+    public UserSelectBuilder Auto => Chain(Enums.UserSelect.AutoValue);
+    public UserSelectBuilder All => Chain(Enums.UserSelect.AllValue);
     public UserSelectBuilder Inherit => Chain(GlobalKeyword.InheritValue);
     public UserSelectBuilder Initial => Chain(GlobalKeyword.InitialValue);
     public UserSelectBuilder Revert => Chain(GlobalKeyword.RevertValue);
@@ -53,7 +54,7 @@ public sealed class UserSelectBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new UserSelectRule(UserSelect.AutoValue, bp));
+            _rules.Add(new UserSelectRule(Enums.UserSelect.AutoValue, bp));
             return this;
         }
 
@@ -74,9 +75,9 @@ public sealed class UserSelectBuilder : ICssBuilder
             UserSelectRule rule = _rules[i];
             string cls = rule.Value switch
             {
-                UserSelect.NoneValue => _classNone,
-                UserSelect.AutoValue => _classAuto,
-                UserSelect.AllValue => _classAll,
+                Enums.UserSelect.NoneValue => _classNone,
+                Enums.UserSelect.AutoValue => _classAuto,
+                Enums.UserSelect.AllValue => _classAll,
                 _ => string.Empty
             };
             if (cls.Length == 0)

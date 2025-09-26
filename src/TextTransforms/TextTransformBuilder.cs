@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Soenneker.Quark.Enums;
 using Soenneker.Utils.PooledStringBuilders;
 
 namespace Soenneker.Quark;
@@ -25,9 +26,9 @@ public sealed class TextTransformBuilder : ICssBuilder
             _rules.AddRange(rules);
     }
 
-    public TextTransformBuilder Lowercase => Chain(TextTransform.LowercaseValue);
-    public TextTransformBuilder Uppercase => Chain(TextTransform.UppercaseValue);
-    public TextTransformBuilder Capitalize => Chain(TextTransform.CapitalizeValue);
+    public TextTransformBuilder Lowercase => Chain(Enums.TextTransform.LowercaseValue);
+    public TextTransformBuilder Uppercase => Chain(Enums.TextTransform.UppercaseValue);
+    public TextTransformBuilder Capitalize => Chain(Enums.TextTransform.CapitalizeValue);
     public TextTransformBuilder Inherit => Chain(GlobalKeyword.InheritValue);
     public TextTransformBuilder Initial => Chain(GlobalKeyword.InitialValue);
     public TextTransformBuilder Revert => Chain(GlobalKeyword.RevertValue);
@@ -53,7 +54,7 @@ public sealed class TextTransformBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new TextTransformRule(TextTransform.LowercaseValue, bp));
+            _rules.Add(new TextTransformRule(Enums.TextTransform.LowercaseValue, bp));
             return this;
         }
 
@@ -74,9 +75,9 @@ public sealed class TextTransformBuilder : ICssBuilder
             TextTransformRule rule = _rules[i];
             string cls = rule.Value switch
             {
-                TextTransform.LowercaseValue => _classLower,
-                TextTransform.UppercaseValue => _classUpper,
-                TextTransform.CapitalizeValue => _classCap,
+                Enums.TextTransform.LowercaseValue => _classLower,
+                Enums.TextTransform.UppercaseValue => _classUpper,
+                Enums.TextTransform.CapitalizeValue => _classCap,
                 _ => string.Empty
             };
             if (cls.Length == 0)

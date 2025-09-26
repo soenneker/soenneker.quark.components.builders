@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Soenneker.Quark.Enums;
 using Soenneker.Utils.PooledStringBuilders;
 
 namespace Soenneker.Quark;
@@ -34,15 +35,15 @@ public sealed class PositionBuilder : ICssBuilder
     }
 
     /// <summary>Chain with static positioning for the next rule.</summary>
-    public PositionBuilder Static => ChainWithPosition(Position.StaticValue);
+    public PositionBuilder Static => ChainWithPosition(Enums.Position.StaticValue);
     /// <summary>Chain with relative positioning for the next rule.</summary>
-    public PositionBuilder Relative => ChainWithPosition(Position.RelativeValue);
+    public PositionBuilder Relative => ChainWithPosition(Enums.Position.RelativeValue);
     /// <summary>Chain with absolute positioning for the next rule.</summary>
-    public PositionBuilder Absolute => ChainWithPosition(Position.AbsoluteValue);
+    public PositionBuilder Absolute => ChainWithPosition(Enums.Position.AbsoluteValue);
     /// <summary>Chain with fixed positioning for the next rule.</summary>
-    public PositionBuilder Fixed => ChainWithPosition(Position.FixedValue);
+    public PositionBuilder Fixed => ChainWithPosition(Enums.Position.FixedValue);
     /// <summary>Chain with sticky positioning for the next rule.</summary>
-    public PositionBuilder Sticky => ChainWithPosition(Position.StickyValue);
+    public PositionBuilder Sticky => ChainWithPosition(Enums.Position.StickyValue);
 
     public PositionBuilder Inherit => ChainWithPosition(GlobalKeyword.InheritValue);
     public PositionBuilder Initial => ChainWithPosition(GlobalKeyword.InitialValue);
@@ -71,7 +72,7 @@ public sealed class PositionBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new PositionRule(Position.StaticValue, breakpoint));
+            _rules.Add(new PositionRule(Enums.Position.StaticValue, breakpoint));
             return this;
         }
 
@@ -146,11 +147,11 @@ public sealed class PositionBuilder : ICssBuilder
         return position switch
         {
             // Intellenum<string> *Value constants are compile-time consts, safe in switch
-            Position.StaticValue => _classStatic,
-            Position.RelativeValue => _classRelative,
-            Position.AbsoluteValue => _classAbsolute,
-            Position.FixedValue => _classFixed,
-            Position.StickyValue => _classSticky,
+            Enums.Position.StaticValue => _classStatic,
+            Enums.Position.RelativeValue => _classRelative,
+            Enums.Position.AbsoluteValue => _classAbsolute,
+            Enums.Position.FixedValue => _classFixed,
+            Enums.Position.StickyValue => _classSticky,
             _ => string.Empty
         };
     }

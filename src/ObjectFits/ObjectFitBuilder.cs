@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Soenneker.Quark.Enums;
 using Soenneker.Utils.PooledStringBuilders;
 
 namespace Soenneker.Quark;
@@ -33,27 +34,27 @@ public sealed class ObjectFitBuilder : ICssBuilder
     /// <summary>
     /// Chain with contain for the next rule.
     /// </summary>
-    public ObjectFitBuilder Contain => ChainWithFit(ObjectFit.ContainValue);
+    public ObjectFitBuilder Contain => ChainWithFit(Enums.ObjectFit.ContainValue);
 
     /// <summary>
     /// Chain with cover for the next rule.
     /// </summary>
-    public ObjectFitBuilder Cover => ChainWithFit(ObjectFit.CoverValue);
+    public ObjectFitBuilder Cover => ChainWithFit(Enums.ObjectFit.CoverValue);
 
     /// <summary>
     /// Chain with fill for the next rule.
     /// </summary>
-    public ObjectFitBuilder Fill => ChainWithFit(ObjectFit.FillValue);
+    public ObjectFitBuilder Fill => ChainWithFit(Enums.ObjectFit.FillValue);
 
     /// <summary>
     /// Chain with scale-down for the next rule.
     /// </summary>
-    public ObjectFitBuilder ScaleDown => ChainWithFit(ObjectFit.ScaleDownValue);
+    public ObjectFitBuilder ScaleDown => ChainWithFit(Enums.ObjectFit.ScaleDownValue);
 
     /// <summary>
     /// Chain with none for the next rule.
     /// </summary>
-    public ObjectFitBuilder None => ChainWithFit(ObjectFit.NoneValue);
+    public ObjectFitBuilder None => ChainWithFit(Enums.ObjectFit.NoneValue);
 
     public ObjectFitBuilder Inherit => ChainWithFit(GlobalKeyword.InheritValue);
     public ObjectFitBuilder Initial => ChainWithFit(GlobalKeyword.InitialValue);
@@ -99,7 +100,7 @@ public sealed class ObjectFitBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new ObjectFitRule(ObjectFit.ContainValue, breakpoint));
+            _rules.Add(new ObjectFitRule(Enums.ObjectFit.ContainValue, breakpoint));
             return this;
         }
 
@@ -173,11 +174,11 @@ public sealed class ObjectFitBuilder : ICssBuilder
     {
         return fit switch
         {
-            ObjectFit.ContainValue => _classContain,
-            ObjectFit.CoverValue => _classCover,
-            ObjectFit.FillValue => _classFill,
-            ObjectFit.ScaleDownValue => _classScale,
-            ObjectFit.NoneValue => _classNone,
+            Enums.ObjectFit.ContainValue => _classContain,
+            Enums.ObjectFit.CoverValue => _classCover,
+            Enums.ObjectFit.FillValue => _classFill,
+            Enums.ObjectFit.ScaleDownValue => _classScale,
+            Enums.ObjectFit.NoneValue => _classNone,
             _ => string.Empty
         };
     }

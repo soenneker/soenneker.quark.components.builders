@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Soenneker.Quark.Enums;
 using Soenneker.Utils.PooledStringBuilders;
 
 namespace Soenneker.Quark;
@@ -24,8 +25,8 @@ public sealed class TextWrapBuilder : ICssBuilder
             _rules.AddRange(rules);
     }
 
-    public TextWrapBuilder Wrap => Chain(TextWrap.WrapValue);
-    public TextWrapBuilder NoWrap => Chain(TextWrap.NoWrapValue);
+    public TextWrapBuilder Wrap => Chain(Enums.TextWrap.WrapValue);
+    public TextWrapBuilder NoWrap => Chain(Enums.TextWrap.NoWrapValue);
     public TextWrapBuilder Inherit => Chain(GlobalKeyword.InheritValue);
     public TextWrapBuilder Initial => Chain(GlobalKeyword.InitialValue);
     public TextWrapBuilder Revert => Chain(GlobalKeyword.RevertValue);
@@ -51,7 +52,7 @@ public sealed class TextWrapBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new TextWrapRule(TextWrap.WrapValue, bp));
+            _rules.Add(new TextWrapRule(Enums.TextWrap.WrapValue, bp));
             return this;
         }
 
@@ -73,8 +74,8 @@ public sealed class TextWrapBuilder : ICssBuilder
             TextWrapRule rule = _rules[i];
             string cls = rule.Value switch
             {
-                TextWrap.WrapValue => _classWrap,
-                TextWrap.NoWrapValue => _classNoWrap,
+                Enums.TextWrap.WrapValue => _classWrap,
+                Enums.TextWrap.NoWrapValue => _classNoWrap,
                 _ => string.Empty
             };
 
@@ -106,8 +107,8 @@ public sealed class TextWrapBuilder : ICssBuilder
             TextWrapRule rule = _rules[i];
             string? css = rule.Value switch
             {
-                TextWrap.WrapValue => "wrap",
-                TextWrap.NoWrapValue => "nowrap",
+                Enums.TextWrap.WrapValue => "wrap",
+                Enums.TextWrap.NoWrapValue => "nowrap",
                 GlobalKeyword.InheritValue => "inherit",
                 GlobalKeyword.InitialValue => "initial",
                 GlobalKeyword.UnsetValue => "unset",

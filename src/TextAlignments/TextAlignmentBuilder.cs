@@ -19,9 +19,9 @@ public sealed class TextAlignmentBuilder : ICssBuilder
     private const string _textAlignPrefix = "text-align: ";
 
     // ----- Style constants (compile-time, Intellenum *Value are const) -----
-    private const string _styleStart = $"{_textAlignPrefix}{TextAlignment.StartValue}";
-    private const string _styleCenter = $"{_textAlignPrefix}{TextAlignment.CenterValue}";
-    private const string _styleEnd = $"{_textAlignPrefix}{TextAlignment.EndValue}";
+    private const string _styleStart = $"{_textAlignPrefix}{Enums.TextAlignment.StartValue}";
+    private const string _styleCenter = $"{_textAlignPrefix}{Enums.TextAlignment.CenterValue}";
+    private const string _styleEnd = $"{_textAlignPrefix}{Enums.TextAlignment.EndValue}";
     private const string _styleInherit = $"{_textAlignPrefix}{GlobalKeyword.InheritValue}";
     private const string _styleInitial = $"{_textAlignPrefix}{GlobalKeyword.InitialValue}";
     private const string _styleUnset = $"{_textAlignPrefix}{GlobalKeyword.UnsetValue}";
@@ -39,9 +39,9 @@ public sealed class TextAlignmentBuilder : ICssBuilder
             _rules.AddRange(rules);
     }
 
-    public TextAlignmentBuilder Start => Chain(TextAlignment.StartValue);
-    public TextAlignmentBuilder Center => Chain(TextAlignment.CenterValue);
-    public TextAlignmentBuilder End => Chain(TextAlignment.EndValue);
+    public TextAlignmentBuilder Start => Chain(Enums.TextAlignment.StartValue);
+    public TextAlignmentBuilder Center => Chain(Enums.TextAlignment.CenterValue);
+    public TextAlignmentBuilder End => Chain(Enums.TextAlignment.EndValue);
 
     public TextAlignmentBuilder Inherit => Chain(GlobalKeyword.InheritValue);
     public TextAlignmentBuilder Initial => Chain(GlobalKeyword.InitialValue);
@@ -69,7 +69,7 @@ public sealed class TextAlignmentBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new TextAlignmentRule(TextAlignment.StartValue, bp));
+            _rules.Add(new TextAlignmentRule(Enums.TextAlignment.StartValue, bp));
             return this;
         }
 
@@ -93,9 +93,9 @@ public sealed class TextAlignmentBuilder : ICssBuilder
 
             string baseClass = rule.Value switch
             {
-                TextAlignment.StartValue => _classStart,
-                TextAlignment.CenterValue => _classCenter,
-                TextAlignment.EndValue => _classEnd,
+                Enums.TextAlignment.StartValue => _classStart,
+                Enums.TextAlignment.CenterValue => _classCenter,
+                Enums.TextAlignment.EndValue => _classEnd,
                 _ => string.Empty
             };
 
@@ -131,9 +131,9 @@ public sealed class TextAlignmentBuilder : ICssBuilder
 
             string css = rule.Value switch
             {
-                TextAlignment.StartValue => _styleStart,
-                TextAlignment.CenterValue => _styleCenter,
-                TextAlignment.EndValue => _styleEnd,
+                Enums.TextAlignment.StartValue => _styleStart,
+                Enums.TextAlignment.CenterValue => _styleCenter,
+                Enums.TextAlignment.EndValue => _styleEnd,
 
                 GlobalKeyword.InheritValue => _styleInherit,
                 GlobalKeyword.InitialValue => _styleInitial,

@@ -1,4 +1,4 @@
-using Soenneker.Quark.Enums.Size;
+using Soenneker.Quark.Enums;
 
 namespace Soenneker.Quark;
 

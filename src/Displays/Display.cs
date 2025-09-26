@@ -1,4 +1,6 @@
 
+using Soenneker.Quark.Enums;
+
 namespace Soenneker.Quark;
 
 /// <summary>
@@ -9,57 +11,57 @@ public static class Display
     /// <summary>
     /// Display none (hidden).
     /// </summary>
-    public static DisplayBuilder None => new(Enums.DisplayTypes.DisplayType.NoneValue);
+    public static DisplayBuilder None => new(Enums.DisplayType.NoneValue);
 
     /// <summary>
     /// Display inline.
     /// </summary>
-    public static DisplayBuilder Inline => new(Enums.DisplayTypes.DisplayType.InlineValue);
+    public static DisplayBuilder Inline => new(Enums.DisplayType.InlineValue);
 
     /// <summary>
     /// Display inline-block.
     /// </summary>
-    public static DisplayBuilder InlineBlock => new(Enums.DisplayTypes.DisplayType.InlineBlockValue);
+    public static DisplayBuilder InlineBlock => new(Enums.DisplayType.InlineBlockValue);
 
     /// <summary>
     /// Display block.
     /// </summary>
-    public static DisplayBuilder Block => new(Enums.DisplayTypes.DisplayType.BlockValue);
+    public static DisplayBuilder Block => new(Enums.DisplayType.BlockValue);
 
     /// <summary>
     /// Display flex.
     /// </summary>
-    public static DisplayBuilder Flex => new(Enums.DisplayTypes.DisplayType.FlexValue);
+    public static DisplayBuilder Flex => new(Enums.DisplayType.FlexValue);
 
     /// <summary>
     /// Display inline-flex.
     /// </summary>
-    public static DisplayBuilder InlineFlex => new(Enums.DisplayTypes.DisplayType.InlineFlexValue);
+    public static DisplayBuilder InlineFlex => new(Enums.DisplayType.InlineFlexValue);
 
     /// <summary>
     /// Display grid.
     /// </summary>
-    public static DisplayBuilder Grid => new(Enums.DisplayTypes.DisplayType.GridValue);
+    public static DisplayBuilder Grid => new(Enums.DisplayType.GridValue);
 
     /// <summary>
     /// Display inline-grid.
     /// </summary>
-    public static DisplayBuilder InlineGrid => new(Enums.DisplayTypes.DisplayType.InlineGridValue);
+    public static DisplayBuilder InlineGrid => new(Enums.DisplayType.InlineGridValue);
 
     /// <summary>
     /// Display table.
     /// </summary>
-    public static DisplayBuilder Table => new(Enums.DisplayTypes.DisplayType.TableValue);
+    public static DisplayBuilder Table => new(Enums.DisplayType.TableValue);
 
     /// <summary>
     /// Display table-cell.
     /// </summary>
-    public static DisplayBuilder TableCell => new(Enums.DisplayTypes.DisplayType.TableCellValue);
+    public static DisplayBuilder TableCell => new(Enums.DisplayType.TableCellValue);
 
     /// <summary>
     /// Display table-row.
     /// </summary>
-    public static DisplayBuilder TableRow => new(Enums.DisplayTypes.DisplayType.TableRowValue);
+    public static DisplayBuilder TableRow => new(Enums.DisplayType.TableRowValue);
 
     /// <summary>
     /// Inherit from parent.

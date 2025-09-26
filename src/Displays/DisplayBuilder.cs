@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Soenneker.Extensions.String;
+using Soenneker.Quark.Enums;
 using Soenneker.Utils.PooledStringBuilders;
 
 namespace Soenneker.Quark;
@@ -24,17 +25,17 @@ public sealed class DisplayBuilder : ICssBuilder
             _rules.AddRange(rules);
     }
 
-    public DisplayBuilder None => ChainWithDisplay(Enums.DisplayTypes.DisplayType.NoneValue);
-    public DisplayBuilder Inline => ChainWithDisplay(Enums.DisplayTypes.DisplayType.InlineValue);
-    public DisplayBuilder InlineBlock => ChainWithDisplay(Enums.DisplayTypes.DisplayType.InlineBlockValue);
-    public DisplayBuilder Block => ChainWithDisplay(Enums.DisplayTypes.DisplayType.BlockValue);
-    public DisplayBuilder Flex => ChainWithDisplay(Enums.DisplayTypes.DisplayType.FlexValue);
-    public DisplayBuilder InlineFlex => ChainWithDisplay(Enums.DisplayTypes.DisplayType.InlineFlexValue);
-    public DisplayBuilder Grid => ChainWithDisplay(Enums.DisplayTypes.DisplayType.GridValue);
-    public DisplayBuilder InlineGrid => ChainWithDisplay(Enums.DisplayTypes.DisplayType.InlineGridValue);
-    public DisplayBuilder Table => ChainWithDisplay(Enums.DisplayTypes.DisplayType.TableValue);
-    public DisplayBuilder TableCell => ChainWithDisplay(Enums.DisplayTypes.DisplayType.TableCellValue);
-    public DisplayBuilder TableRow => ChainWithDisplay(Enums.DisplayTypes.DisplayType.TableRowValue);
+    public DisplayBuilder None => ChainWithDisplay(Enums.DisplayType.NoneValue);
+    public DisplayBuilder Inline => ChainWithDisplay(Enums.DisplayType.InlineValue);
+    public DisplayBuilder InlineBlock => ChainWithDisplay(Enums.DisplayType.InlineBlockValue);
+    public DisplayBuilder Block => ChainWithDisplay(Enums.DisplayType.BlockValue);
+    public DisplayBuilder Flex => ChainWithDisplay(Enums.DisplayType.FlexValue);
+    public DisplayBuilder InlineFlex => ChainWithDisplay(Enums.DisplayType.InlineFlexValue);
+    public DisplayBuilder Grid => ChainWithDisplay(Enums.DisplayType.GridValue);
+    public DisplayBuilder InlineGrid => ChainWithDisplay(Enums.DisplayType.InlineGridValue);
+    public DisplayBuilder Table => ChainWithDisplay(Enums.DisplayType.TableValue);
+    public DisplayBuilder TableCell => ChainWithDisplay(Enums.DisplayType.TableCellValue);
+    public DisplayBuilder TableRow => ChainWithDisplay(Enums.DisplayType.TableRowValue);
     public DisplayBuilder Inherit => ChainWithDisplay(GlobalKeyword.InheritValue);
     public DisplayBuilder Initial => ChainWithDisplay(GlobalKeyword.InitialValue);
     public DisplayBuilder Revert => ChainWithDisplay(GlobalKeyword.RevertValue);
@@ -60,7 +61,7 @@ public sealed class DisplayBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new DisplayRule(Enums.DisplayTypes.DisplayType.BlockValue, breakpoint));
+            _rules.Add(new DisplayRule(Enums.DisplayType.BlockValue, breakpoint));
             return this;
         }
 
@@ -130,17 +131,17 @@ public sealed class DisplayBuilder : ICssBuilder
     {
         return display switch
         {
-            Enums.DisplayTypes.DisplayType.NoneValue => "d-none",
-            Enums.DisplayTypes.DisplayType.InlineValue => "d-inline",
-            Enums.DisplayTypes.DisplayType.InlineBlockValue => "d-inline-block",
-            Enums.DisplayTypes.DisplayType.BlockValue => "d-block",
-            Enums.DisplayTypes.DisplayType.FlexValue => "d-flex",
-            Enums.DisplayTypes.DisplayType.InlineFlexValue => "d-inline-flex",
-            Enums.DisplayTypes.DisplayType.GridValue => "d-grid",
-            Enums.DisplayTypes.DisplayType.InlineGridValue => "d-inline-grid",
-            Enums.DisplayTypes.DisplayType.TableValue => "d-table",
-            Enums.DisplayTypes.DisplayType.TableCellValue => "d-table-cell",
-            Enums.DisplayTypes.DisplayType.TableRowValue => "d-table-row",
+            DisplayType.NoneValue => "d-none",
+            DisplayType.InlineValue => "d-inline",
+            DisplayType.InlineBlockValue => "d-inline-block",
+            Enums.DisplayType.BlockValue => "d-block",
+            Enums.DisplayType.FlexValue => "d-flex",
+            Enums.DisplayType.InlineFlexValue => "d-inline-flex",
+            Enums.DisplayType.GridValue => "d-grid",
+            Enums.DisplayType.InlineGridValue => "d-inline-grid",
+            Enums.DisplayType.TableValue => "d-table",
+            Enums.DisplayType.TableCellValue => "d-table-cell",
+            Enums.DisplayType.TableRowValue => "d-table-row",
             _ => string.Empty
         };
     }

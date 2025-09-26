@@ -34,10 +34,10 @@ public sealed class OverflowBuilder : ICssBuilder
     }
 
     // ----- Fluent chaining (values & keywords) -----
-    public OverflowBuilder Auto => Chain(Overflow.AutoValue);
-    public OverflowBuilder Hidden => Chain(Overflow.HiddenValue);
-    public OverflowBuilder Visible => Chain(Overflow.VisibleValue);
-    public OverflowBuilder Scroll => Chain(Overflow.ScrollValue);
+    public OverflowBuilder Auto => Chain(Enums.Overflow.AutoValue);
+    public OverflowBuilder Hidden => Chain(Enums.Overflow.HiddenValue);
+    public OverflowBuilder Visible => Chain(Enums.Overflow.VisibleValue);
+    public OverflowBuilder Scroll => Chain(Enums.Overflow.ScrollValue);
 
     public OverflowBuilder Inherit => Chain(GlobalKeyword.InheritValue);
     public OverflowBuilder Initial => Chain(GlobalKeyword.InitialValue);
@@ -66,7 +66,7 @@ public sealed class OverflowBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new OverflowRule(Overflow.AutoValue, bp));
+            _rules.Add(new OverflowRule(Enums.Overflow.AutoValue, bp));
             return this;
         }
 
@@ -136,10 +136,10 @@ public sealed class OverflowBuilder : ICssBuilder
     {
         return overflow switch
         {
-            Overflow.AutoValue => _classAuto,
-            Overflow.HiddenValue => _classHidden,
-            Overflow.VisibleValue => _classVisible,
-            Overflow.ScrollValue => _classScroll,
+            Enums.Overflow.AutoValue => _classAuto,
+            Enums.Overflow.HiddenValue => _classHidden,
+            Enums.Overflow.VisibleValue => _classVisible,
+            Enums.Overflow.ScrollValue => _classScroll,
             _ => string.Empty
         };
     }

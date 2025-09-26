@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Soenneker.Quark.Enums;
 using Soenneker.Utils.PooledStringBuilders;
 
 namespace Soenneker.Quark;
@@ -24,8 +25,8 @@ public sealed class FontStyleBuilder : ICssBuilder
             _rules.AddRange(rules);
     }
 
-    public FontStyleBuilder Italic => Chain(FontStyle.ItalicValue);
-    public FontStyleBuilder Normal => Chain(FontStyle.NormalValue);
+    public FontStyleBuilder Italic => Chain(Enums.FontStyle.ItalicValue);
+    public FontStyleBuilder Normal => Chain(Enums.FontStyle.NormalValue);
     public FontStyleBuilder Inherit => Chain(GlobalKeyword.InheritValue);
     public FontStyleBuilder Initial => Chain(GlobalKeyword.InitialValue);
     public FontStyleBuilder Revert => Chain(GlobalKeyword.RevertValue);
@@ -51,7 +52,7 @@ public sealed class FontStyleBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new FontStyleRule(FontStyle.NormalValue, bp));
+            _rules.Add(new FontStyleRule(Enums.FontStyle.NormalValue, bp));
             return this;
         }
 
@@ -72,8 +73,8 @@ public sealed class FontStyleBuilder : ICssBuilder
             FontStyleRule rule = _rules[i];
             string cls = rule.Value switch
             {
-                FontStyle.ItalicValue => _classItalic,
-                FontStyle.NormalValue => _classNormal,
+                Enums.FontStyle.ItalicValue => _classItalic,
+                Enums.FontStyle.NormalValue => _classNormal,
                 _ => string.Empty
             };
             if (cls.Length == 0)

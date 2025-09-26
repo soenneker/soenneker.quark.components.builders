@@ -1,11 +1,13 @@
 
+using Soenneker.Quark.Enums;
+
 namespace Soenneker.Quark;
 
 public static class TextTransform
 {
-    public static TextTransformBuilder Lowercase => new(TextTransform.LowercaseValue);
-    public static TextTransformBuilder Uppercase => new(TextTransform.UppercaseValue);
-    public static TextTransformBuilder Capitalize => new(TextTransform.CapitalizeValue);
+    public static TextTransformBuilder Lowercase => new(Enums.TextTransform.LowercaseValue);
+    public static TextTransformBuilder Uppercase => new(Enums.TextTransform.UppercaseValue);
+    public static TextTransformBuilder Capitalize => new(Enums.TextTransform.CapitalizeValue);
 
     public static TextTransformBuilder Inherit => new(GlobalKeyword.InheritValue);
     public static TextTransformBuilder Initial => new(GlobalKeyword.InitialValue);

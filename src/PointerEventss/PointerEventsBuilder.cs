@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Soenneker.Quark.Enums;
 using Soenneker.Utils.PooledStringBuilders;
 
 namespace Soenneker.Quark;
@@ -16,8 +17,8 @@ public sealed class PointerEventsBuilder : ICssBuilder
     // ----- CSS prefix & style constants (Intellenum *Value are const, so const-interp is fine) -----
     private const string _pointerEventsPrefix = "pointer-events: ";
 
-    private const string _styleNone = $"{_pointerEventsPrefix}{PointerEvents.NoneValue}";
-    private const string _styleAuto = $"{_pointerEventsPrefix}{PointerEvents.AutoValue}";
+    private const string _styleNone = $"{_pointerEventsPrefix}none";
+    private const string _styleAuto = $"{_pointerEventsPrefix}auto";
     private const string _styleInherit = $"{_pointerEventsPrefix}{GlobalKeyword.InheritValue}";
     private const string _styleInitial = $"{_pointerEventsPrefix}{GlobalKeyword.InitialValue}";
     private const string _styleUnset = $"{_pointerEventsPrefix}{GlobalKeyword.UnsetValue}";
@@ -35,8 +36,8 @@ public sealed class PointerEventsBuilder : ICssBuilder
             _rules.AddRange(rules);
     }
 
-    public PointerEventsBuilder None => Chain(PointerEvents.NoneValue);
-    public PointerEventsBuilder Auto => Chain(PointerEvents.AutoValue);
+    public PointerEventsBuilder None => Chain(Enums.PointerEvents.None);
+    public PointerEventsBuilder Auto => Chain(Enums.PointerEvents.Auto);
     public PointerEventsBuilder Inherit => Chain(GlobalKeyword.InheritValue);
     public PointerEventsBuilder Initial => Chain(GlobalKeyword.InitialValue);
     public PointerEventsBuilder Revert => Chain(GlobalKeyword.RevertValue);
@@ -63,7 +64,7 @@ public sealed class PointerEventsBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new PointerEventsRule(PointerEvents.AutoValue, bp));
+            _rules.Add(new PointerEventsRule(Enums.PointerEvents.Auto, bp));
             return this;
         }
 
@@ -87,8 +88,8 @@ public sealed class PointerEventsBuilder : ICssBuilder
 
             string baseClass = rule.Value switch
             {
-                PointerEvents.NoneValue => _classNone,
-                PointerEvents.AutoValue => _classAuto,
+                Enums.PointerEvents.NoneValue => _classNone,
+                Enums.PointerEvents.AutoValue => _classAuto,
                 _ => string.Empty
             };
 
@@ -122,8 +123,8 @@ public sealed class PointerEventsBuilder : ICssBuilder
 
             string css = rule.Value switch
             {
-                PointerEvents.NoneValue => _styleNone,
-                PointerEvents.AutoValue => _styleAuto,
+                Enums.PointerEvents.NoneValue => _styleNone,
+                Enums.PointerEvents.AutoValue => _styleAuto,
                 GlobalKeyword.InheritValue => _styleInherit,
                 GlobalKeyword.InitialValue => _styleInitial,
                 GlobalKeyword.UnsetValue => _styleUnset,

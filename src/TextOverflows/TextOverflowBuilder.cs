@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Soenneker.Quark.Enums;
 using Soenneker.Utils.PooledStringBuilders;
-using TextOverflowEnum = Soenneker.Quark.Enums.TextOverflows.TextOverflow;
+using TextOverflowEnum = Soenneker.Quark.Enums.TextOverflow;
 
 namespace Soenneker.Quark;
 
@@ -21,6 +22,11 @@ public sealed class TextOverflowBuilder : ICssBuilder
 
     internal TextOverflowBuilder(TextOverflowEnum textOverflow, Breakpoint? breakpoint = null)
     {
+        _rules.Add(new TextOverflowRule(textOverflow.Value, breakpoint));
+    }
+
+    internal TextOverflowBuilder(string textOverflow, Breakpoint? breakpoint = null)
+    {
         _rules.Add(new TextOverflowRule(textOverflow, breakpoint));
     }
 
@@ -35,11 +41,11 @@ public sealed class TextOverflowBuilder : ICssBuilder
     public TextOverflowBuilder Ellipsis => Chain(TextOverflowEnum.Ellipsis);
 
     // ----- Fluent chaining (Global keywords) -----
-    public TextOverflowBuilder Inherit => Chain(GlobalKeyword.Inherit);
-    public TextOverflowBuilder Initial => Chain(GlobalKeyword.Initial);
-    public TextOverflowBuilder Revert => Chain(GlobalKeyword.Revert);
-    public TextOverflowBuilder RevertLayer => Chain(GlobalKeyword.RevertLayer);
-    public TextOverflowBuilder Unset => Chain(GlobalKeyword.Unset);
+    public TextOverflowBuilder Inherit => Chain(GlobalKeyword.InheritValue);
+    public TextOverflowBuilder Initial => Chain(GlobalKeyword.InitialValue);
+    public TextOverflowBuilder Revert => Chain(GlobalKeyword.RevertValue);
+    public TextOverflowBuilder RevertLayer => Chain(GlobalKeyword.RevertLayerValue);
+    public TextOverflowBuilder Unset => Chain(GlobalKeyword.UnsetValue);
 
     // ----- Breakpoint chaining -----
     public TextOverflowBuilder OnPhone => ChainBp(Breakpoint.Phone);
@@ -52,7 +58,7 @@ public sealed class TextOverflowBuilder : ICssBuilder
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private TextOverflowBuilder Chain(TextOverflowEnum value)
     {
-        _rules.Add(new TextOverflowRule(value, null));
+        _rules.Add(new TextOverflowRule(value.Value, null));
         return this;
     }
 
@@ -60,7 +66,15 @@ public sealed class TextOverflowBuilder : ICssBuilder
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private TextOverflowBuilder Chain(GlobalKeyword keyword)
     {
-        _rules.Add(new TextOverflowRule(keyword, null));
+        _rules.Add(new TextOverflowRule(keyword.Value, null));
+        return this;
+    }
+
+    // Overload for string values
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private TextOverflowBuilder Chain(string value)
+    {
+        _rules.Add(new TextOverflowRule(value, null));
         return this;
     }
 
@@ -77,9 +91,8 @@ public sealed class TextOverflowBuilder : ICssBuilder
         int lastIdx = _rules.Count - 1;
         TextOverflowRule last = _rules[lastIdx];
 
-        // Re-create the rule preserving its text-overflow value using the enum-typed property.
-        // (Works for Clip/Ellipsis and for keyword-backed rules if your Intellenum holds keyword values too.)
-        _rules[lastIdx] = new TextOverflowRule(last.TextOverflow, bp);
+        // Re-create the rule preserving its text-overflow value using the string value.
+        _rules[lastIdx] = new TextOverflowRule(last.Value, bp);
         return this;
     }
 
@@ -97,7 +110,7 @@ public sealed class TextOverflowBuilder : ICssBuilder
             TextOverflowRule rule = _rules[i];
 
             // Only Clip/Ellipsis map to a Bootstrap class; keywords don't.
-            string baseClass = GetTextOverflowClass(rule.TextOverflow);
+            string baseClass = GetTextOverflowClass(rule.Value);
             if (baseClass.Length == 0)
                 continue;
 
@@ -127,8 +140,9 @@ public sealed class TextOverflowBuilder : ICssBuilder
         {
             TextOverflowRule rule = _rules[i];
 
-            // Always use the Intellenum string value (covers Clip/Ellipsis and any keyword values)
-            string value = rule.TextOverflow.Value;
+            // Always use the string value (covers Clip/Ellipsis and any keyword values)
+            string value = rule.Value;
+
             if (string.IsNullOrEmpty(value))
                 continue;
 
@@ -143,12 +157,12 @@ public sealed class TextOverflowBuilder : ICssBuilder
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static string GetTextOverflowClass(TextOverflowEnum textOverflow)
+    private static string GetTextOverflowClass(string textOverflow)
     {
         switch (textOverflow)
         {
-            case TextOverflowEnum.ClipValue:
-            case TextOverflowEnum.EllipsisValue:
+            case "clip":
+            case "ellipsis":
                 return _classTruncate;
             default:
                 return string.Empty;
