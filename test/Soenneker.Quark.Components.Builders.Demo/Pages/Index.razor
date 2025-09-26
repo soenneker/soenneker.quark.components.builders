@@ -15,6 +15,46 @@
 
 <hr />
 
+<h2>Border Radius Examples</h2>
+
+<div style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0;">
+    <DemoDiv BorderRadius="@BorderRadius.Sm" style="padding: 1rem; background: #e3f2fd; border: 1px solid #2196f3;">
+        Small Radius
+    </DemoDiv>
+    
+    <DemoDiv BorderRadius="@BorderRadius.Lg" style="padding: 1rem; background: #f3e5f5; border: 1px solid #9c27b0;">
+        Large Radius
+    </DemoDiv>
+    
+    <DemoDiv BorderRadius="@BorderRadius.Pill" style="padding: 1rem; background: #e8f5e8; border: 1px solid #4caf50;">
+        Pill Shape
+    </DemoDiv>
+    
+    <DemoDiv BorderRadius="@BorderRadius.Circle" style="padding: 1rem; background: #fff3e0; border: 1px solid #ff9800; width: 100px; height: 100px; display: flex; align-items: center; justify-content: center;">
+        Circle
+    </DemoDiv>
+</div>
+
+<div style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0;">
+    <DemoDiv BorderRadius="@BorderRadius.TopLeft.Lg" style="padding: 1rem; background: #fce4ec; border: 1px solid #e91e63;">
+        Top Left Only
+    </DemoDiv>
+    
+    <DemoDiv BorderRadius="@BorderRadius.TopRight.Lg" style="padding: 1rem; background: #e0f2f1; border: 1px solid #009688;">
+        Top Right Only
+    </DemoDiv>
+    
+    <DemoDiv BorderRadius="@BorderRadius.BottomLeft.Lg" style="padding: 1rem; background: #f1f8e9; border: 1px solid #8bc34a;">
+        Bottom Left Only
+    </DemoDiv>
+    
+    <DemoDiv BorderRadius="@BorderRadius.BottomRight.Lg" style="padding: 1rem; background: #fff8e1; border: 1px solid #ffc107;">
+        Bottom Right Only
+    </DemoDiv>
+</div>
+
+<hr />
+
 @code{
 
     protected override void OnInitialized()

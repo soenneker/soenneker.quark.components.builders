@@ -1,4 +1,4 @@
-<div class="@GetDisplayClass()" style="@GetDisplayStyle() @GetFloatStyle()">
+<div class="@GetDisplayClass() @GetBorderRadiusClass()" style="@GetDisplayStyle() @GetFloatStyle() @GetBorderRadiusStyle()">
 	@ChildContent
 </div>
 
@@ -11,6 +11,9 @@
 
     [Parameter]
     public CssValue<FloatBuilder>? Float { get; set; }
+
+    [Parameter]
+    public CssValue<BorderRadiusBuilder>? BorderRadius { get; set; }
 
 	[Parameter]
 	public RenderFragment? ChildContent { get; set; }
@@ -35,6 +38,22 @@
     {
         if (Float?.IsCssStyle == true)
             return Float.ToString();
+
+        return string.Empty;
+    }
+
+    private string GetBorderRadiusClass()
+    {
+        if (BorderRadius?.IsCssClass == true)
+            return BorderRadius.ToString();
+
+        return string.Empty;
+    }
+
+    private string GetBorderRadiusStyle()
+    {
+        if (BorderRadius?.IsCssStyle == true)
+            return BorderRadius.ToString();
 
         return string.Empty;
     }
