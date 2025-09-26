@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using Soenneker.Quark.Enums.Breakpoints;
-using Soenneker.Quark.Enums.Size;
 using Soenneker.Utils.PooledStringBuilders;
 
 namespace Soenneker.Quark;

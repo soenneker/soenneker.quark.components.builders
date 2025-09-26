@@ -1,4 +1,3 @@
-using Soenneker.Quark.Enums.Scales;
 
 namespace Soenneker.Quark;
 

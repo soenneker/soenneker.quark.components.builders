@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using Soenneker.Quark.Enums.Breakpoints;
-using Soenneker.Quark.Enums.GlobalKeywords;
 using Soenneker.Utils.PooledStringBuilders;
 using TextOverflowEnum = Soenneker.Quark.Enums.TextOverflows.TextOverflow;
 
