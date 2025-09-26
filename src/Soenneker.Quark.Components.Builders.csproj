@@ -50,7 +50,7 @@
     <ItemGroup>
         <PackageReference Include="Soenneker.Extensions.String" Version="3.0.557" />
         <PackageReference Include="Soenneker.Quark.Enums.BoxShadows" Version="3.0.6" />
-        <PackageReference Include="Soenneker.Quark.Enums.Breakpoints" Version="3.0.8" />
+        <PackageReference Include="Soenneker.Quark.Enums.Breakpoints" Version="3.0.10" />
         <PackageReference Include="Soenneker.Quark.Enums.DisplayTypes" Version="3.0.8" />
         <PackageReference Include="Soenneker.Quark.Enums.ElementSides" Version="3.0.5" />
         <PackageReference Include="Soenneker.Quark.Enums.Flexes" Version="3.0.5" />
