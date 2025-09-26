@@ -63,7 +63,7 @@
         <PackageReference Include="Soenneker.Quark.Enums.Positions" Version="3.0.2" />
         <PackageReference Include="Soenneker.Quark.Enums.Scales" Version="3.0.2" />
         <PackageReference Include="Soenneker.Quark.Enums.Size" Version="3.0.4" />
-        <PackageReference Include="Soenneker.Quark.Enums.TextAlignments" Version="3.0.4" />
+        <PackageReference Include="Soenneker.Quark.Enums.TextAlignments" Version="3.0.5" />
         <PackageReference Include="Soenneker.Quark.Enums.TextDecorations.Line" Version="3.0.2" />
         <PackageReference Include="Soenneker.Quark.Enums.TextOverflows" Version="3.0.2" />
         <PackageReference Include="Soenneker.Quark.Enums.TextTransforms" Version="3.0.2" />
