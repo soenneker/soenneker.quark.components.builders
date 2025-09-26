@@ -59,7 +59,7 @@
         <PackageReference Include="Soenneker.Quark.Enums.FontWeights" Version="3.0.2" />
         <PackageReference Include="Soenneker.Quark.Enums.ObjectFits" Version="3.0.2" />
         <PackageReference Include="Soenneker.Quark.Enums.Overflows" Version="3.0.2" />
-        <PackageReference Include="Soenneker.Quark.Enums.PointerEvents" Version="3.0.2" />
+        <PackageReference Include="Soenneker.Quark.Enums.PointerEvents" Version="3.0.3" />
         <PackageReference Include="Soenneker.Quark.Enums.Positions" Version="3.0.2" />
         <PackageReference Include="Soenneker.Quark.Enums.Scales" Version="3.0.2" />
         <PackageReference Include="Soenneker.Quark.Enums.Size" Version="3.0.4" />
