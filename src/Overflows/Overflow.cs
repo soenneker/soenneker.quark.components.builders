@@ -33,4 +33,20 @@ public static class Overflow
     public static OverflowBuilder Revert => new(GlobalKeyword.RevertValue);
     public static OverflowBuilder RevertLayer => new(GlobalKeyword.RevertLayerValue);
     public static OverflowBuilder Unset => new(GlobalKeyword.UnsetValue);
+
+    // ----- Axis builders -----
+    /// <summary>
+    /// Overflow X axis.
+    /// </summary>
+    public static OverflowBuilder X => OverflowBuilder.Create().X;
+
+    /// <summary>
+    /// Overflow Y axis.
+    /// </summary>
+    public static OverflowBuilder Y => OverflowBuilder.Create().Y;
+
+    /// <summary>
+    /// Overflow all axes.
+    /// </summary>
+    public static OverflowBuilder All => OverflowBuilder.Create().All;
 }

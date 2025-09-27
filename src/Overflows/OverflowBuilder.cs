@@ -12,25 +12,44 @@ namespace Soenneker.Quark;
 public sealed class OverflowBuilder : ICssBuilder
 {
     private readonly List<OverflowRule> _rules = new(4);
+    private string _axis = "";
 
     // ----- Class name constants -----
     private const string _classAuto = "overflow-auto";
     private const string _classHidden = "overflow-hidden";
     private const string _classVisible = "overflow-visible";
     private const string _classScroll = "overflow-scroll";
+    private const string _classAutoX = "overflow-x-auto";
+    private const string _classHiddenX = "overflow-x-hidden";
+    private const string _classVisibleX = "overflow-x-visible";
+    private const string _classScrollX = "overflow-x-scroll";
+    private const string _classAutoY = "overflow-y-auto";
+    private const string _classHiddenY = "overflow-y-hidden";
+    private const string _classVisibleY = "overflow-y-visible";
+    private const string _classScrollY = "overflow-y-scroll";
 
-    // ----- CSS prefix -----
+    // ----- CSS prefixes -----
     private const string _overflowPrefix = "overflow: ";
+    private const string _overflowXPrefix = "overflow-x: ";
+    private const string _overflowYPrefix = "overflow-y: ";
 
-    internal OverflowBuilder(string overflow, Breakpoint? breakpoint = null)
+    internal OverflowBuilder(string overflow)
     {
-        _rules.Add(new OverflowRule(overflow, breakpoint));
+        _rules.Add(new OverflowRule(overflow, null));
     }
 
     internal OverflowBuilder(List<OverflowRule> rules)
     {
         if (rules is { Count: > 0 })
             _rules.AddRange(rules);
+    }
+
+    /// <summary>
+    /// Creates a new OverflowBuilder with no initial value.
+    /// </summary>
+    public static OverflowBuilder Create()
+    {
+        return new OverflowBuilder(new List<OverflowRule>());
     }
 
     // ----- Fluent chaining (values & keywords) -----
@@ -45,34 +64,30 @@ public sealed class OverflowBuilder : ICssBuilder
     public OverflowBuilder RevertLayer => Chain(GlobalKeyword.RevertLayerValue);
     public OverflowBuilder Unset => Chain(GlobalKeyword.UnsetValue);
 
-    // ----- Breakpoint chaining -----
-    public OverflowBuilder OnPhone => ChainBp(Breakpoint.Phone);
-    public OverflowBuilder OnTablet => ChainBp(Breakpoint.Tablet);
-    public OverflowBuilder OnLaptop => ChainBp(Breakpoint.Laptop);
-    public OverflowBuilder OnDesktop => ChainBp(Breakpoint.Desktop);
-    public OverflowBuilder OnWidescreen => ChainBp(Breakpoint.Widescreen);
-    public OverflowBuilder OnUltrawide => ChainBp(Breakpoint.Ultrawide);
+    // ----- Axis chaining -----
+    public OverflowBuilder X => ChainAxis("-x");
+    public OverflowBuilder Y => ChainAxis("-y");
+    public OverflowBuilder All => ChainAxis("");
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private OverflowBuilder Chain(string overflow)
     {
-        _rules.Add(new OverflowRule(overflow, null));
+        // Replace the last rule instead of adding a new one
+        if (_rules.Count > 0)
+        {
+            _rules[_rules.Count - 1] = new OverflowRule(overflow, null);
+        }
+        else
+        {
+            _rules.Add(new OverflowRule(overflow, null));
+        }
         return this;
     }
 
-    /// <summary>Apply a breakpoint to the most recent rule (or bootstrap with "auto" if empty).</summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private OverflowBuilder ChainBp(Breakpoint bp)
+    private OverflowBuilder ChainAxis(string axis)
     {
-        if (_rules.Count == 0)
-        {
-            _rules.Add(new OverflowRule(Enums.Overflow.AutoValue, bp));
-            return this;
-        }
-
-        int lastIdx = _rules.Count - 1;
-        OverflowRule last = _rules[lastIdx];
-        _rules[lastIdx] = new OverflowRule(last.Overflow, bp);
+        _axis = axis;
         return this;
     }
 
@@ -92,10 +107,6 @@ public sealed class OverflowBuilder : ICssBuilder
             string baseClass = GetOverflowClass(rule.Overflow);
             if (baseClass.Length == 0)
                 continue;
-
-            string bp = BreakpointUtil.GetBreakpointToken(rule.Breakpoint);
-            if (bp.Length != 0)
-                baseClass = InsertBreakpoint(baseClass, bp);
 
             if (!first) sb.Append(' ');
             else first = false;
@@ -124,7 +135,7 @@ public sealed class OverflowBuilder : ICssBuilder
             if (!first) sb.Append("; ");
             else first = false;
 
-            sb.Append(_overflowPrefix);
+            sb.Append(GetOverflowPrefix());
             sb.Append(value);
         }
 
@@ -132,56 +143,44 @@ public sealed class OverflowBuilder : ICssBuilder
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static string GetOverflowClass(string overflow)
+    private string GetOverflowClass(string overflow)
     {
-        return overflow switch
+        string baseClass = overflow switch
         {
-            Enums.Overflow.AutoValue => _classAuto,
-            Enums.Overflow.HiddenValue => _classHidden,
-            Enums.Overflow.VisibleValue => _classVisible,
-            Enums.Overflow.ScrollValue => _classScroll,
+            Enums.Overflow.AutoValue => "overflow-auto",
+            Enums.Overflow.HiddenValue => "overflow-hidden",
+            Enums.Overflow.VisibleValue => "overflow-visible",
+            Enums.Overflow.ScrollValue => "overflow-scroll",
             _ => string.Empty
         };
+
+        if (string.IsNullOrEmpty(baseClass) || string.IsNullOrEmpty(_axis))
+            return baseClass;
+
+        // Insert axis into class name: "overflow-auto" + "-x" = "overflow-x-auto"
+        int dashIndex = baseClass.IndexOf('-');
+        if (dashIndex > 0)
+        {
+            return baseClass.Insert(dashIndex, _axis);
+        }
+
+        return baseClass;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static string GetBp(Breakpoint? breakpoint) => breakpoint?.Value ?? string.Empty;
-
-    /// <summary>
-    /// Insert breakpoint token as: "overflow-hidden" + "md" ? "overflow-md-hidden".
-    /// Falls back to "bp-{class}" if no dash exists.
-    /// </summary>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static string InsertBreakpoint(string className, string bp)
+    private string GetOverflowPrefix()
     {
-        int dashIndex = className.IndexOf('-');
-        if (dashIndex > 0)
+        return _axis switch
         {
-            // length = prefix + "-" + bp + remainder
-            int len = dashIndex + 1 + bp.Length + (className.Length - dashIndex);
-            return string.Create(len, (className, dashIndex, bp), static (dst, s) =>
-            {
-                // prefix
-                s.className.AsSpan(0, s.dashIndex).CopyTo(dst);
-                int idx = s.dashIndex;
+            "-x" => _overflowXPrefix,
+            "-y" => _overflowYPrefix,
+            _ => _overflowPrefix
+        };
+    }
 
-                // "-" + bp
-                dst[idx++] = '-';
-                s.bp.AsSpan().CopyTo(dst[idx..]);
-                idx += s.bp.Length;
-
-                // remainder (starts with '-')
-                s.className.AsSpan(s.dashIndex).CopyTo(dst[idx..]);
-            });
-        }
-
-        // Fallback: "bp-{className}"
-        return string.Create(bp.Length + 1 + className.Length, (className, bp), static (dst, s) =>
-        {
-            s.bp.AsSpan().CopyTo(dst);
-            int idx = s.bp.Length;
-            dst[idx++] = '-';
-            s.className.AsSpan().CopyTo(dst[idx..]);
-        });
+    /// <summary>Gets the string representation of the builder (same as ToClass).</summary>
+    public override string ToString()
+    {
+        return ToClass();
     }
 }
