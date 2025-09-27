@@ -1,5 +1,4 @@
 using Soenneker.Quark.Enums;
-using TextOverflowEnum = Soenneker.Quark.Enums.TextOverflowKeyword;
 
 namespace Soenneker.Quark;
 
