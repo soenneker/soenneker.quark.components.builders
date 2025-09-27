@@ -11,57 +11,57 @@ public static class Display
     /// <summary>
     /// Display none (hidden).
     /// </summary>
-    public static DisplayBuilder None => new(Enums.DisplayType.NoneValue);
+    public static DisplayBuilder None => new(Enums.DisplayKeyword.NoneValue);
 
     /// <summary>
     /// Display inline.
     /// </summary>
-    public static DisplayBuilder Inline => new(Enums.DisplayType.InlineValue);
+    public static DisplayBuilder Inline => new(Enums.DisplayKeyword.InlineValue);
 
     /// <summary>
     /// Display inline-block.
     /// </summary>
-    public static DisplayBuilder InlineBlock => new(Enums.DisplayType.InlineBlockValue);
+    public static DisplayBuilder InlineBlock => new(Enums.DisplayKeyword.InlineBlockValue);
 
     /// <summary>
     /// Display block.
     /// </summary>
-    public static DisplayBuilder Block => new(Enums.DisplayType.BlockValue);
+    public static DisplayBuilder Block => new(Enums.DisplayKeyword.BlockValue);
 
     /// <summary>
     /// Display flex.
     /// </summary>
-    public static DisplayBuilder Flex => new(Enums.DisplayType.FlexValue);
+    public static DisplayBuilder Flex => new(Enums.DisplayKeyword.FlexValue);
 
     /// <summary>
     /// Display inline-flex.
     /// </summary>
-    public static DisplayBuilder InlineFlex => new(Enums.DisplayType.InlineFlexValue);
+    public static DisplayBuilder InlineFlex => new(Enums.DisplayKeyword.InlineFlexValue);
 
     /// <summary>
     /// Display grid.
     /// </summary>
-    public static DisplayBuilder Grid => new(Enums.DisplayType.GridValue);
+    public static DisplayBuilder Grid => new(Enums.DisplayKeyword.GridValue);
 
     /// <summary>
     /// Display inline-grid.
     /// </summary>
-    public static DisplayBuilder InlineGrid => new(Enums.DisplayType.InlineGridValue);
+    public static DisplayBuilder InlineGrid => new(Enums.DisplayKeyword.InlineGridValue);
 
     /// <summary>
     /// Display table.
     /// </summary>
-    public static DisplayBuilder Table => new(Enums.DisplayType.TableValue);
+    public static DisplayBuilder Table => new(Enums.DisplayKeyword.TableValue);
 
     /// <summary>
     /// Display table-cell.
     /// </summary>
-    public static DisplayBuilder TableCell => new(Enums.DisplayType.TableCellValue);
+    public static DisplayBuilder TableCell => new(Enums.DisplayKeyword.TableCellValue);
 
     /// <summary>
     /// Display table-row.
     /// </summary>
-    public static DisplayBuilder TableRow => new(Enums.DisplayType.TableRowValue);
+    public static DisplayBuilder TableRow => new(Enums.DisplayKeyword.TableRowValue);
 
     /// <summary>
     /// Inherit from parent.

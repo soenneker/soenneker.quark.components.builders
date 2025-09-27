@@ -11,27 +11,27 @@ public static class ObjectFit
     /// <summary>
     /// object-fit: contain.
     /// </summary>
-    public static ObjectFitBuilder Contain => new(Enums.ObjectFit.ContainValue);
+    public static ObjectFitBuilder Contain => new(Enums.ObjectFitKeyword.ContainValue);
 
     /// <summary>
     /// object-fit: cover.
     /// </summary>
-    public static ObjectFitBuilder Cover => new(Enums.ObjectFit.CoverValue);
+    public static ObjectFitBuilder Cover => new(Enums.ObjectFitKeyword.CoverValue);
 
     /// <summary>
     /// object-fit: fill.
     /// </summary>
-    public static ObjectFitBuilder Fill => new(Enums.ObjectFit.FillValue);
+    public static ObjectFitBuilder Fill => new(Enums.ObjectFitKeyword.FillValue);
 
     /// <summary>
     /// object-fit: scale-down.
     /// </summary>
-    public static ObjectFitBuilder ScaleDown => new(Enums.ObjectFit.ScaleDownValue);
+    public static ObjectFitBuilder ScaleDown => new(Enums.ObjectFitKeyword.ScaleDownValue);
 
     /// <summary>
     /// object-fit: none.
     /// </summary>
-    public static ObjectFitBuilder None => new(Enums.ObjectFit.NoneValue);
+    public static ObjectFitBuilder None => new(Enums.ObjectFitKeyword.NoneValue);
 
     public static ObjectFitBuilder Inherit => new(GlobalKeyword.InheritValue);
     public static ObjectFitBuilder Initial => new(GlobalKeyword.InitialValue);

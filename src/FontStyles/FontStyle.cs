@@ -5,8 +5,8 @@ namespace Soenneker.Quark;
 
 public static class FontStyle
 {
-    public static FontStyleBuilder Italic => new(Enums.FontStyle.ItalicValue);
-    public static FontStyleBuilder Normal => new(Enums.FontStyle.NormalValue);
+    public static FontStyleBuilder Italic => new(Enums.FontStyleKeyword.ItalicValue);
+    public static FontStyleBuilder Normal => new(Enums.FontStyleKeyword.NormalValue);
     public static FontStyleBuilder Inherit => new(GlobalKeyword.InheritValue);
     public static FontStyleBuilder Initial => new(GlobalKeyword.InitialValue);
     public static FontStyleBuilder Revert => new(GlobalKeyword.RevertValue);
