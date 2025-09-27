@@ -25,8 +25,8 @@ public sealed class FontStyleBuilder : ICssBuilder
             _rules.AddRange(rules);
     }
 
-    public FontStyleBuilder Italic => Chain(Enums.FontStyle.ItalicValue);
-    public FontStyleBuilder Normal => Chain(Enums.FontStyle.NormalValue);
+    public FontStyleBuilder Italic => Chain(FontStyleKeyword.ItalicValue);
+    public FontStyleBuilder Normal => Chain(FontStyleKeyword.NormalValue);
     public FontStyleBuilder Inherit => Chain(GlobalKeyword.InheritValue);
     public FontStyleBuilder Initial => Chain(GlobalKeyword.InitialValue);
     public FontStyleBuilder Revert => Chain(GlobalKeyword.RevertValue);
@@ -52,7 +52,7 @@ public sealed class FontStyleBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new FontStyleRule(Enums.FontStyle.NormalValue, bp));
+            _rules.Add(new FontStyleRule(FontStyleKeyword.NormalValue, bp));
             return this;
         }
 
@@ -73,8 +73,8 @@ public sealed class FontStyleBuilder : ICssBuilder
             FontStyleRule rule = _rules[i];
             string cls = rule.Value switch
             {
-                Enums.FontStyle.ItalicValue => _classItalic,
-                Enums.FontStyle.NormalValue => _classNormal,
+                FontStyleKeyword.ItalicValue => _classItalic,
+                FontStyleKeyword.NormalValue => _classNormal,
                 _ => string.Empty
             };
             if (cls.Length == 0)

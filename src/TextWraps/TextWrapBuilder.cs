@@ -25,8 +25,8 @@ public sealed class TextWrapBuilder : ICssBuilder
             _rules.AddRange(rules);
     }
 
-    public TextWrapBuilder Wrap => Chain(Enums.TextWrap.WrapValue);
-    public TextWrapBuilder NoWrap => Chain(Enums.TextWrap.NoWrapValue);
+    public TextWrapBuilder Wrap => Chain(TextWrapKeyword.WrapValue);
+    public TextWrapBuilder NoWrap => Chain(TextWrapKeyword.NoWrapValue);
     public TextWrapBuilder Inherit => Chain(GlobalKeyword.InheritValue);
     public TextWrapBuilder Initial => Chain(GlobalKeyword.InitialValue);
     public TextWrapBuilder Revert => Chain(GlobalKeyword.RevertValue);
@@ -52,7 +52,7 @@ public sealed class TextWrapBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new TextWrapRule(Enums.TextWrap.WrapValue, bp));
+            _rules.Add(new TextWrapRule(TextWrapKeyword.WrapValue, bp));
             return this;
         }
 
@@ -74,8 +74,8 @@ public sealed class TextWrapBuilder : ICssBuilder
             TextWrapRule rule = _rules[i];
             string cls = rule.Value switch
             {
-                Enums.TextWrap.WrapValue => _classWrap,
-                Enums.TextWrap.NoWrapValue => _classNoWrap,
+                TextWrapKeyword.WrapValue => _classWrap,
+                TextWrapKeyword.NoWrapValue => _classNoWrap,
                 _ => string.Empty
             };
 
@@ -107,8 +107,8 @@ public sealed class TextWrapBuilder : ICssBuilder
             TextWrapRule rule = _rules[i];
             string? css = rule.Value switch
             {
-                Enums.TextWrap.WrapValue => "wrap",
-                Enums.TextWrap.NoWrapValue => "nowrap",
+                TextWrapKeyword.WrapValue => "wrap",
+                TextWrapKeyword.NoWrapValue => "nowrap",
                 GlobalKeyword.InheritValue => "inherit",
                 GlobalKeyword.InitialValue => "initial",
                 GlobalKeyword.UnsetValue => "unset",

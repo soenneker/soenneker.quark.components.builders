@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Soenneker.Quark.Enums;
 using Soenneker.Utils.PooledStringBuilders;
-using TextOverflowEnum = Soenneker.Quark.Enums.TextOverflow;
+using TextOverflowEnum = Soenneker.Quark.Enums.TextOverflowKeyword;
 
 namespace Soenneker.Quark;
 

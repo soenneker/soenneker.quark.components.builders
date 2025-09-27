@@ -51,7 +51,7 @@ public sealed class BorderRadiusBuilder : ICssBuilder
     public BorderRadiusBuilder All => AddRule(ElementSide.All, "");
 
     // ----- Size chaining -----
-    public BorderRadiusBuilder S0 => ChainWithSize(Scale.S0);
+    public BorderRadiusBuilder S0 => ChainWithSize(ScaleType.S0);
     public BorderRadiusBuilder Sm => ChainWithSize("sm");
     public BorderRadiusBuilder Default => ChainWithSize("");
     public BorderRadiusBuilder Lg => ChainWithSize("lg");
@@ -102,7 +102,7 @@ public sealed class BorderRadiusBuilder : ICssBuilder
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private BorderRadiusBuilder ChainWithSize(Scale scale)
+    private BorderRadiusBuilder ChainWithSize(ScaleType scale)
     {
         // If the last rule has a corner token but no size, update it instead of adding new
         if (_rules.Count > 0 && !string.IsNullOrEmpty(_rules[^1].CornerToken) && string.IsNullOrEmpty(_rules[^1].Size))
@@ -269,7 +269,7 @@ public sealed class BorderRadiusBuilder : ICssBuilder
     {
         return size switch
         {
-            Scale.S0Value => "0",
+            ScaleType.S0Value => "0",
             "sm" => "0.25rem",
             "" => "0.375rem",
             "lg" => "0.5rem",

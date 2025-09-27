@@ -29,12 +29,12 @@ public sealed class FontWeightBuilder : ICssBuilder
             _rules.AddRange(rules);
     }
 
-    public FontWeightBuilder Light => Chain(Enums.FontWeight.LightValue);
-    public FontWeightBuilder Normal => Chain(Enums.FontWeight.NormalValue);
-    public FontWeightBuilder Medium => Chain(Enums.FontWeight.MediumValue);
-    public FontWeightBuilder Semibold => Chain(Enums.FontWeight.SemiboldValue);
-    public FontWeightBuilder Bold => Chain(Enums.FontWeight.BoldValue);
-    public FontWeightBuilder Bolder => Chain(Enums.FontWeight.BolderValue);
+    public FontWeightBuilder Light => Chain(FontWeightKeyword.LightValue);
+    public FontWeightBuilder Normal => Chain(FontWeightKeyword.NormalValue);
+    public FontWeightBuilder Medium => Chain(FontWeightKeyword.MediumValue);
+    public FontWeightBuilder Semibold => Chain(FontWeightKeyword.SemiboldValue);
+    public FontWeightBuilder Bold => Chain(FontWeightKeyword.BoldValue);
+    public FontWeightBuilder Bolder => Chain(FontWeightKeyword.BolderValue);
     public FontWeightBuilder Inherit => Chain(GlobalKeyword.InheritValue);
     public FontWeightBuilder Initial => Chain(GlobalKeyword.InitialValue);
     public FontWeightBuilder Revert => Chain(GlobalKeyword.RevertValue);
@@ -65,7 +65,7 @@ public sealed class FontWeightBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new FontWeightRule(Enums.FontWeight.NormalValue, bp));
+            _rules.Add(new FontWeightRule(FontWeightKeyword.NormalValue, bp));
             return this;
         }
 
@@ -86,12 +86,12 @@ public sealed class FontWeightBuilder : ICssBuilder
             FontWeightRule rule = _rules[i];
             string cls = rule.Value switch
             {
-                Enums.FontWeight.LightValue => _classLight,
-                Enums.FontWeight.NormalValue => _classNormal,
-                Enums.FontWeight.MediumValue => _classMedium,
-                Enums.FontWeight.SemiboldValue => _classSemibold,
-                Enums.FontWeight.BoldValue => _classBold,
-                Enums.FontWeight.BolderValue => _classBolder,
+                FontWeightKeyword.LightValue => _classLight,
+                FontWeightKeyword.NormalValue => _classNormal,
+                FontWeightKeyword.MediumValue => _classMedium,
+                FontWeightKeyword.SemiboldValue => _classSemibold,
+                FontWeightKeyword.BoldValue => _classBold,
+                FontWeightKeyword.BolderValue => _classBolder,
                 _ => string.Empty
             };
             if (cls.Length == 0)
@@ -120,12 +120,12 @@ public sealed class FontWeightBuilder : ICssBuilder
             FontWeightRule rule = _rules[i];
             string? css = rule.Value switch
             {
-                Enums.FontWeight.LightValue => "300",
-                Enums.FontWeight.NormalValue => "400",
-                Enums.FontWeight.MediumValue => "500",
-                Enums.FontWeight.SemiboldValue => "600",
-                Enums.FontWeight.BoldValue => "700",
-                Enums.FontWeight.BolderValue => "bolder",
+                FontWeightKeyword.LightValue => "300",
+                FontWeightKeyword.NormalValue => "400",
+                FontWeightKeyword.MediumValue => "500",
+                FontWeightKeyword.SemiboldValue => "600",
+                FontWeightKeyword.BoldValue => "700",
+                FontWeightKeyword.BolderValue => "bolder",
                 GlobalKeyword.InheritValue => "inherit",
                 GlobalKeyword.InitialValue => "initial",
                 GlobalKeyword.UnsetValue => "unset",

@@ -24,7 +24,7 @@ public sealed class VisibilityBuilder : ICssBuilder
             _rules.AddRange(rules);
     }
 
-    public VisibilityBuilder Visible => Chain(Enums.Visibility.VisibleValue);
+    public VisibilityBuilder Visible => Chain(VisibilityKeyword.VisibleValue);
     public VisibilityBuilder Invisible => Chain("invisible");
     public VisibilityBuilder Inherit => Chain(GlobalKeyword.InheritValue);
     public VisibilityBuilder Initial => Chain(GlobalKeyword.InitialValue);
@@ -51,7 +51,7 @@ public sealed class VisibilityBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new VisibilityRule(Enums.Visibility.VisibleValue, bp));
+            _rules.Add(new VisibilityRule(VisibilityKeyword.VisibleValue, bp));
             return this;
         }
 
@@ -73,7 +73,7 @@ public sealed class VisibilityBuilder : ICssBuilder
             string cls = rule.Value switch
             {
                 "invisible" => _classInvisible,
-                Enums.Visibility.VisibleValue => _classVisible,
+                VisibilityKeyword.VisibleValue => _classVisible,
                 _ => string.Empty
             };
             if (cls.Length == 0)
@@ -103,7 +103,7 @@ public sealed class VisibilityBuilder : ICssBuilder
             string? css = rule.Value switch
             {
                 "invisible" => "visibility: hidden",
-                Enums.Visibility.VisibleValue => "visibility: visible",
+                VisibilityKeyword.VisibleValue => "visibility: visible",
                 GlobalKeyword.InheritValue => "visibility: inherit",
                 GlobalKeyword.InitialValue => "visibility: initial",
                 GlobalKeyword.UnsetValue => "visibility: unset",

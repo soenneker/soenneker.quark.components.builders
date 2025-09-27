@@ -36,8 +36,8 @@ public sealed class PointerEventsBuilder : ICssBuilder
             _rules.AddRange(rules);
     }
 
-    public PointerEventsBuilder None => Chain(Enums.PointerEvents.None);
-    public PointerEventsBuilder Auto => Chain(Enums.PointerEvents.Auto);
+    public PointerEventsBuilder None => Chain(PointerEventsKeyword.None);
+    public PointerEventsBuilder Auto => Chain(PointerEventsKeyword.Auto);
     public PointerEventsBuilder Inherit => Chain(GlobalKeyword.InheritValue);
     public PointerEventsBuilder Initial => Chain(GlobalKeyword.InitialValue);
     public PointerEventsBuilder Revert => Chain(GlobalKeyword.RevertValue);
@@ -64,7 +64,7 @@ public sealed class PointerEventsBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new PointerEventsRule(Enums.PointerEvents.Auto, bp));
+            _rules.Add(new PointerEventsRule(PointerEventsKeyword.Auto, bp));
             return this;
         }
 
@@ -88,8 +88,8 @@ public sealed class PointerEventsBuilder : ICssBuilder
 
             string baseClass = rule.Value switch
             {
-                Enums.PointerEvents.NoneValue => _classNone,
-                Enums.PointerEvents.AutoValue => _classAuto,
+                PointerEventsKeyword.NoneValue => _classNone,
+                PointerEventsKeyword.AutoValue => _classAuto,
                 _ => string.Empty
             };
 
@@ -123,8 +123,8 @@ public sealed class PointerEventsBuilder : ICssBuilder
 
             string css = rule.Value switch
             {
-                Enums.PointerEvents.NoneValue => _styleNone,
-                Enums.PointerEvents.AutoValue => _styleAuto,
+                PointerEventsKeyword.NoneValue => _styleNone,
+                PointerEventsKeyword.AutoValue => _styleAuto,
                 GlobalKeyword.InheritValue => _styleInherit,
                 GlobalKeyword.InitialValue => _styleInitial,
                 GlobalKeyword.UnsetValue => _styleUnset,

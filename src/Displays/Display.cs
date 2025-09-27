@@ -11,57 +11,57 @@ public static class Display
     /// <summary>
     /// Display none (hidden).
     /// </summary>
-    public static DisplayBuilder None => new(Enums.DisplayKeyword.NoneValue);
+    public static DisplayBuilder None => new(DisplayKeyword.NoneValue);
 
     /// <summary>
     /// Display inline.
     /// </summary>
-    public static DisplayBuilder Inline => new(Enums.DisplayKeyword.InlineValue);
+    public static DisplayBuilder Inline => new(DisplayKeyword.InlineValue);
 
     /// <summary>
     /// Display inline-block.
     /// </summary>
-    public static DisplayBuilder InlineBlock => new(Enums.DisplayKeyword.InlineBlockValue);
+    public static DisplayBuilder InlineBlock => new(DisplayKeyword.InlineBlockValue);
 
     /// <summary>
     /// Display block.
     /// </summary>
-    public static DisplayBuilder Block => new(Enums.DisplayKeyword.BlockValue);
+    public static DisplayBuilder Block => new(DisplayKeyword.BlockValue);
 
     /// <summary>
     /// Display flex.
     /// </summary>
-    public static DisplayBuilder Flex => new(Enums.DisplayKeyword.FlexValue);
+    public static DisplayBuilder Flex => new(DisplayKeyword.FlexValue);
 
     /// <summary>
     /// Display inline-flex.
     /// </summary>
-    public static DisplayBuilder InlineFlex => new(Enums.DisplayKeyword.InlineFlexValue);
+    public static DisplayBuilder InlineFlex => new(DisplayKeyword.InlineFlexValue);
 
     /// <summary>
     /// Display grid.
     /// </summary>
-    public static DisplayBuilder Grid => new(Enums.DisplayKeyword.GridValue);
+    public static DisplayBuilder Grid => new(DisplayKeyword.GridValue);
 
     /// <summary>
     /// Display inline-grid.
     /// </summary>
-    public static DisplayBuilder InlineGrid => new(Enums.DisplayKeyword.InlineGridValue);
+    public static DisplayBuilder InlineGrid => new(DisplayKeyword.InlineGridValue);
 
     /// <summary>
     /// Display table.
     /// </summary>
-    public static DisplayBuilder Table => new(Enums.DisplayKeyword.TableValue);
+    public static DisplayBuilder Table => new(DisplayKeyword.TableValue);
 
     /// <summary>
     /// Display table-cell.
     /// </summary>
-    public static DisplayBuilder TableCell => new(Enums.DisplayKeyword.TableCellValue);
+    public static DisplayBuilder TableCell => new(DisplayKeyword.TableCellValue);
 
     /// <summary>
     /// Display table-row.
     /// </summary>
-    public static DisplayBuilder TableRow => new(Enums.DisplayKeyword.TableRowValue);
+    public static DisplayBuilder TableRow => new(DisplayKeyword.TableRowValue);
 
     /// <summary>
     /// Inherit from parent.

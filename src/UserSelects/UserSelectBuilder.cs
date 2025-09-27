@@ -26,9 +26,9 @@ public sealed class UserSelectBuilder : ICssBuilder
             _rules.AddRange(rules);
     }
 
-    public UserSelectBuilder None => Chain(Enums.UserSelect.NoneValue);
-    public UserSelectBuilder Auto => Chain(Enums.UserSelect.AutoValue);
-    public UserSelectBuilder All => Chain(Enums.UserSelect.AllValue);
+    public UserSelectBuilder None => Chain(UserSelectKeyword.NoneValue);
+    public UserSelectBuilder Auto => Chain(UserSelectKeyword.AutoValue);
+    public UserSelectBuilder All => Chain(UserSelectKeyword.AllValue);
     public UserSelectBuilder Inherit => Chain(GlobalKeyword.InheritValue);
     public UserSelectBuilder Initial => Chain(GlobalKeyword.InitialValue);
     public UserSelectBuilder Revert => Chain(GlobalKeyword.RevertValue);
@@ -54,7 +54,7 @@ public sealed class UserSelectBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new UserSelectRule(Enums.UserSelect.AutoValue, bp));
+            _rules.Add(new UserSelectRule(UserSelectKeyword.AutoValue, bp));
             return this;
         }
 
@@ -75,9 +75,9 @@ public sealed class UserSelectBuilder : ICssBuilder
             UserSelectRule rule = _rules[i];
             string cls = rule.Value switch
             {
-                Enums.UserSelect.NoneValue => _classNone,
-                Enums.UserSelect.AutoValue => _classAuto,
-                Enums.UserSelect.AllValue => _classAll,
+                UserSelectKeyword.NoneValue => _classNone,
+                UserSelectKeyword.AutoValue => _classAuto,
+                UserSelectKeyword.AllValue => _classAll,
                 _ => string.Empty
             };
             if (cls.Length == 0)

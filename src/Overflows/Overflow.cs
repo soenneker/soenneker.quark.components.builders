@@ -11,22 +11,22 @@ public static class Overflow
     /// <summary>
     /// Overflow auto.
     /// </summary>
-    public static OverflowBuilder Auto => new(Enums.OverflowKeyword.AutoValue);
+    public static OverflowBuilder Auto => new(OverflowKeyword.AutoValue);
 
     /// <summary>
     /// Overflow hidden.
     /// </summary>
-    public static OverflowBuilder Hidden => new(Enums.OverflowKeyword.HiddenValue);
+    public static OverflowBuilder Hidden => new(OverflowKeyword.HiddenValue);
 
     /// <summary>
     /// Overflow visible.
     /// </summary>
-    public static OverflowBuilder Visible => new(Enums.OverflowKeyword.VisibleValue);
+    public static OverflowBuilder Visible => new(OverflowKeyword.VisibleValue);
 
     /// <summary>
     /// Overflow scroll.
     /// </summary>
-    public static OverflowBuilder Scroll => new(Enums.OverflowKeyword.ScrollValue);
+    public static OverflowBuilder Scroll => new(OverflowKeyword.ScrollValue);
 
     public static OverflowBuilder Inherit => new(GlobalKeyword.InheritValue);
     public static OverflowBuilder Initial => new(GlobalKeyword.InitialValue);

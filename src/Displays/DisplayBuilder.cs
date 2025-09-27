@@ -25,17 +25,17 @@ public sealed class DisplayBuilder : ICssBuilder
             _rules.AddRange(rules);
     }
 
-    public DisplayBuilder None => ChainWithDisplay(Enums.DisplayType.NoneValue);
-    public DisplayBuilder Inline => ChainWithDisplay(Enums.DisplayType.InlineValue);
-    public DisplayBuilder InlineBlock => ChainWithDisplay(Enums.DisplayType.InlineBlockValue);
-    public DisplayBuilder Block => ChainWithDisplay(Enums.DisplayType.BlockValue);
-    public DisplayBuilder Flex => ChainWithDisplay(Enums.DisplayType.FlexValue);
-    public DisplayBuilder InlineFlex => ChainWithDisplay(Enums.DisplayType.InlineFlexValue);
-    public DisplayBuilder Grid => ChainWithDisplay(Enums.DisplayType.GridValue);
-    public DisplayBuilder InlineGrid => ChainWithDisplay(Enums.DisplayType.InlineGridValue);
-    public DisplayBuilder Table => ChainWithDisplay(Enums.DisplayType.TableValue);
-    public DisplayBuilder TableCell => ChainWithDisplay(Enums.DisplayType.TableCellValue);
-    public DisplayBuilder TableRow => ChainWithDisplay(Enums.DisplayType.TableRowValue);
+    public DisplayBuilder None => ChainWithDisplay(DisplayKeyword.NoneValue);
+    public DisplayBuilder Inline => ChainWithDisplay(DisplayKeyword.InlineValue);
+    public DisplayBuilder InlineBlock => ChainWithDisplay(DisplayKeyword.InlineBlockValue);
+    public DisplayBuilder Block => ChainWithDisplay(DisplayKeyword.BlockValue);
+    public DisplayBuilder Flex => ChainWithDisplay(DisplayKeyword.FlexValue);
+    public DisplayBuilder InlineFlex => ChainWithDisplay(DisplayKeyword.InlineFlexValue);
+    public DisplayBuilder Grid => ChainWithDisplay(DisplayKeyword.GridValue);
+    public DisplayBuilder InlineGrid => ChainWithDisplay(DisplayKeyword.InlineGridValue);
+    public DisplayBuilder Table => ChainWithDisplay(DisplayKeyword.TableValue);
+    public DisplayBuilder TableCell => ChainWithDisplay(DisplayKeyword.TableCellValue);
+    public DisplayBuilder TableRow => ChainWithDisplay(DisplayKeyword.TableRowValue);
     public DisplayBuilder Inherit => ChainWithDisplay(GlobalKeyword.InheritValue);
     public DisplayBuilder Initial => ChainWithDisplay(GlobalKeyword.InitialValue);
     public DisplayBuilder Revert => ChainWithDisplay(GlobalKeyword.RevertValue);
@@ -61,7 +61,7 @@ public sealed class DisplayBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new DisplayRule(Enums.DisplayType.BlockValue, breakpoint));
+            _rules.Add(new DisplayRule(DisplayKeyword.BlockValue, breakpoint));
             return this;
         }
 
@@ -131,17 +131,17 @@ public sealed class DisplayBuilder : ICssBuilder
     {
         return display switch
         {
-            DisplayType.NoneValue => "d-none",
-            DisplayType.InlineValue => "d-inline",
-            DisplayType.InlineBlockValue => "d-inline-block",
-            Enums.DisplayType.BlockValue => "d-block",
-            Enums.DisplayType.FlexValue => "d-flex",
-            Enums.DisplayType.InlineFlexValue => "d-inline-flex",
-            Enums.DisplayType.GridValue => "d-grid",
-            Enums.DisplayType.InlineGridValue => "d-inline-grid",
-            Enums.DisplayType.TableValue => "d-table",
-            Enums.DisplayType.TableCellValue => "d-table-cell",
-            Enums.DisplayType.TableRowValue => "d-table-row",
+            DisplayKeyword.NoneValue => "d-none",
+            DisplayKeyword.InlineValue => "d-inline",
+            DisplayKeyword.InlineBlockValue => "d-inline-block",
+            DisplayKeyword.BlockValue => "d-block",
+            DisplayKeyword.FlexValue => "d-flex",
+            DisplayKeyword.InlineFlexValue => "d-inline-flex",
+            DisplayKeyword.GridValue => "d-grid",
+            DisplayKeyword.InlineGridValue => "d-inline-grid",
+            DisplayKeyword.TableValue => "d-table",
+            DisplayKeyword.TableCellValue => "d-table-cell",
+            DisplayKeyword.TableRowValue => "d-table-row",
             _ => string.Empty
         };
     }

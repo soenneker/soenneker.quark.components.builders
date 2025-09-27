@@ -47,12 +47,12 @@ public sealed class BorderBuilder : ICssBuilder
     public BorderBuilder FromEnd => AddRule(ElementSide.InlineEnd);
 
     // ----- Size chaining -----
-    public BorderBuilder S0 => ChainWithSize(Scale.S0);
-    public BorderBuilder S1 => ChainWithSize(Scale.S1);
-    public BorderBuilder S2 => ChainWithSize(Scale.S2);
-    public BorderBuilder S3 => ChainWithSize(Scale.S3);
-    public BorderBuilder S4 => ChainWithSize(Scale.S4);
-    public BorderBuilder S5 => ChainWithSize(Scale.S5);
+    public BorderBuilder S0 => ChainWithSize(ScaleType.S0);
+    public BorderBuilder S1 => ChainWithSize(ScaleType.S1);
+    public BorderBuilder S2 => ChainWithSize(ScaleType.S2);
+    public BorderBuilder S3 => ChainWithSize(ScaleType.S3);
+    public BorderBuilder S4 => ChainWithSize(ScaleType.S4);
+    public BorderBuilder S5 => ChainWithSize(ScaleType.S5);
 
     // ----- Breakpoint chaining -----
     public BorderBuilder OnPhone => ChainWithBreakpoint(Breakpoint.Phone);
@@ -81,7 +81,7 @@ public sealed class BorderBuilder : ICssBuilder
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private BorderBuilder ChainWithSize(Scale scale)
+    private BorderBuilder ChainWithSize(ScaleType scale)
     {
         _rules.Add(new BorderRule(scale.Value, ElementSide.All, null));
         return this;
@@ -270,12 +270,12 @@ public sealed class BorderBuilder : ICssBuilder
     {
         return size switch
         {
-            Scale.S0Value => "0",
-            Scale.S1Value => "1px",
-            Scale.S2Value => "2px",
-            Scale.S3Value => "3px",
-            Scale.S4Value => "4px",
-            Scale.S5Value => "5px",
+            ScaleType.S0Value => "0",
+            ScaleType.S1Value => "1px",
+            ScaleType.S2Value => "2px",
+            ScaleType.S3Value => "3px",
+            ScaleType.S4Value => "4px",
+            ScaleType.S5Value => "5px",
             _ => null
         };
     }

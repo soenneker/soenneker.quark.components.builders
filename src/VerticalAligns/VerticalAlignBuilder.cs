@@ -21,12 +21,12 @@ public sealed class VerticalAlignBuilder : ICssBuilder
             _rules.AddRange(rules);
     }
 
-    public VerticalAlignBuilder Baseline => Chain(Enums.VerticalAlign.BaselineValue);
-    public VerticalAlignBuilder Top => Chain(Enums.VerticalAlign.TopValue);
-    public VerticalAlignBuilder Middle => Chain(Enums.VerticalAlign.MiddleValue);
-    public VerticalAlignBuilder Bottom => Chain(Enums.VerticalAlign.BottomValue);
-    public VerticalAlignBuilder TextTop => Chain(Enums.VerticalAlign.TextTopValue);
-    public VerticalAlignBuilder TextBottom => Chain(Enums.VerticalAlign.TextBottomValue);
+    public VerticalAlignBuilder Baseline => Chain(VerticalAlignKeyword.BaselineValue);
+    public VerticalAlignBuilder Top => Chain(VerticalAlignKeyword.TopValue);
+    public VerticalAlignBuilder Middle => Chain(VerticalAlignKeyword.MiddleValue);
+    public VerticalAlignBuilder Bottom => Chain(VerticalAlignKeyword.BottomValue);
+    public VerticalAlignBuilder TextTop => Chain(VerticalAlignKeyword.TextTopValue);
+    public VerticalAlignBuilder TextBottom => Chain(VerticalAlignKeyword.TextBottomValue);
     public VerticalAlignBuilder Inherit => Chain(GlobalKeyword.InheritValue);
     public VerticalAlignBuilder Initial => Chain(GlobalKeyword.InitialValue);
     public VerticalAlignBuilder Revert => Chain(GlobalKeyword.RevertValue);
@@ -52,7 +52,7 @@ public sealed class VerticalAlignBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new VerticalAlignRule(Enums.VerticalAlign.BaselineValue, bp));
+            _rules.Add(new VerticalAlignRule(VerticalAlignKeyword.BaselineValue, bp));
             return this;
         }
 
@@ -73,12 +73,12 @@ public sealed class VerticalAlignBuilder : ICssBuilder
             VerticalAlignRule rule = _rules[i];
             string cls = rule.Value switch
             {
-                Enums.VerticalAlign.BaselineValue => "align-baseline",
-                Enums.VerticalAlign.TopValue => "align-top",
-                Enums.VerticalAlign.MiddleValue => "align-middle",
-                Enums.VerticalAlign.BottomValue => "align-bottom",
-                Enums.VerticalAlign.TextTopValue => "align-text-top",
-                Enums.VerticalAlign.TextBottomValue => "align-text-bottom",
+                VerticalAlignKeyword.BaselineValue => "align-baseline",
+                VerticalAlignKeyword.TopValue => "align-top",
+                VerticalAlignKeyword.MiddleValue => "align-middle",
+                VerticalAlignKeyword.BottomValue => "align-bottom",
+                VerticalAlignKeyword.TextTopValue => "align-text-top",
+                VerticalAlignKeyword.TextBottomValue => "align-text-bottom",
                 _ => string.Empty
             };
             if (cls.Length == 0)

@@ -5,11 +5,11 @@ namespace Soenneker.Quark;
 
 public static class TextAlignment
 {
-	public static TextAlignmentBuilder Start => new(Enums.TextAlignKeyword.StartValue);
+	public static TextAlignmentBuilder Start => new(TextAlignKeyword.StartValue);
 
-	public static TextAlignmentBuilder Center => new(Enums.TextAlignKeyword.CenterValue);
+	public static TextAlignmentBuilder Center => new(TextAlignKeyword.CenterValue);
 
-	public static TextAlignmentBuilder End => new(Enums.TextAlignKeyword.EndValue);
+	public static TextAlignmentBuilder End => new(TextAlignKeyword.EndValue);
 
 	public static TextAlignmentBuilder Inherit => new(GlobalKeyword.InheritValue);
 	public static TextAlignmentBuilder Initial => new(GlobalKeyword.InitialValue);

@@ -5,9 +5,9 @@ namespace Soenneker.Quark;
 
 public static class UserSelect
 {
-    public static UserSelectBuilder None => new(Enums.UserSelect.NoneValue);
-    public static UserSelectBuilder Auto => new(Enums.UserSelect.AutoValue);
-    public static UserSelectBuilder All => new(Enums.UserSelect.AllValue);
+    public static UserSelectBuilder None => new(UserSelectKeyword.NoneValue);
+    public static UserSelectBuilder Auto => new(UserSelectKeyword.AutoValue);
+    public static UserSelectBuilder All => new(UserSelectKeyword.AllValue);
 
     public static UserSelectBuilder Inherit => new(GlobalKeyword.InheritValue);
     public static UserSelectBuilder Initial => new(GlobalKeyword.InitialValue);

@@ -19,9 +19,9 @@ public sealed class TextDecorationBuilder : ICssBuilder
     private const string _textDecorationPrefix = "text-decoration-line: ";
 
     // ----- Style constants (compile-time const interpolation with Intellenum consts) -----
-    private const string _styleNone = $"{_textDecorationPrefix}{TextDecorationLine.NoneValue}";
-    private const string _styleUnderline = $"{_textDecorationPrefix}{TextDecorationLine.UnderlineValue}";
-    private const string _styleLineThrough = $"{_textDecorationPrefix}{TextDecorationLine.LineThroughValue}";
+    private const string _styleNone = $"{_textDecorationPrefix}{TextDecorationLineKeyword.NoneValue}";
+    private const string _styleUnderline = $"{_textDecorationPrefix}{TextDecorationLineKeyword.UnderlineValue}";
+    private const string _styleLineThrough = $"{_textDecorationPrefix}{TextDecorationLineKeyword.LineThroughValue}";
 
     private const string _styleInherit = $"{_textDecorationPrefix}{GlobalKeyword.InheritValue}";
     private const string _styleInitial = $"{_textDecorationPrefix}{GlobalKeyword.InitialValue}";
@@ -40,9 +40,9 @@ public sealed class TextDecorationBuilder : ICssBuilder
             _rules.AddRange(rules);
     }
 
-    public TextDecorationBuilder None => Chain(TextDecorationLine.NoneValue);
-    public TextDecorationBuilder Underline => Chain(TextDecorationLine.UnderlineValue);
-    public TextDecorationBuilder LineThrough => Chain(TextDecorationLine.LineThroughValue);
+    public TextDecorationBuilder None => Chain(TextDecorationLineKeyword.NoneValue);
+    public TextDecorationBuilder Underline => Chain(TextDecorationLineKeyword.UnderlineValue);
+    public TextDecorationBuilder LineThrough => Chain(TextDecorationLineKeyword.LineThroughValue);
 
     public TextDecorationBuilder Inherit => Chain(GlobalKeyword.InheritValue);
     public TextDecorationBuilder Initial => Chain(GlobalKeyword.InitialValue);
@@ -70,7 +70,7 @@ public sealed class TextDecorationBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new TextDecorationRule(TextDecorationLine.NoneValue, bp));
+            _rules.Add(new TextDecorationRule(TextDecorationLineKeyword.NoneValue, bp));
             return this;
         }
 
@@ -94,9 +94,9 @@ public sealed class TextDecorationBuilder : ICssBuilder
 
             string baseClass = rule.Value switch
             {
-                TextDecorationLine.NoneValue => _classNone,
-                TextDecorationLine.UnderlineValue => _classUnderline,
-                TextDecorationLine.LineThroughValue => _classLineThrough,
+                TextDecorationLineKeyword.NoneValue => _classNone,
+                TextDecorationLineKeyword.UnderlineValue => _classUnderline,
+                TextDecorationLineKeyword.LineThroughValue => _classLineThrough,
                 _ => string.Empty
             };
 
@@ -132,10 +132,9 @@ public sealed class TextDecorationBuilder : ICssBuilder
 
             string css = rule.Value switch
             {
-                TextDecorationLine.NoneValue => _styleNone,
-                TextDecorationLine.UnderlineValue => _styleUnderline,
-                TextDecorationLine.LineThroughValue => _styleLineThrough,
-
+                TextDecorationLineKeyword.NoneValue => _styleNone,
+                TextDecorationLineKeyword.UnderlineValue => _styleUnderline,
+                TextDecorationLineKeyword.LineThroughValue => _styleLineThrough,
                 GlobalKeyword.InheritValue => _styleInherit,
                 GlobalKeyword.InitialValue => _styleInitial,
                 GlobalKeyword.UnsetValue => _styleUnset,

@@ -30,11 +30,11 @@ public sealed class FloatBuilder : ICssBuilder
             _rules.AddRange(rules);
     }
 
-    public FloatBuilder None => ChainWithValue(Enums.Float.NoneValue);
-    public FloatBuilder Left => ChainWithValue(Enums.Float.LeftValue);
-    public FloatBuilder Right => ChainWithValue(Enums.Float.RightValue);
-    public FloatBuilder Start => ChainWithValue(Enums.Float.InlineStartValue);
-    public FloatBuilder End => ChainWithValue(Enums.Float.InlineEndValue);
+    public FloatBuilder None => ChainWithValue(FloatKeyword.NoneValue);
+    public FloatBuilder Left => ChainWithValue(FloatKeyword.LeftValue);
+    public FloatBuilder Right => ChainWithValue(FloatKeyword.RightValue);
+    public FloatBuilder Start => ChainWithValue(FloatKeyword.InlineStartValue);
+    public FloatBuilder End => ChainWithValue(FloatKeyword.InlineEndValue);
     public FloatBuilder Inherit => ChainWithValue(GlobalKeyword.InheritValue);
     public FloatBuilder Initial => ChainWithValue(GlobalKeyword.InitialValue);
     public FloatBuilder Revert => ChainWithValue(GlobalKeyword.RevertValue);
@@ -60,7 +60,7 @@ public sealed class FloatBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new FloatRule(Enums.Float.NoneValue, breakpoint));
+            _rules.Add(new FloatRule(FloatKeyword.NoneValue, breakpoint));
             return this;
         }
 
@@ -84,11 +84,11 @@ public sealed class FloatBuilder : ICssBuilder
 
             string cls = rule.Value switch
             {
-                Enums.Float.LeftValue => _classStart,
-                Enums.Float.RightValue => _classEnd,
-                Enums.Float.InlineStartValue => _classStart,
-                Enums.Float.InlineEndValue => _classEnd,
-                Enums.Float.NoneValue => _classNone,
+                FloatKeyword.LeftValue => _classStart,
+                FloatKeyword.RightValue => _classEnd,
+                FloatKeyword.InlineStartValue => _classStart,
+                FloatKeyword.InlineEndValue => _classEnd,
+                FloatKeyword.NoneValue => _classNone,
                 _ => string.Empty
             };
 
@@ -122,11 +122,11 @@ public sealed class FloatBuilder : ICssBuilder
 
             string? css = rule.Value switch
             {
-                Enums.Float.LeftValue => "left",
-                Enums.Float.RightValue => "right",
-                Enums.Float.InlineStartValue => "inline-start",
-                Enums.Float.InlineEndValue => "inline-end",
-                Enums.Float.NoneValue => "none",
+                FloatKeyword.LeftValue => "left",
+                FloatKeyword.RightValue => "right",
+                FloatKeyword.InlineStartValue => "inline-start",
+                FloatKeyword.InlineEndValue => "inline-end",
+                FloatKeyword.NoneValue => "none",
                 GlobalKeyword.InheritValue => "inherit",
                 GlobalKeyword.InitialValue => "initial",
                 GlobalKeyword.UnsetValue => "unset",

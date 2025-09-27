@@ -26,7 +26,7 @@ public sealed class LineHeightBuilder : ICssBuilder
             _rules.AddRange(rules);
     }
 
-    public LineHeightBuilder L1 => Chain(Scale.S1.Value);
+    public LineHeightBuilder L1 => Chain(ScaleType.S1.Value);
     public LineHeightBuilder Sm => Chain(Size.Small.Value);
     public LineHeightBuilder Base => Chain("base");
     public LineHeightBuilder Lg => Chain(Size.Large.Value);
@@ -71,7 +71,7 @@ public sealed class LineHeightBuilder : ICssBuilder
             LineHeightRule rule = _rules[i];
             string cls = rule.Value switch
             {
-                Scale.S1Value => _classLh1,
+                ScaleType.S1Value => _classLh1,
                 "sm" => _classLhSm,
                 "base" => _classLhBase,
                 "lg" => _classLhLg,
@@ -103,7 +103,7 @@ public sealed class LineHeightBuilder : ICssBuilder
             LineHeightRule rule = _rules[i];
             string? css = rule.Value switch
             {
-                Scale.S1Value => "1",
+                ScaleType.S1Value => "1",
                 "sm" => "1.25",
                 "base" => "1.5",
                 "lg" => "2",

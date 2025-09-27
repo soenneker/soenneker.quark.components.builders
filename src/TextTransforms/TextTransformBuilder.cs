@@ -26,9 +26,9 @@ public sealed class TextTransformBuilder : ICssBuilder
             _rules.AddRange(rules);
     }
 
-    public TextTransformBuilder Lowercase => Chain(Enums.TextTransform.LowercaseValue);
-    public TextTransformBuilder Uppercase => Chain(Enums.TextTransform.UppercaseValue);
-    public TextTransformBuilder Capitalize => Chain(Enums.TextTransform.CapitalizeValue);
+    public TextTransformBuilder Lowercase => Chain(TextTransformKeyword.LowercaseValue);
+    public TextTransformBuilder Uppercase => Chain(TextTransformKeyword.UppercaseValue);
+    public TextTransformBuilder Capitalize => Chain(TextTransformKeyword.CapitalizeValue);
     public TextTransformBuilder Inherit => Chain(GlobalKeyword.InheritValue);
     public TextTransformBuilder Initial => Chain(GlobalKeyword.InitialValue);
     public TextTransformBuilder Revert => Chain(GlobalKeyword.RevertValue);
@@ -54,7 +54,7 @@ public sealed class TextTransformBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new TextTransformRule(Enums.TextTransform.LowercaseValue, bp));
+            _rules.Add(new TextTransformRule(TextTransformKeyword.LowercaseValue, bp));
             return this;
         }
 
@@ -75,9 +75,9 @@ public sealed class TextTransformBuilder : ICssBuilder
             TextTransformRule rule = _rules[i];
             string cls = rule.Value switch
             {
-                Enums.TextTransform.LowercaseValue => _classLower,
-                Enums.TextTransform.UppercaseValue => _classUpper,
-                Enums.TextTransform.CapitalizeValue => _classCap,
+                TextTransformKeyword.LowercaseValue => _classLower,
+                TextTransformKeyword.UppercaseValue => _classUpper,
+                TextTransformKeyword.CapitalizeValue => _classCap,
                 _ => string.Empty
             };
             if (cls.Length == 0)

@@ -5,8 +5,8 @@ namespace Soenneker.Quark;
 
 public static class TextWrap
 {
-    public static TextWrapBuilder Wrap => new(Enums.TextWrap.WrapValue);
-    public static TextWrapBuilder NoWrap => new(Enums.TextWrap.NoWrapValue);
+    public static TextWrapBuilder Wrap => new(TextWrapKeyword.WrapValue);
+    public static TextWrapBuilder NoWrap => new(TextWrapKeyword.NoWrapValue);
 
     public static TextWrapBuilder Inherit => new(GlobalKeyword.InheritValue);
     public static TextWrapBuilder Initial => new(GlobalKeyword.InitialValue);

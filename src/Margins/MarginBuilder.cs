@@ -55,12 +55,12 @@ public sealed class MarginBuilder : ICssBuilder
     public MarginBuilder FromEnd => AddRule(ElementSide.InlineEnd);
 
     // ----- Size chaining -----
-    public MarginBuilder S0 => ChainWithSize(Scale.S0);
-    public MarginBuilder S1 => ChainWithSize(Scale.S1);
-    public MarginBuilder S2 => ChainWithSize(Scale.S2);
-    public MarginBuilder S3 => ChainWithSize(Scale.S3);
-    public MarginBuilder S4 => ChainWithSize(Scale.S4);
-    public MarginBuilder S5 => ChainWithSize(Scale.S5);
+    public MarginBuilder S0 => ChainWithSize(ScaleType.S0);
+    public MarginBuilder S1 => ChainWithSize(ScaleType.S1);
+    public MarginBuilder S2 => ChainWithSize(ScaleType.S2);
+    public MarginBuilder S3 => ChainWithSize(ScaleType.S3);
+    public MarginBuilder S4 => ChainWithSize(ScaleType.S4);
+    public MarginBuilder S5 => ChainWithSize(ScaleType.S5);
     public MarginBuilder Auto => ChainWithSize("auto");
 
     // ----- Breakpoint chaining -----
@@ -74,7 +74,7 @@ public sealed class MarginBuilder : ICssBuilder
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private MarginBuilder AddRule(ElementSide side)
     {
-        string size = _rules.Count > 0 ? _rules[^1].Size : Scale.S0Value;
+        string size = _rules.Count > 0 ? _rules[^1].Size : ScaleType.S0Value;
         Breakpoint? bp = _rules.Count > 0 ? _rules[^1].Breakpoint : null;
 
         if (_rules.Count > 0 && _rules[^1].Side == ElementSide.All)
@@ -97,7 +97,7 @@ public sealed class MarginBuilder : ICssBuilder
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private MarginBuilder ChainWithSize(Scale scale)
+    private MarginBuilder ChainWithSize(ScaleType scale)
     {
         _rules.Add(new MarginRule(scale.Value, ElementSide.All, null));
         return this;
@@ -108,7 +108,7 @@ public sealed class MarginBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new MarginRule(Scale.S0Value, ElementSide.All, breakpoint));
+            _rules.Add(new MarginRule(ScaleType.S0Value, ElementSide.All, breakpoint));
             return this;
         }
 
@@ -252,12 +252,12 @@ public sealed class MarginBuilder : ICssBuilder
         {
             return size switch
             {
-                Scale.S0Value => _token0,
-                Scale.S1Value => _token1,
-                Scale.S2Value => _token2,
-                Scale.S3Value => _token3,
-                Scale.S4Value => _token4,
-                Scale.S5Value => _token5,
+                ScaleType.S0Value => _token0,
+                ScaleType.S1Value => _token1,
+                ScaleType.S2Value => _token2,
+                ScaleType.S3Value => _token3,
+                ScaleType.S4Value => _token4,
+                ScaleType.S5Value => _token5,
                 "auto" => _tokenAuto,
                 _ => string.Empty
             };
@@ -298,12 +298,12 @@ public sealed class MarginBuilder : ICssBuilder
         {
             return size switch
             {
-                Scale.S0Value => "0",
-                Scale.S1Value => "0.25rem",
-                Scale.S2Value => "0.5rem",
-                Scale.S3Value => "1rem",
-                Scale.S4Value => "1.5rem",
-                Scale.S5Value => "3rem",
+                ScaleType.S0Value => "0",
+                ScaleType.S1Value => "0.25rem",
+                ScaleType.S2Value => "0.5rem",
+                ScaleType.S3Value => "1rem",
+                ScaleType.S4Value => "1.5rem",
+                ScaleType.S5Value => "3rem",
                 "auto" => "auto",
                 _ => null
             };

@@ -35,15 +35,15 @@ public sealed class PositionBuilder : ICssBuilder
     }
 
     /// <summary>Chain with static positioning for the next rule.</summary>
-    public PositionBuilder Static => ChainWithPosition(Enums.Position.StaticValue);
+    public PositionBuilder Static => ChainWithPosition(PositionKeyword.StaticValue);
     /// <summary>Chain with relative positioning for the next rule.</summary>
-    public PositionBuilder Relative => ChainWithPosition(Enums.Position.RelativeValue);
+    public PositionBuilder Relative => ChainWithPosition(PositionKeyword.RelativeValue);
     /// <summary>Chain with absolute positioning for the next rule.</summary>
-    public PositionBuilder Absolute => ChainWithPosition(Enums.Position.AbsoluteValue);
+    public PositionBuilder Absolute => ChainWithPosition(PositionKeyword.AbsoluteValue);
     /// <summary>Chain with fixed positioning for the next rule.</summary>
-    public PositionBuilder Fixed => ChainWithPosition(Enums.Position.FixedValue);
+    public PositionBuilder Fixed => ChainWithPosition(PositionKeyword.FixedValue);
     /// <summary>Chain with sticky positioning for the next rule.</summary>
-    public PositionBuilder Sticky => ChainWithPosition(Enums.Position.StickyValue);
+    public PositionBuilder Sticky => ChainWithPosition(PositionKeyword.StickyValue);
 
     public PositionBuilder Inherit => ChainWithPosition(GlobalKeyword.InheritValue);
     public PositionBuilder Initial => ChainWithPosition(GlobalKeyword.InitialValue);
@@ -72,7 +72,7 @@ public sealed class PositionBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new PositionRule(Enums.Position.StaticValue, breakpoint));
+            _rules.Add(new PositionRule(PositionKeyword.StaticValue, breakpoint));
             return this;
         }
 
@@ -147,11 +147,11 @@ public sealed class PositionBuilder : ICssBuilder
         return position switch
         {
             // Intellenum<string> *Value constants are compile-time consts, safe in switch
-            Enums.Position.StaticValue => _classStatic,
-            Enums.Position.RelativeValue => _classRelative,
-            Enums.Position.AbsoluteValue => _classAbsolute,
-            Enums.Position.FixedValue => _classFixed,
-            Enums.Position.StickyValue => _classSticky,
+            PositionKeyword.StaticValue => _classStatic,
+            PositionKeyword.RelativeValue => _classRelative,
+            PositionKeyword.AbsoluteValue => _classAbsolute,
+            PositionKeyword.FixedValue => _classFixed,
+            PositionKeyword.StickyValue => _classSticky,
             _ => string.Empty
         };
     }

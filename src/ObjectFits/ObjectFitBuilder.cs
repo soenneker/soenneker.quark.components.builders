@@ -34,27 +34,27 @@ public sealed class ObjectFitBuilder : ICssBuilder
     /// <summary>
     /// Chain with contain for the next rule.
     /// </summary>
-    public ObjectFitBuilder Contain => ChainWithFit(Enums.ObjectFit.ContainValue);
+    public ObjectFitBuilder Contain => ChainWithFit(ObjectFitKeyword.ContainValue);
 
     /// <summary>
     /// Chain with cover for the next rule.
     /// </summary>
-    public ObjectFitBuilder Cover => ChainWithFit(Enums.ObjectFit.CoverValue);
+    public ObjectFitBuilder Cover => ChainWithFit(ObjectFitKeyword.CoverValue);
 
     /// <summary>
     /// Chain with fill for the next rule.
     /// </summary>
-    public ObjectFitBuilder Fill => ChainWithFit(Enums.ObjectFit.FillValue);
+    public ObjectFitBuilder Fill => ChainWithFit(ObjectFitKeyword.FillValue);
 
     /// <summary>
     /// Chain with scale-down for the next rule.
     /// </summary>
-    public ObjectFitBuilder ScaleDown => ChainWithFit(Enums.ObjectFit.ScaleDownValue);
+    public ObjectFitBuilder ScaleDown => ChainWithFit(ObjectFitKeyword.ScaleDownValue);
 
     /// <summary>
     /// Chain with none for the next rule.
     /// </summary>
-    public ObjectFitBuilder None => ChainWithFit(Enums.ObjectFit.NoneValue);
+    public ObjectFitBuilder None => ChainWithFit(ObjectFitKeyword.NoneValue);
 
     public ObjectFitBuilder Inherit => ChainWithFit(GlobalKeyword.InheritValue);
     public ObjectFitBuilder Initial => ChainWithFit(GlobalKeyword.InitialValue);
@@ -100,7 +100,7 @@ public sealed class ObjectFitBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new ObjectFitRule(Enums.ObjectFit.ContainValue, breakpoint));
+            _rules.Add(new ObjectFitRule(ObjectFitKeyword.ContainValue, breakpoint));
             return this;
         }
 
@@ -174,11 +174,11 @@ public sealed class ObjectFitBuilder : ICssBuilder
     {
         return fit switch
         {
-            Enums.ObjectFit.ContainValue => _classContain,
-            Enums.ObjectFit.CoverValue => _classCover,
-            Enums.ObjectFit.FillValue => _classFill,
-            Enums.ObjectFit.ScaleDownValue => _classScale,
-            Enums.ObjectFit.NoneValue => _classNone,
+            ObjectFitKeyword.ContainValue => _classContain,
+            ObjectFitKeyword.CoverValue => _classCover,
+            ObjectFitKeyword.FillValue => _classFill,
+            ObjectFitKeyword.ScaleDownValue => _classScale,
+            ObjectFitKeyword.NoneValue => _classNone,
             _ => string.Empty
         };
     }

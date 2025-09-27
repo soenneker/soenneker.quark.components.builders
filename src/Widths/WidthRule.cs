@@ -1,4 +1,3 @@
-
 using Soenneker.Quark.Enums;
 
 namespace Soenneker.Quark;
@@ -7,5 +6,3 @@ namespace Soenneker.Quark;
 /// Represents a single width rule with optional breakpoint.
 /// </summary>
 internal record WidthRule(string Size, Breakpoint? Breakpoint = null);
-
-
