@@ -29,8 +29,8 @@ public sealed class BoxShadowBuilder : ICssBuilder
 
     public BoxShadowBuilder None => Chain("none");
     public BoxShadowBuilder Base => Chain("base");
-    public BoxShadowBuilder Sm => Chain(Size.Small.Value);
-    public BoxShadowBuilder Lg => Chain(Size.Large.Value);
+    public BoxShadowBuilder Sm => Chain(SizeType.Small.Value);
+    public BoxShadowBuilder Lg => Chain(SizeType.Large.Value);
 
     public BoxShadowBuilder OnPhone => ChainBp(Breakpoint.Phone);
     public BoxShadowBuilder OnTablet => ChainBp(Breakpoint.Tablet);

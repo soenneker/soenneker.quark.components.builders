@@ -30,7 +30,7 @@ public sealed class BorderRadiusBuilder : ICssBuilder
     {
         _cornerToken = cornerToken;
         if (!string.IsNullOrEmpty(size))
-            _rules.Add(new BorderRadiusRule(size, ElementSide.All, breakpoint, cornerToken));
+            _rules.Add(new BorderRadiusRule(size, ElementSideType.All, breakpoint, cornerToken));
     }
 
     internal BorderRadiusBuilder(List<BorderRadiusRule> rules)
@@ -44,11 +44,11 @@ public sealed class BorderRadiusBuilder : ICssBuilder
     public BorderRadiusBuilder TopRight => new(_rules) { _cornerToken = "tr" };
     public BorderRadiusBuilder BottomLeft => new(_rules) { _cornerToken = "bl" };
     public BorderRadiusBuilder BottomRight => new(_rules) { _cornerToken = "br" };
-    public BorderRadiusBuilder Top => AddRule(ElementSide.Top, "t");
-    public BorderRadiusBuilder Bottom => AddRule(ElementSide.Bottom, "b");
-    public BorderRadiusBuilder Left => AddRule(ElementSide.Left, "l");
-    public BorderRadiusBuilder Right => AddRule(ElementSide.Right, "r");
-    public BorderRadiusBuilder All => AddRule(ElementSide.All, "");
+    public BorderRadiusBuilder Top => AddRule(ElementSideType.Top, "t");
+    public BorderRadiusBuilder Bottom => AddRule(ElementSideType.Bottom, "b");
+    public BorderRadiusBuilder Left => AddRule(ElementSideType.Left, "l");
+    public BorderRadiusBuilder Right => AddRule(ElementSideType.Right, "r");
+    public BorderRadiusBuilder All => AddRule(ElementSideType.All, "");
 
     // ----- Size chaining -----
     public BorderRadiusBuilder S0 => ChainWithSize(ScaleType.S0);
@@ -69,12 +69,12 @@ public sealed class BorderRadiusBuilder : ICssBuilder
     public BorderRadiusBuilder OnUltrawide => ChainWithBreakpoint(Breakpoint.Ultrawide);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private BorderRadiusBuilder AddRule(ElementSide side, string cornerToken = "")
+    private BorderRadiusBuilder AddRule(ElementSideType side, string cornerToken = "")
     {
         string size = _rules.Count > 0 ? _rules[^1].Size : "0";
         Breakpoint? bp = _rules.Count > 0 ? _rules[^1].Breakpoint : null;
 
-        if (_rules.Count > 0 && _rules[^1].Side == ElementSide.All)
+        if (_rules.Count > 0 && _rules[^1].Side == ElementSideType.All)
         {
             _rules[^1] = new BorderRadiusRule(size, side, bp, cornerToken);
         }
@@ -96,7 +96,7 @@ public sealed class BorderRadiusBuilder : ICssBuilder
         }
         else
         {
-            _rules.Add(new BorderRadiusRule(size, ElementSide.All, null, _cornerToken));
+            _rules.Add(new BorderRadiusRule(size, ElementSideType.All, null, _cornerToken));
         }
         return this;
     }
@@ -111,7 +111,7 @@ public sealed class BorderRadiusBuilder : ICssBuilder
         }
         else
         {
-            _rules.Add(new BorderRadiusRule(scale.Value, ElementSide.All, null, _cornerToken));
+            _rules.Add(new BorderRadiusRule(scale.Value, ElementSideType.All, null, _cornerToken));
         }
         return this;
     }
@@ -121,7 +121,7 @@ public sealed class BorderRadiusBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new BorderRadiusRule("0", ElementSide.All, breakpoint, ""));
+            _rules.Add(new BorderRadiusRule("0", ElementSideType.All, breakpoint, ""));
             return this;
         }
 

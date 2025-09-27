@@ -34,7 +34,7 @@ public sealed class MarginBuilder : ICssBuilder
 
     internal MarginBuilder(string size, Breakpoint? breakpoint = null)
     {
-        _rules.Add(new MarginRule(size, ElementSide.All, breakpoint));
+        _rules.Add(new MarginRule(size, ElementSideType.All, breakpoint));
     }
 
     internal MarginBuilder(List<MarginRule> rules)
@@ -44,15 +44,15 @@ public sealed class MarginBuilder : ICssBuilder
     }
 
     // ----- Side chaining -----
-    public MarginBuilder FromTop => AddRule(ElementSide.Top);
-    public MarginBuilder FromRight => AddRule(ElementSide.Right);
-    public MarginBuilder FromBottom => AddRule(ElementSide.Bottom);
-    public MarginBuilder FromLeft => AddRule(ElementSide.Left);
-    public MarginBuilder OnX => AddRule(ElementSide.Horizontal);
-    public MarginBuilder OnY => AddRule(ElementSide.Vertical);
-    public MarginBuilder OnAll => AddRule(ElementSide.All);
-    public MarginBuilder FromStart => AddRule(ElementSide.InlineStart);
-    public MarginBuilder FromEnd => AddRule(ElementSide.InlineEnd);
+    public MarginBuilder FromTop => AddRule(ElementSideType.Top);
+    public MarginBuilder FromRight => AddRule(ElementSideType.Right);
+    public MarginBuilder FromBottom => AddRule(ElementSideType.Bottom);
+    public MarginBuilder FromLeft => AddRule(ElementSideType.Left);
+    public MarginBuilder OnX => AddRule(ElementSideType.Horizontal);
+    public MarginBuilder OnY => AddRule(ElementSideType.Vertical);
+    public MarginBuilder OnAll => AddRule(ElementSideType.All);
+    public MarginBuilder FromStart => AddRule(ElementSideType.InlineStart);
+    public MarginBuilder FromEnd => AddRule(ElementSideType.InlineEnd);
 
     // ----- Size chaining -----
     public MarginBuilder S0 => ChainWithSize(ScaleType.S0);
@@ -72,12 +72,12 @@ public sealed class MarginBuilder : ICssBuilder
     public MarginBuilder OnUltrawide => ChainWithBreakpoint(Breakpoint.Ultrawide);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private MarginBuilder AddRule(ElementSide side)
+    private MarginBuilder AddRule(ElementSideType side)
     {
         string size = _rules.Count > 0 ? _rules[^1].Size : ScaleType.S0Value;
         Breakpoint? bp = _rules.Count > 0 ? _rules[^1].Breakpoint : null;
 
-        if (_rules.Count > 0 && _rules[^1].Side == ElementSide.All)
+        if (_rules.Count > 0 && _rules[^1].Side == ElementSideType.All)
         {
             _rules[^1] = new MarginRule(size, side, bp);
         }
@@ -92,14 +92,14 @@ public sealed class MarginBuilder : ICssBuilder
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private MarginBuilder ChainWithSize(string size)
     {
-        _rules.Add(new MarginRule(size, ElementSide.All, null));
+        _rules.Add(new MarginRule(size, ElementSideType.All, null));
         return this;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private MarginBuilder ChainWithSize(ScaleType scale)
     {
-        _rules.Add(new MarginRule(scale.Value, ElementSide.All, null));
+        _rules.Add(new MarginRule(scale.Value, ElementSideType.All, null));
         return this;
     }
 
@@ -108,7 +108,7 @@ public sealed class MarginBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new MarginRule(ScaleType.S0Value, ElementSide.All, breakpoint));
+            _rules.Add(new MarginRule(ScaleType.S0Value, ElementSideType.All, breakpoint));
             return this;
         }
 
@@ -182,43 +182,43 @@ public sealed class MarginBuilder : ICssBuilder
 
                 switch (rule.Side)
                 {
-                    case ElementSide.AllValue:
+                    case ElementSideType.AllValue:
                         AppendStyle(ref first, ref sb, "margin", sizeVal);
                         break;
 
-                    case ElementSide.TopValue:
+                    case ElementSideType.TopValue:
                         AppendStyle(ref first, ref sb, "margin-top", sizeVal);
                         break;
 
-                    case ElementSide.RightValue:
+                    case ElementSideType.RightValue:
                         AppendStyle(ref first, ref sb, "margin-right", sizeVal);
                         break;
 
-                    case ElementSide.BottomValue:
+                    case ElementSideType.BottomValue:
                         AppendStyle(ref first, ref sb, "margin-bottom", sizeVal);
                         break;
 
-                    case ElementSide.LeftValue:
+                    case ElementSideType.LeftValue:
                         AppendStyle(ref first, ref sb, "margin-left", sizeVal);
                         break;
 
-                    case ElementSide.HorizontalValue:
-                    case ElementSide.LeftRightValue:
+                    case ElementSideType.HorizontalValue:
+                    case ElementSideType.LeftRightValue:
                         AppendStyle(ref first, ref sb, "margin-left", sizeVal);
                         AppendStyle(ref first, ref sb, "margin-right", sizeVal);
                         break;
 
-                    case ElementSide.VerticalValue:
-                    case ElementSide.TopBottomValue:
+                    case ElementSideType.VerticalValue:
+                    case ElementSideType.TopBottomValue:
                         AppendStyle(ref first, ref sb, "margin-top", sizeVal);
                         AppendStyle(ref first, ref sb, "margin-bottom", sizeVal);
                         break;
 
-                    case ElementSide.InlineStartValue:
+                    case ElementSideType.InlineStartValue:
                         AppendStyle(ref first, ref sb, "margin-inline-start", sizeVal);
                         break;
 
-                    case ElementSide.InlineEndValue:
+                    case ElementSideType.InlineEndValue:
                         AppendStyle(ref first, ref sb, "margin-inline-end", sizeVal);
                         break;
 
@@ -264,29 +264,29 @@ public sealed class MarginBuilder : ICssBuilder
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static string GetSideToken(ElementSide side)
+        private static string GetSideToken(ElementSideType side)
         {
             switch (side)
             {
-                case ElementSide.AllValue:
+                case ElementSideType.AllValue:
                     return string.Empty;
-                case ElementSide.TopValue:
+                case ElementSideType.TopValue:
                     return _sideT;
-                case ElementSide.RightValue:
+                case ElementSideType.RightValue:
                     return _sideE;
-                case ElementSide.BottomValue:
+                case ElementSideType.BottomValue:
                     return _sideB;
-                case ElementSide.LeftValue:
+                case ElementSideType.LeftValue:
                     return _sideS;
-                case ElementSide.HorizontalValue:
-                case ElementSide.LeftRightValue:
+                case ElementSideType.HorizontalValue:
+                case ElementSideType.LeftRightValue:
                     return _sideX;
-                case ElementSide.VerticalValue:
-                case ElementSide.TopBottomValue:
+                case ElementSideType.VerticalValue:
+                case ElementSideType.TopBottomValue:
                     return _sideY;
-                case ElementSide.InlineStartValue:
+                case ElementSideType.InlineStartValue:
                     return _sideS;
-                case ElementSide.InlineEndValue:
+                case ElementSideType.InlineEndValue:
                     return _sideE;
                 default:
                     return string.Empty;

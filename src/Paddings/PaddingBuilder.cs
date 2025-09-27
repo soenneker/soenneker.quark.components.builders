@@ -29,7 +29,7 @@ public sealed class PaddingBuilder : ICssBuilder
 
     internal PaddingBuilder(string size, Breakpoint? breakpoint = null)
     {
-        _rules.Add(new PaddingRule(size, ElementSide.All, breakpoint));
+        _rules.Add(new PaddingRule(size, ElementSideType.All, breakpoint));
     }
 
     internal PaddingBuilder(List<PaddingRule> rules)
@@ -39,15 +39,15 @@ public sealed class PaddingBuilder : ICssBuilder
     }
 
     // ----- Side chaining -----
-    public PaddingBuilder FromTop => AddRule(ElementSide.Top);
-    public PaddingBuilder FromRight => AddRule(ElementSide.Right);
-    public PaddingBuilder FromBottom => AddRule(ElementSide.Bottom);
-    public PaddingBuilder FromLeft => AddRule(ElementSide.Left);
-    public PaddingBuilder OnX => AddRule(ElementSide.Horizontal);
-    public PaddingBuilder OnY => AddRule(ElementSide.Vertical);
-    public PaddingBuilder OnAll => AddRule(ElementSide.All);
-    public PaddingBuilder FromStart => AddRule(ElementSide.InlineStart);
-    public PaddingBuilder FromEnd => AddRule(ElementSide.InlineEnd);
+    public PaddingBuilder FromTop => AddRule(ElementSideType.Top);
+    public PaddingBuilder FromRight => AddRule(ElementSideType.Right);
+    public PaddingBuilder FromBottom => AddRule(ElementSideType.Bottom);
+    public PaddingBuilder FromLeft => AddRule(ElementSideType.Left);
+    public PaddingBuilder OnX => AddRule(ElementSideType.Horizontal);
+    public PaddingBuilder OnY => AddRule(ElementSideType.Vertical);
+    public PaddingBuilder OnAll => AddRule(ElementSideType.All);
+    public PaddingBuilder FromStart => AddRule(ElementSideType.InlineStart);
+    public PaddingBuilder FromEnd => AddRule(ElementSideType.InlineEnd);
 
     // ----- Size chaining -----
     public PaddingBuilder S0 => ChainWithSize(ScaleType.S0);
@@ -66,13 +66,13 @@ public sealed class PaddingBuilder : ICssBuilder
     public PaddingBuilder OnUltrawide => ChainWithBreakpoint(Breakpoint.Ultrawide);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private PaddingBuilder AddRule(ElementSide side)
+    private PaddingBuilder AddRule(ElementSideType side)
     {
         // Use last size & breakpoint if present; default to ScaleType.S0Value when absent
         string size = _rules.Count > 0 ? _rules[^1].Size : ScaleType.S0Value;
         Breakpoint? bp = _rules.Count > 0 ? _rules[^1].Breakpoint : null;
 
-        if (_rules.Count > 0 && _rules[^1].Side == ElementSide.All)
+        if (_rules.Count > 0 && _rules[^1].Side == ElementSideType.All)
         {
             // Replace last "All" with specific side using same size/bp
             _rules[^1] = new PaddingRule(size, side, bp);
@@ -88,14 +88,14 @@ public sealed class PaddingBuilder : ICssBuilder
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private PaddingBuilder ChainWithSize(string size)
     {
-        _rules.Add(new PaddingRule(size, ElementSide.All, null));
+        _rules.Add(new PaddingRule(size, ElementSideType.All, null));
         return this;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private PaddingBuilder ChainWithSize(ScaleType scale)
     {
-        _rules.Add(new PaddingRule(scale.Value, ElementSide.All, null));
+        _rules.Add(new PaddingRule(scale.Value, ElementSideType.All, null));
         return this;
     }
 
@@ -104,7 +104,7 @@ public sealed class PaddingBuilder : ICssBuilder
     {
         if (_rules.Count == 0)
         {
-            _rules.Add(new PaddingRule(ScaleType.S0Value, ElementSide.All, breakpoint));
+            _rules.Add(new PaddingRule(ScaleType.S0Value, ElementSideType.All, breakpoint));
             return this;
         }
 
@@ -176,43 +176,43 @@ public sealed class PaddingBuilder : ICssBuilder
 
                 switch (rule.Side)
                 {
-                    case ElementSide.AllValue:
+                    case ElementSideType.AllValue:
                         AppendStyle(ref first, ref sb, "padding", sizeVal);
                         break;
 
-                    case ElementSide.TopValue:
+                    case ElementSideType.TopValue:
                         AppendStyle(ref first, ref sb, "padding-top", sizeVal);
                         break;
 
-                    case ElementSide.RightValue:
+                    case ElementSideType.RightValue:
                         AppendStyle(ref first, ref sb, "padding-right", sizeVal);
                         break;
 
-                    case ElementSide.BottomValue:
+                    case ElementSideType.BottomValue:
                         AppendStyle(ref first, ref sb, "padding-bottom", sizeVal);
                         break;
 
-                    case ElementSide.LeftValue:
+                    case ElementSideType.LeftValue:
                         AppendStyle(ref first, ref sb, "padding-left", sizeVal);
                         break;
 
-                    case ElementSide.HorizontalValue:
-                    case ElementSide.LeftRightValue:
+                    case ElementSideType.HorizontalValue:
+                    case ElementSideType.LeftRightValue:
                         AppendStyle(ref first, ref sb, "padding-left", sizeVal);
                         AppendStyle(ref first, ref sb, "padding-right", sizeVal);
                         break;
 
-                    case ElementSide.VerticalValue:
-                    case ElementSide.TopBottomValue:
+                    case ElementSideType.VerticalValue:
+                    case ElementSideType.TopBottomValue:
                         AppendStyle(ref first, ref sb, "padding-top", sizeVal);
                         AppendStyle(ref first, ref sb, "padding-bottom", sizeVal);
                         break;
 
-                    case ElementSide.InlineStartValue:
+                    case ElementSideType.InlineStartValue:
                         AppendStyle(ref first, ref sb, "padding-inline-start", sizeVal);
                         break;
 
-                    case ElementSide.InlineEndValue:
+                    case ElementSideType.InlineEndValue:
                         AppendStyle(ref first, ref sb, "padding-inline-end", sizeVal);
                         break;
 
@@ -259,29 +259,29 @@ public sealed class PaddingBuilder : ICssBuilder
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static string GetSideToken(ElementSide side)
+    private static string GetSideToken(ElementSideType side)
     {
         switch (side)
         {
-            case ElementSide.AllValue:
+            case ElementSideType.AllValue:
                 return string.Empty;
-            case ElementSide.TopValue:
+            case ElementSideType.TopValue:
                 return _sideT;
-            case ElementSide.RightValue:
+            case ElementSideType.RightValue:
                 return _sideE;
-            case ElementSide.BottomValue:
+            case ElementSideType.BottomValue:
                 return _sideB;
-            case ElementSide.LeftValue:
+            case ElementSideType.LeftValue:
                 return _sideS;
-            case ElementSide.HorizontalValue:
-            case ElementSide.LeftRightValue:
+            case ElementSideType.HorizontalValue:
+            case ElementSideType.LeftRightValue:
                 return _sideX;
-            case ElementSide.VerticalValue:
-            case ElementSide.TopBottomValue:
+            case ElementSideType.VerticalValue:
+            case ElementSideType.TopBottomValue:
                 return _sideY;
-            case ElementSide.InlineStartValue:
+            case ElementSideType.InlineStartValue:
                 return _sideS; // Bootstrap uses "s" for start
-            case ElementSide.InlineEndValue:
+            case ElementSideType.InlineEndValue:
                 return _sideE; // Bootstrap uses "e" for end
             default:
                 return string.Empty;

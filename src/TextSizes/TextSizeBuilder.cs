@@ -42,11 +42,11 @@ public sealed class TextSizeBuilder : ICssBuilder
     }
 
     // ----- Fluent size chaining -----
-    public TextSizeBuilder Xs => ChainSize(Size.ExtraSmall.Value);
-    public TextSizeBuilder Sm => ChainSize(Size.Small.Value);
+    public TextSizeBuilder Xs => ChainSize(SizeType.ExtraSmall.Value);
+    public TextSizeBuilder Sm => ChainSize(SizeType.Small.Value);
     public TextSizeBuilder Base => ChainSize("base");
-    public TextSizeBuilder Lg => ChainSize(Size.Large.Value);
-    public TextSizeBuilder Xl => ChainSize(Size.ExtraLarge.Value);
+    public TextSizeBuilder Lg => ChainSize(SizeType.Large.Value);
+    public TextSizeBuilder Xl => ChainSize(SizeType.ExtraLarge.Value);
     public TextSizeBuilder Xl2 => ChainSize("2xl");
     public TextSizeBuilder Xl3 => ChainSize("3xl");
     public TextSizeBuilder Xl4 => ChainSize("4xl");

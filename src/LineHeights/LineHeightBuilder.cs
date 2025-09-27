@@ -27,9 +27,9 @@ public sealed class LineHeightBuilder : ICssBuilder
     }
 
     public LineHeightBuilder L1 => Chain(ScaleType.S1.Value);
-    public LineHeightBuilder Sm => Chain(Size.Small.Value);
+    public LineHeightBuilder Sm => Chain(SizeType.Small.Value);
     public LineHeightBuilder Base => Chain("base");
-    public LineHeightBuilder Lg => Chain(Size.Large.Value);
+    public LineHeightBuilder Lg => Chain(SizeType.Large.Value);
 
     public LineHeightBuilder OnPhone => ChainBp(Breakpoint.Phone);
     public LineHeightBuilder OnTablet => ChainBp(Breakpoint.Tablet);

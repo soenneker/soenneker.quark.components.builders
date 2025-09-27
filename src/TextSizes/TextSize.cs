@@ -10,12 +10,12 @@ public static class TextSize
     /// <summary>
     /// Extra small text size.
     /// </summary>
-    public static TextSizeBuilder Xs => new(Size.ExtraSmall.Value);
+    public static TextSizeBuilder Xs => new(SizeType.ExtraSmall.Value);
 
     /// <summary>
     /// Small text size.
     /// </summary>
-    public static TextSizeBuilder Sm => new(Size.Small.Value);
+    public static TextSizeBuilder Sm => new(SizeType.Small.Value);
 
     /// <summary>
     /// Base text size (default).
@@ -25,12 +25,12 @@ public static class TextSize
     /// <summary>
     /// Large text size.
     /// </summary>
-    public static TextSizeBuilder Lg => new(Size.Large.Value);
+    public static TextSizeBuilder Lg => new(SizeType.Large.Value);
 
     /// <summary>
     /// Extra large text size.
     /// </summary>
-    public static TextSizeBuilder Xl => new(Size.ExtraLarge.Value);
+    public static TextSizeBuilder Xl => new(SizeType.ExtraLarge.Value);
 
     /// <summary>
     /// 2X large text size.
